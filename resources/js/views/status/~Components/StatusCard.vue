@@ -1,7 +1,7 @@
 <template>
 
 
-    <div v-if="$status.config.contentLoading" class="bg-white sm:rounded-xl shadow px-6 py-4">
+    <div v-if="!$status.content" class="bg-white sm:rounded-xl shadow px-6 py-4">
       Loading
     </div>
 
@@ -121,8 +121,6 @@
 <script setup lang="ts">
 import { ClockIcon, XMarkIcon, PlusIcon, ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/vue/20/solid'
 import { useStatusStore } from '@/store/StatusStore'
-import { onMounted } from 'vue'
-import { useRoute } from 'vue-router'
 import { FullName } from "@/helpers/Converter"
 import moment from 'moment'
 

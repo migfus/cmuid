@@ -42,6 +42,14 @@ const router = createRouter({
             title: 'Verify ID',
           }
         },
+        {
+          path: 'verify/:id',
+          name: 'verify-show',
+          component: () => import('@/views/verify/[id].vue'),
+          meta: {
+            title: 'Verify CSC ID',
+          }
+        }
       ]
     },
 

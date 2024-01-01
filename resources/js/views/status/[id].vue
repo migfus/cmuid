@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-7xl mx-auto my-4 grid grid-cols-6 gap-4">
-    <InformationCard class="col-span-4"/>
-    <StatusCard class="col-span-2"/>
+    <InformationCard class="col-span-3"/>
+    <StatusCard class="col-span-3"/>
   </div>
 
 </template>

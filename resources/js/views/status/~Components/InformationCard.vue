@@ -1,36 +1,30 @@
 <template>
-
-
-    <div v-if="$status.config.contentLoading" class="bg-white sm:rounded-xl shadow px-6 py-4">
-      Loading
-    </div>
-
-    <div v-else class="bg-white sm:rounded-xl shadow">
-      <div class="flow-root">
-        <ul role="list" class="px-4 py-0 divide-y divide-gray-200">
-          <h1 class="p-4 font-bold text-gray-500">Information</h1>
-
-
-        </ul>
+  <ul v-if="$status.content" role="list" class="grid grid-cols-1">
+    <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+      <div class="flex w-full items-center justify-between space-x-6 p-6">
+        <div class="flex-1 truncate">
+          <div class="flex items-center space-x-3">
+            <h3 class="truncate text-sm font-medium text-gray-900">{{ FullName($status.content.info) }}</h3>
+            <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
+              {{  $status.content.status[$status.content.status.length - 1].category.name }}
+            </span>
+          </div>
+          <p class="mt-1 truncate text-sm text-gray-500">{{ $status.content.info.position }}</p>
+          <p class="mt-1 truncate text-sm text-gray-500">{{ $status.content.info.unit ?? ''}}, {{ $status.content.info.department ?? '' }}</p>
+          <p class="mt-1 truncate text-sm text-gray-500">{{ $status.content.info.email ?? ''}}</p>
+          <p class="mt-1 truncate text-sm text-gray-500">0{{ $status.content.info.mobile }}</p>
+        </div>
       </div>
-    </div>
-
-
+      <div class="p-5">
+        <img class="mt-2 rounded-xl shadow h-64 w-auto mb-2" :src="$status.content.info.picture" alt="" />
+      </div>
+    </li>
+  </ul>
 </template>
 
 <script setup lang="ts">
-import { ClockIcon, XMarkIcon, PlusIcon, ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/vue/20/solid'
+import { FullName } from '@/helpers/Converter'
 import { useStatusStore } from '@/store/StatusStore'
-import { onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { FullName } from "@/helpers/Converter"
-import moment from 'moment'
 
-const $route = useRoute()
 const $status = useStatusStore()
-
-onMounted(() => {
-  // @ts-ignore
-  $status.ShowAPI($route.params.id)
-})
 </script>

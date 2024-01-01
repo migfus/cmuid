@@ -27,5 +27,7 @@ class UserRegister extends Model
       'mobile',
     ];
 
-
+  public function status() {
+    return $this->hasMany(RegisterStatus::class, 'user_register_id');
+  }
 }

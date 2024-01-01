@@ -14,6 +14,8 @@ Route::controller(\App\Http\Controllers\AuthController::class)->group(function (
 Route::post('/user-register', [\App\Http\Controllers\UserRegisterController::class, 'store']);
 Route::apiResource('/status',  \App\Http\Controllers\RegisterStatusController::class)
         ->only(['show']);
+Route::apiResource('/verify',  \App\Http\Controllers\VerifyController::class)
+        ->only(['show']);
 
 Route::middleware('auth:sanctum')->group(function () {
   Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);

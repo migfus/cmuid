@@ -16,7 +16,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $user_register_id
- * @property string|null $user_id
+ * @property int|null $user_id
  * @property int $category_id
  * @property string|null $content
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -110,6 +110,8 @@ namespace App\Models{
  * @property string $mobile
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RegisterStatus> $status
+ * @property-read int|null $status_count
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister query()
