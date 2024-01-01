@@ -9,9 +9,15 @@ Route::get('/test', function() {
 
 Route::controller(\App\Http\Controllers\AuthController::class)->group(function () {
   Route::post('/login', 'Login');
-  Route::post('/register', 'Register');
 });
 
+Route::post('/user-register', [\App\Http\Controllers\UserRegisterController::class, 'store']);
+Route::apiResource('/status',  \App\Http\Controllers\RegisterStatusController::class)
+        ->only(['show']);
+
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+  Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+
+  Route::apiResource('/user-register', \App\Http\Controllers\profile\UserRegisterController::class)
+    ->except(['store']);
 });

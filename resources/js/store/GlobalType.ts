@@ -11,3 +11,38 @@ export type TGQuery = {
   start?: Date
   end?: Date
 }
+
+export type TGUserRegister = {
+  picture: string
+  last_name: string
+  first_name: string
+  mid_name?: string
+  ext_name?: string
+  position: string
+  department?: string
+  unit?: string
+  mobile: number
+  email?: string
+}
+
+export type TGStatus = {
+  id: number,
+  user_register_id: number
+  user_register: {
+    picture: string
+    last_name: string
+    first_name: string
+    mid_name?: string
+    ext_name?: string
+  }
+  user_id?: number
+  user: {
+    email: string
+    avatar: string
+  }
+  category: {
+    name: string
+  }
+  content?: string
+  created_at: Date
+}

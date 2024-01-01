@@ -16,7 +16,6 @@ class UserSeeder extends Seeder
   public function run(): void {
     User::create(
       [
-        'id' => Str::uuid()->toString(),
         'email' => 'staff@gmail.com',
         'password'=> Hash::make('12345678'),
         'avatar'   => 'https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg',

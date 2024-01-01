@@ -19,36 +19,6 @@ class RoleAndPermissionsSeeder extends Seeder
     // Permission::create(['name' => 'update user']);
     // Permission::create(['name' => 'destroy user']);
 
-    // NOTE POSTS
-    // Permission::create(['name' => 'index post']);
-    // Permission::create(['name' => 'store post']);
-    // Permission::create(['name' => 'update post']);
-    // Permission::create(['name' => 'destroy post']);
-
-    // NOTE FAQS
-    // Permission::create(['name' => 'index faq']);
-    // Permission::create(['name' => 'store faq']);
-    // Permission::create(['name' => 'update faq']);
-    // Permission::create(['name' => 'destroy faq']);
-
-    // NOTE EVENTS/CALENDAR
-    // Permission::create(['name' => 'index event']);
-    // Permission::create(['name' => 'store event']);
-    // Permission::create(['name' => 'update event']);
-    // Permission::create(['name' => 'destroy event']);
-
-    // NOTE PERSON
-    // Permission::create(['name' => 'index person']);
-    // Permission::create(['name' => 'store person']);
-    // Permission::create(['name' => 'update person']);
-    // Permission::create(['name' => 'destroy person']);
-
-    // NOTE DASHBOARD
-    // Permission::create(['name' => 'index dashboard']);
-    // Permission::create(['name' => 'store dashboard']);
-    // Permission::create(['name' => 'update dashboard']);
-    // Permission::create(['name' => 'destroy dashboard']);
-
     // NOTE PROFILE
     Permission::create(['name' => 'index profile']);
     Permission::create(['name' => 'update profile']);

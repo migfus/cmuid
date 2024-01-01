@@ -9,11 +9,40 @@ const router = createRouter({
     // NOTE PAGES
     {
       path: "/",
-      name: 'register',
-      component: () => import('@/views/register/index.vue'),
-      meta: {
-        title: 'Register',
-      }
+      children: [
+        {
+          path: '',
+          name: 'register',
+          component: () => import('@/views/register/index.vue'),
+          meta: {
+            title: 'CSC ID Registration',
+          }
+        },
+        {
+          path: 'status',
+          name: 'status',
+          component: () => import('@/views/status/index.vue'),
+          meta: {
+            title: 'CSC ID Status',
+          }
+        },
+        {
+          path: 'status/:id',
+          name: 'status-show',
+          component: () => import('@/views/status/[id].vue'),
+          meta: {
+            title: 'CSC ID Status',
+          }
+        },
+        {
+          path: 'verify',
+          name: 'verify',
+          component: () => import('@/views/verify/index.vue'),
+          meta: {
+            title: 'Verify ID',
+          }
+        },
+      ]
     },
 
     {

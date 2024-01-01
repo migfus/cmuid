@@ -66,11 +66,22 @@ class Controller extends BaseController
     return url('').$location;
   }
 
-  public function G_FileUpload($file, $path = '') : string {
+  public function G_FileUpload($file) : string {
 
     $target_dir = "uploads/";
-    $target_file = $target_dir . basename($file["file"]["name"]);
+    $image = time().'.'.$file->extension();
+    $file->move(public_path($target_dir), $image);
 
-    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+    return '/'.$target_dir.$image;
+  }
+
+  public function generateRandomString($length = 5) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+      $randomString .= $characters[random_int(0, $charactersLength - 1)];
+    }
+    return $randomString;
   }
 }
