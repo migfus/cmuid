@@ -4,9 +4,10 @@ import axios from "axios"
 import { notify } from 'notiwind'
 import { useStorage, StorageSerializers } from '@vueuse/core'
 import ability from '@/Ability'
+import type { TGAuth } from "../GlobalType"
 
 interface TContent {
-  auth: any
+  auth: TGAuth
   ip: string
   permissions: Array<string>
   token: string
@@ -48,13 +49,11 @@ export const useAuthStore = defineStore(title, () => {
       this.router.push({ name: 'dashboard'})
     }
     catch(e) {
-      if(e.response.data.message != 'Invalid Input') {
-        notify({
-          group: "error",
-          title: "Invalid Credentials",
-          text: 'Mistyped? Please try again.'
-        }, 5000)
-      }
+      notify({
+        group: "error",
+        title: "Invalid Credentials",
+        text: 'Mistyped? Please try again.'
+      }, 5000)
     }
     config.loading = false
   }

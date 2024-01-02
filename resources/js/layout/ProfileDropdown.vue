@@ -21,12 +21,12 @@
               Dashboard
             </RouterLink>
           </MenuItem>
-          <MenuItem v-slot="{ active }">
+          <!-- <MenuItem v-slot="{ active }">
             <RouterLink :to="{name: 'profile'}" :class="[active || $route.name == 'profile' ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
               <SquaresPlusIcon class="h-5 w-5 inline-block mr-1" aria-hidden="true" />
               Profile
             </RouterLink>
-          </MenuItem>
+          </MenuItem> -->
           <MenuItem v-slot="{ active }">
             <a @click="$auth.Logout()" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer']">
               <XMarkIcon class="h-5 w-5 inline-block mr-1" aria-hidden="true" />
@@ -42,11 +42,6 @@
     <RouterLink :to="{name: 'login'}" class="ml-3 inline-flex items-center justify-center">
       <AppButton color="white">
         Login
-      </AppButton>
-    </RouterLink>
-    <RouterLink :to="{name: 'register'}" class="ml-3 inline-flex items-center justify-center">
-      <AppButton color="success">
-        Register
       </AppButton>
     </RouterLink>
   </div>

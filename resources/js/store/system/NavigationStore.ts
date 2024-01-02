@@ -17,6 +17,10 @@ export const useNavigationStore = defineStore("system/NavigationStore", () => {
       name: 'Check Status',
       link: { name: 'status'},
     },
+    {
+      name: 'Verify',
+      link: { name: 'verify'},
+    },
   ]
   // BUG
   const social = shallowRef([

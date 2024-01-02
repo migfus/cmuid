@@ -54,6 +54,30 @@ const router = createRouter({
     },
 
     {
+      path: '/dashboard',
+      children: [
+        {
+          path: '',
+          name: 'dashboard',
+          component: () => import('@/views/dashboard/index.vue'),
+          meta: {
+            title: 'Dashboard',
+            sideBar: true
+          }
+        },
+        {
+          path: '',
+          name: 'user-register',
+          component: () => import('@/views/dashboard/user-register.vue'),
+          meta: {
+            title: 'Dashboard',
+            sideBar: true
+          }
+        },
+      ]
+    },
+
+    {
       path: "/login",
       name: 'login',
       component: () => import('@/views/login.vue'),

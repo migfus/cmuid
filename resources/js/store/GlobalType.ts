@@ -46,3 +46,11 @@ export type TGStatus = {
   content?: string
   created_at: Date
 }
+
+export type TGAuth = {
+  id: number
+  email: string
+  // password: string
+  avatar: string
+  created_at: string
+}

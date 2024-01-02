@@ -23,9 +23,9 @@
                 <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
               </div>
 
-              <div class="text-sm">
+              <!-- <div class="text-sm">
                 <RouterLink :to="{name: 'forgot'}" class="font-medium text-primary-600 hover:text-primary-500">Forgot your password?</RouterLink>
-              </div>
+              </div> -->
             </div>
 
             <div>

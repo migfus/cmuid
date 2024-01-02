@@ -13,11 +13,11 @@ class RoleAndPermissionsSeeder extends Seeder
   public function run(): void {
     app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-    // NOTE USERS
-    // Permission::create(['name' => 'index user']);
-    // Permission::create(['name' => 'store user']);
-    // Permission::create(['name' => 'update user']);
-    // Permission::create(['name' => 'destroy user']);
+    // NOTE DASHBOARD
+    Permission::create(['name' => 'index dashboard']);
+
+    // NOTE REGISTER
+    Permission::create(['name' => 'index register']);
 
     // NOTE PROFILE
     Permission::create(['name' => 'index profile']);
@@ -29,8 +29,8 @@ class RoleAndPermissionsSeeder extends Seeder
       // 'index post',     'store post',     'update post',
       // 'index faq',      'store faq',      'update faq',
       // 'index event',    'store event',    'update event',
-      // 'index person',   'store person',   'update person',
-      // 'index dashboard','store dashboard','update dashboard','destroy dashboard',
+      'index register',
+      'index dashboard',
       'index profile', 'update profile'
     ]);
   }

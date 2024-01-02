@@ -1,12 +1,4 @@
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-gray-100">
-    <body class="h-full">
-    ```
-  -->
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog as="div" class="relative z-40 md:hidden" @close="sidebarOpen = false">
@@ -32,19 +24,15 @@
                 <nav class="space-y-1 px-2">
 
                   <!-- SECTION MOBILE NAV -->
-                  <!-- <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'profile')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
-                  <AppSidebarNav linkName="profile"   :icon="UsersIcon" :disabled="!can('index', 'profile')" @click="sidebarOpen = false"> Prolife </AppSidebarNav>
-                  <AppSidebarNav linkName="account"   :icon="Cog6ToothIcon" :disabled="!can('index', 'profile')" @click="sidebarOpen = false"> Account Settings </AppSidebarNav> -->
+                  <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'dashboard')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
+                  <AppSidebarNav linkName="user-register" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> User Register </AppSidebarNav>
+
 
                   <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
 
-                  <!-- <AppSidebarNav linkName="home" :icon="HomeIcon" @click="sidebarOpen = false"> Home </AppSidebarNav>
-                  <AppSidebarNav linkName="about" :icon="InformationCircleIcon" @click="sidebarOpen = false"> About </AppSidebarNav>
-                  <AppSidebarNav linkName="job-listing" :icon="BriefcaseIcon" :span="Number($job.content.length)" @click="sidebarOpen = false"> Job Listing </AppSidebarNav>
-                  <AppSidebarNav linkName="calendar" :icon="CalendarIcon" :span="Number($event.eventCount)" @click="sidebarOpen = false"> Calendar </AppSidebarNav>
-                  <AppSidebarNav linkName="faqs" :icon="CheckCircleIcon" @click="sidebarOpen = false"> FAQs </AppSidebarNav>
-                  <AppSidebarNav linkName="posts" :icon="MegaphoneIcon" @click="sidebarOpen = false"> Posts </AppSidebarNav>
-                  <AppSidebarNav linkName="download-documents" :icon="ArrowDownOnSquareIcon" @click="sidebarOpen = false"> Download Documents </AppSidebarNav> -->
+                  <AppSidebarNav linkName="register" :icon="HomeIcon" @click="sidebarOpen = false"> Register </AppSidebarNav>
+                  <AppSidebarNav linkName="status" :icon="ClockIcon" @click="sidebarOpen = false"> Check Status </AppSidebarNav>
+                  <AppSidebarNav linkName="verify" :icon="CheckBadgeIcon" @click="sidebarOpen = false"> Verify</AppSidebarNav>
 
                 </nav>
               </div>
@@ -61,7 +49,7 @@
     <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex flex-grow flex-col overflow-y-auto border-gray-200 bg-gray-800 pt-5">
-        <RouterLink :to="{name: 'home'}" class="flex flex-shrink-0 items-center px-4">
+        <RouterLink :to="{name: 'register'}" class="flex flex-shrink-0 items-center px-4">
           <object class="h-8 w-auto" data="/images/logo.svg" alt="Your Company" />
           <p class="ml-4 font-semibold text-white">OHRM | CMU</p>
         </RouterLink>
@@ -69,19 +57,14 @@
           <nav class="flex-1 space-y-1 px-2 pb-4">
 
             <!-- SECTION DESKTOP NAV -->
-            <!-- <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'profile')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
-            <AppSidebarNav linkName="profile" :icon="UsersIcon" :disabled="!can('index', 'profile')" @click="sidebarOpen = false"> Profile </AppSidebarNav>
-            <AppSidebarNav linkName="account" :icon="Cog6ToothIcon" :disabled="!can('index', 'profile')" @click="sidebarOpen = false"> Account Settings </AppSidebarNav> -->
+            <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'dashboard')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
+            <AppSidebarNav linkName="user-register" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> User Register </AppSidebarNav>
 
             <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
 
-            <!-- <AppSidebarNav linkName="home" :icon="HomeIcon" @click="sidebarOpen = false"> Home </AppSidebarNav>
-            <AppSidebarNav linkName="about" :icon="InformationCircleIcon" @click="sidebarOpen = false"> About </AppSidebarNav>
-            <AppSidebarNav linkName="job-listing" :icon="BriefcaseIcon" :span="Number($job.content.length)" @click="sidebarOpen = false"> Job Listing </AppSidebarNav>
-            <AppSidebarNav linkName="calendar" :icon="CalendarIcon" :span="Number($event.eventCount)" @click="sidebarOpen = false"> Calendar </AppSidebarNav>
-            <AppSidebarNav linkName="faqs" :icon="CheckCircleIcon" @click="sidebarOpen = false"> FAQs </AppSidebarNav>
-            <AppSidebarNav linkName="posts" :icon="MegaphoneIcon" @click="sidebarOpen = false"> Posts </AppSidebarNav>
-            <AppSidebarNav linkName="download-documents" :icon="ArrowDownOnSquareIcon" @click="sidebarOpen = false"> Download Documents </AppSidebarNav> -->
+            <AppSidebarNav linkName="register" :icon="HomeIcon" @click="sidebarOpen = false"> Register </AppSidebarNav>
+            <AppSidebarNav linkName="status" :icon="ClockIcon" @click="sidebarOpen = false"> Check Status </AppSidebarNav>
+            <AppSidebarNav linkName="verify" :icon="CheckBadgeIcon" @click="sidebarOpen = false"> Verify</AppSidebarNav>
 
           </nav>
         </div>
@@ -146,17 +129,12 @@ import {
 } from '@headlessui/vue'
 import {
   Bars3BottomLeftIcon,
-  CalendarIcon,
   HomeIcon,
-  UsersIcon,
   XMarkIcon,
-  InformationCircleIcon,
-  CheckCircleIcon,
-  MegaphoneIcon,
-  Cog6ToothIcon,
   WindowIcon,
-  BriefcaseIcon,
-  ArrowDownOnSquareIcon
+  CheckBadgeIcon,
+  ClockIcon,
+  UserPlusIcon
 } from '@heroicons/vue/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { usePreLoader } from '@/store/system/PreLoader'
