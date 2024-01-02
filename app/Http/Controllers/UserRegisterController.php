@@ -46,6 +46,7 @@ class UserRegisterController extends Controller
 
     $id = UserRegister::create([
       'id' => $csc_id,
+      'status_category_id' => 2,
       'picture' => $picture,
       'last_name'  => $req->last_name,
       'first_name' => $req->first_name,
@@ -61,7 +62,7 @@ class UserRegisterController extends Controller
     RegisterStatus::create([
       'user_register_id' => $id,
       'category_id' => 1,
-      'content' => 'New CSC ID is registered',
+      'content' => "New CSC ID Registered",
     ]);
     RegisterStatus::create([
       'user_register_id' => $id,

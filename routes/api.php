@@ -20,6 +20,7 @@ Route::apiResource('/verify',  \App\Http\Controllers\VerifyController::class)
 Route::middleware('auth:sanctum')->group(function () {
   Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 
-  Route::apiResource('/user-register', \App\Http\Controllers\profile\UserRegisterController::class)
-    ->except(['store']);
+  Route::apiResource('/request',  \App\Http\Controllers\RequestController::class)
+    ->only(['index', 'update']);
+
 });

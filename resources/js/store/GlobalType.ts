@@ -13,6 +13,7 @@ export type TGQuery = {
 }
 
 export type TGUserRegister = {
+  id: string
   picture: string
   last_name: string
   first_name: string
@@ -23,6 +24,7 @@ export type TGUserRegister = {
   unit?: string
   mobile: number
   email?: string
+  created_at: Date
 }
 
 export type TGStatus = {

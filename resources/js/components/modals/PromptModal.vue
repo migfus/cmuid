@@ -10,9 +10,14 @@
             <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 sm:scale-100" leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
               <DialogPanel class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <div class="sm:flex sm:items-start">
-                  <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <ExclamationTriangleIcon class="h-6 w-6 text-red-600" aria-hidden="true" />
+
+                  <div v-if="type == 'error'" class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <ExclamationTriangleIcon  class="h-6 w-6 text-red-600" aria-hidden="true" />
                   </div>
+                  <div v-else class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <CheckCircleIcon class="h-6 w-6 text-green-600" aria-hidden="true" />
+                  </div>
+
                   <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">{{ $props.title}}</DialogTitle>
                     <div class="mt-2">
@@ -21,8 +26,8 @@
                   </div>
                 </div>
                 <div class="mt-5 sm:mt-4 flex-none sm:flex gap-2 justify-end">
-                  <AppButton @click="$model = false" color="white" class="w-full sm:w-auto mb-2 sm:mb-0">Cancel</AppButton>
-                  <AppButton @click="$emit('confirm', true); $model = false" color="danger" class="w-full sm:w-auto">{{ $props.confirmButtonName }}</AppButton>
+                  <AppButton @click="$model = false" class="w-full sm:w-auto mb-2 sm:mb-0">Cancel</AppButton>
+                  <AppButton @click="$emit('confirm', true); $model = false" :color="type == 'error' ? `danger` : '' " class="w-full sm:w-auto">{{ $props.confirmButtonName }}</AppButton>
                 </div>
               </DialogPanel>
             </TransitionChild>
@@ -34,13 +39,17 @@
 
 <script setup lang="ts">
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
+import { ExclamationTriangleIcon, CheckCircleIcon } from '@heroicons/vue/24/outline'
+
 import AppButton from '@/components/form/AppButton.vue'
 
 const $props = defineProps<{
-    confirmButtonName: string
-    title: string
+  confirmButtonName: string
+  title: string
+  type?: string
 }>()
+
 const $emit = defineEmits(['confirm'])
 const $model = defineModel<boolean>()
 </script>
+

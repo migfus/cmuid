@@ -25,8 +25,10 @@
 
                   <!-- SECTION MOBILE NAV -->
                   <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'dashboard')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
-                  <AppSidebarNav linkName="user-register" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> User Register </AppSidebarNav>
-
+                  <AppSidebarNav linkName="request" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
+                  <AppSidebarNav linkName="completed" :icon="CheckCircleIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Completed </AppSidebarNav>
+                  <AppSidebarNav linkName="canceled" :icon="XMarkIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Canceled </AppSidebarNav>
+                  <AppSidebarNav linkName="devices" :icon="DevicePhoneMobileIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Devices </AppSidebarNav>
 
                   <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
 
@@ -58,7 +60,10 @@
 
             <!-- SECTION DESKTOP NAV -->
             <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'dashboard')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
-            <AppSidebarNav linkName="user-register" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> User Register </AppSidebarNav>
+            <AppSidebarNav linkName="request" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
+            <AppSidebarNav linkName="completed" :icon="CheckCircleIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Completed</AppSidebarNav>
+            <AppSidebarNav linkName="canceled" :icon="XMarkIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Canceled </AppSidebarNav>
+            <AppSidebarNav linkName="devices" :icon="DevicePhoneMobileIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Devices </AppSidebarNav>
 
             <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
 
@@ -134,7 +139,9 @@ import {
   WindowIcon,
   CheckBadgeIcon,
   ClockIcon,
-  UserPlusIcon
+  UserPlusIcon,
+  CheckCircleIcon,
+DevicePhoneMobileIcon
 } from '@heroicons/vue/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { usePreLoader } from '@/store/system/PreLoader'

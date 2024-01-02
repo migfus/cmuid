@@ -15,6 +15,7 @@ class UserRegister extends Model
 
     protected $fillable = [
       'id',
+      'status_category_id',
       'picture',
       'last_name',
       'first_name',

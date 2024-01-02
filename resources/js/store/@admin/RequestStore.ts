@@ -1,0 +1,108 @@
+import { ref, reactive } from "vue"
+import { defineStore } from "pinia"
+import axios from "axios"
+import { notify } from 'notiwind'
+import type { TGQuery, TGUserRegister } from "../GlobalType"
+
+type TParams = {
+  id: string
+  name: string
+  content: string
+}
+type TConfig = {
+  buttonLoading: boolean
+  contentLoading: boolean
+  show: string
+}
+
+const title = `@admin/RequestStore`
+export const useRequestStore = defineStore(title, () => {
+  const content = ref<TGUserRegister[]>(null)
+
+  const config = reactive<TConfig>({
+    buttonLoading: false,
+    contentLoading: false,
+    show: ''
+  })
+
+  const query = reactive<TGQuery>({
+    search: '',
+    sort: 'DESC',
+    filter: 'request',
+  })
+
+  const params = reactive<TParams>({
+    id: null,
+    name: null,
+    content: '<p>Content of the editor.</p>'
+  })
+
+  // SECTION API
+  async function GetAPI() {
+    config.contentLoading = true
+    try{
+      let { data: { data }} = await axios.get(`/api/request`, {params: query})
+      content.value = data
+    }
+    catch(e) {
+      if(e.response.data.message != 'Invalid Input') {
+        notify({
+          group: "error",
+          title: "Server Error",
+          text: 'The server is doing something unnecessary.'
+        }, 5000)
+      }
+    }
+    config.contentLoading = false
+  }
+
+  async function FeedbackAPI() {
+    config.buttonLoading = true
+    try{
+      let { data: { data }} = await axios.put(`/api/request/${params.id}`, {type: config.show, ...params})
+      GetAPI()
+    }
+    catch(e) {
+      notify({
+        group: "error",
+        title: "Server Error",
+        text: 'The server is doing something unnecessary.'
+      }, 5000)
+    }
+    config.buttonLoading = false
+  }
+
+
+  function ShowChange(value: string, name = '') {
+    config.show = value
+    params.name = name
+
+    switch(value) {
+      case 'Feedback':
+        params.content = '<p>Feedback Here</p>'
+        break;
+      case 'Done':
+        params.content = '<p>Your <strong>CSC ID</strong> is successfully processed. You can now claim to <strong>OHRM</strong>.</p>'
+        break;
+      case 'Cancel':
+        params.content = "<p>Unfortunate the photo you submitted is <strong>unrecognizable</strong>. It may cause some issue upon making CSC ID for this issue.</p>"
+        break;
+      default:
+        params.content = ''
+        config.show = ''
+    }
+  }
+
+
+  return {
+    config,
+    content,
+    query,
+    params,
+
+    GetAPI,
+    FeedbackAPI,
+
+    ShowChange
+  }
+});

@@ -44,8 +44,8 @@
                   </div>
                   <div class="min-w-0 flex-1 py-1.5">
                     <div class="text-sm text-gray-500">
-                      <div class="font-medium text-gray-900">Pending...</div>
-                      Waiting for 9
+                      <div class="font-medium text-gray-900">Waiting to process</div>
+                      There may be other CSC ID in under process. We'll notify you for any updates.
                     </div>
                   </div>
                 </template>
@@ -65,7 +65,7 @@
                       <p class="mt-0.5 text-sm text-gray-500">Feedback on {{ moment(row.created_at).fromNow(true) }}</p>
                     </div>
                     <div class="mt-2 text-sm text-gray-700">
-                      <p>{{ row.content }}</p>
+                      <p v-html="row.content"></p>
                     </div>
                   </div>
                 </template>
@@ -83,7 +83,7 @@
                       <div class="font-medium text-red-600">Cancelled</div>
                       <div class="font-sm text-gray-500">{{ moment(row.created_at).fromNow(true)}}</div>
                       <div class="mt-2 text-sm text-gray-700">
-                        <p>{{ row.content }}</p>
+                        <p v-html="row.content"></p>
                       </div>
                     </div>
                   </div>
@@ -93,7 +93,7 @@
                   <div>
                     <div class="relative px-1">
                       <div class="flex h-8 w-8 items-center justify-center rounded-full bg-green-100 ring-8 ring-white">
-                        <XMarkIcon class="h-5 w-5 text-green-500" aria-hidden="true" />
+                        <CheckCircleIcon class="h-5 w-5 text-green-500" aria-hidden="true" />
                       </div>
                     </div>
                   </div>
@@ -102,7 +102,7 @@
                       <div class="font-medium text-green-600">Done</div>
                       <div class="font-sm text-gray-500">{{ moment(row.created_at).fromNow(true)}}</div>
                       <div class="mt-2 text-sm text-gray-700">
-                        <p>{{ row.content }}</p>
+                        <p v-html="row.content"></p>
                       </div>
                     </div>
                   </div>
@@ -119,7 +119,7 @@
 </template>
 
 <script setup lang="ts">
-import { ClockIcon, XMarkIcon, PlusIcon, ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/vue/20/solid'
+import { ClockIcon, XMarkIcon, PlusIcon, ChatBubbleOvalLeftEllipsisIcon, CheckCircleIcon } from '@heroicons/vue/20/solid'
 import { useStatusStore } from '@/store/StatusStore'
 import { FullName } from "@/helpers/Converter"
 import moment from 'moment'

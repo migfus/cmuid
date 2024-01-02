@@ -66,11 +66,38 @@ const router = createRouter({
           }
         },
         {
-          path: '',
-          name: 'user-register',
-          component: () => import('@/views/dashboard/user-register.vue'),
+          path: '/request',
+          name: 'request',
+          component: () => import('@/views/dashboard/request.vue'),
           meta: {
-            title: 'Dashboard',
+            title: 'Requesting ID',
+            sideBar: true
+          }
+        },
+        {
+          path: '/completed',
+          name: 'completed',
+          component: () => import('@/views/dashboard/completed.vue'),
+          meta: {
+            title: 'Completed',
+            sideBar: true
+          }
+        },
+        {
+          path: '/canceled',
+          name: 'canceled',
+          component: () => import('@/views/dashboard/canceled.vue'),
+          meta: {
+            title: 'Canceled',
+            sideBar: true
+          }
+        },
+        {
+          path: '/devices',
+          name: 'devices',
+          component: () => import('@/views/dashboard/devices.vue'),
+          meta: {
+            title: 'Devices',
             sideBar: true
           }
         },

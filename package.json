@@ -19,6 +19,8 @@
     "dependencies": {
         "@casl/ability": "^6.5.0",
         "@casl/vue": "^2.2.1",
+        "@ckeditor/ckeditor5-build-classic": "^40.2.0",
+        "@ckeditor/ckeditor5-vue": "^5.1.0",
         "@fawmi/vue-google-maps": "^0.9.79",
         "@fullcalendar/core": "^6.1.8",
         "@fullcalendar/daygrid": "^6.1.8",
@@ -30,6 +32,7 @@
         "@tailwindcss/forms": "^0.5.3",
         "@vitejs/plugin-vue": "^4.2.3",
         "@vuepic/vue-datepicker": "^5.4.0",
+        "@vueup/vue-quill": "^1.2.0",
         "@vueuse/core": "^10.1.2",
         "downloadjs": "^1.4.7",
         "heroicons": "^2.0.18",

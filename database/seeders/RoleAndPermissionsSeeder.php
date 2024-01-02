@@ -18,6 +18,7 @@ class RoleAndPermissionsSeeder extends Seeder
 
     // NOTE REGISTER
     Permission::create(['name' => 'index register']);
+    Permission::create(['name' => 'feedback register']);
 
     // NOTE PROFILE
     Permission::create(['name' => 'index profile']);
@@ -29,7 +30,7 @@ class RoleAndPermissionsSeeder extends Seeder
       // 'index post',     'store post',     'update post',
       // 'index faq',      'store faq',      'update faq',
       // 'index event',    'store event',    'update event',
-      'index register',
+      'index register', 'feedback register',
       'index dashboard',
       'index profile', 'update profile'
     ]);

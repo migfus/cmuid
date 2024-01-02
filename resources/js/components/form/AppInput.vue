@@ -39,7 +39,7 @@ const $props = defineProps<{
     ltr?: boolean
     mask?: string
 }>()
-const $model = defineModel<string>();
+const $model = defineModel<string | number>();
 
 const error = computed(() => {
     if($props.errors) {

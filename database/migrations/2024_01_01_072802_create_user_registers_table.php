@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_registers', function (Blueprint $table) {
           $table->string('id', 6)->primary();
+          $table->tinyInteger('status_category_id');
           $table->string('picture');
           $table->string('last_name');
           $table->string('first_name');
