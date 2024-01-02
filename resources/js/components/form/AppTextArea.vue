@@ -9,7 +9,7 @@
     >{{ $props.placeholder }}</label>
     <Field
         @input="$emit('update:modelValue', $event.target.value)"
-        v-model="$props.modelValue"
+        v-model="$model"
         :placeholder="$props.placeholder"
         :type="$props.type"
         :name="$props.name"
@@ -30,22 +30,21 @@ import { computed } from 'vue'
 import { Field, ErrorMessage } from 'vee-validate'
 
 const $props = defineProps<{
-    placeholder: string
-    name: string
-    type?: string
-    modelValue?: any
-    errors?: any
-    noLabel?: boolean
-    ltr?: boolean
+  placeholder: string
+  name: string
+  type?: string
+  errors?: any
+  noLabel?: boolean
+  ltr?: boolean
 }>()
-const $emit = defineEmits(['update:modelValue'])
+const $model = defineModel()
 
 const error = computed(() => {
-    if($props.errors) {
-        if($props.errors[$props.name]) {
-            return $props.errors[$props.name]
-        }
+  if($props.errors) {
+    if($props.errors[$props.name]) {
+      return $props.errors[$props.name]
     }
-    return null
+  }
+  return null
 })
 </script>

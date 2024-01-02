@@ -1,6 +1,6 @@
 <template>
-  <TransitionRoot as="template" :show="$props.modelValue">
-    <Dialog as="div" class="relative z-10" @close="$emit('update:modelValue', false)">
+  <TransitionRoot as="template" :show="$model">
+    <Dialog as="div" class="relative z-10" @close="$model = false">
       <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 backdrop-transition-opacity backdrop-blur" />
       </TransitionChild>
@@ -21,8 +21,8 @@
                   </div>
                 </div>
                 <div class="mt-5 sm:mt-4 flex-none sm:flex gap-2 justify-end">
-                  <AppButton @click="$emit('update:modelValue', false)" color="white" class="w-full sm:w-auto mb-2 sm:mb-0">Cancel</AppButton>
-                  <AppButton @click="$emit('confirm', true); $emit('update:modelValue', false)" color="danger" class="w-full sm:w-auto">{{ $props.confirmButtonName }}</AppButton>
+                  <AppButton @click="$model = false" color="white" class="w-full sm:w-auto mb-2 sm:mb-0">Cancel</AppButton>
+                  <AppButton @click="$emit('confirm', true); $model = false" color="danger" class="w-full sm:w-auto">{{ $props.confirmButtonName }}</AppButton>
                 </div>
               </DialogPanel>
             </TransitionChild>
@@ -40,7 +40,7 @@ import AppButton from '@/components/form/AppButton.vue'
 const $props = defineProps<{
     confirmButtonName: string
     title: string
-    modelValue: boolean
 }>()
-const $emit = defineEmits(['confirm', 'update:modelValue'])
+const $emit = defineEmits(['confirm'])
+const $model = defineModel<boolean>()
 </script>

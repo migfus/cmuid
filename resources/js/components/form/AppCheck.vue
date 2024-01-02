@@ -10,8 +10,7 @@
 
   <div class="flex h-5 items-center">
     <input
-      @change="$emit('update:modelValue', $event.target.checked)"
-      :checked="$props.modelValue"
+      v-model="$model"
       :name="$props.name"
       :id="$props.name"
       type="checkbox"
@@ -32,11 +31,10 @@ import { Field, ErrorMessage } from 'vee-validate'
 const $props = defineProps<{
   placeholder: string
   name: string
-  modelValue?: any
   errors?: any
   desc?: string
 }>()
-const $emit = defineEmits(['update:modelValue'])
+const $model = defineModel()
 
 const error = computed(() => {
   if($props.errors) {

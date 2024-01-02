@@ -22,7 +22,7 @@
                         <div class="flex text-sm text-gray-600">
                           <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
                             <span>Upload a file</span>
-                            <Field @change="AddPicture($event)" id="file-upload" name="picture" type="file" class="sr-only" />
+                            <Field @change="AddPicture($event)" id="file-upload" name="picture" type="file" class="sr-only" accept="image/*"/>
                           </label>
                           <p class="pl-1">or drag and drop</p>
                         </div>

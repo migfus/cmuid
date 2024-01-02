@@ -5,7 +5,7 @@ import { notify } from 'notiwind'
 import type { TGConfig, TGUserRegister } from "./GlobalType"
 
 
-const title = `auth/RegisterStore`
+const title = `RegisterStore`
 export const useRegisterStore = defineStore(title, () => {
 
   const params = reactive<TGUserRegister>(ResetParams())

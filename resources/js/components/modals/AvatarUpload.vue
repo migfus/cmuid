@@ -1,6 +1,6 @@
 <template>
-  <TransitionRoot as="template" :show="show">
-    <Dialog as="div" class="relative z-10" @close="$emit('update:modelValue', false)">
+  <TransitionRoot as="template" :show="$show_model">
+    <Dialog as="div" class="relative z-10" @close="$show_model = false">
       <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 backdrop-transition-opacity backdrop-blur" />
       </TransitionChild>
@@ -18,7 +18,7 @@
                     <div class="mt-2">
                       <VuePictureCropper
                           :boxStyle="config.cropperBoxStyle"
-                          :img="$props.modelValue"
+                          :img="$model"
                           :options="config.cropperOption"
                           class="rounded-xl"
                       />
@@ -66,13 +66,11 @@ import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessu
 import VuePictureCropper, { cropper } from 'vue-picture-cropper'
 import AppButton from '@/components/form/AppButton.vue'
 
-const $props = defineProps({
-    modelValue: String,
-    show: Boolean,
-})
-const $emit = defineEmits(['update:modelValue', 'update', 'update:show'])
+const $emit = defineEmits(['update', 'update:show'])
+const $model = defineModel<string>()
+const $show_model = defineModel<boolean>()
 const uploadInput = ref(null);
-const defaultImage = $props.modelValue;
+const defaultImage = $model.value;
 const config = {
     cropperOption: {
         viewMode: 2,
@@ -87,10 +85,6 @@ const config = {
     }
 }
 
-function updateValue(val: string) {
-    $emit('update:modelValue', val)
-}
-
 function SelectFile(event: Event) {
     // @ts-ignore
     const { files } = event.target
@@ -100,7 +94,7 @@ function SelectFile(event: Event) {
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = () => {
-        updateValue(String(reader.result))
+        $model.value = String(reader.result)
         if (!uploadInput.value) return
         uploadInput.value.value = ''
     }
@@ -113,7 +107,7 @@ async function GetResult() {
         maxHeight: 200,
         imageSmoothingQuality: 'high'
     })
-    updateValue(base64)
+    $model.value = base64
     $emit('update')
     $emit('update:show', false)
 }
@@ -121,6 +115,6 @@ async function GetResult() {
 function Reset() {
     if (!cropper) return
     cropper.reset()
-    updateValue(defaultImage)
+    $model.value = defaultImage
 }
 </script>

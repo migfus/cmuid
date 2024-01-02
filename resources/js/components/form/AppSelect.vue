@@ -10,7 +10,7 @@
     </label>
     <Field
         as="select"
-        :value="$props.modelValue"
+        :value="$model"
         @change="$emit('update:modelValue', $event.target.value)"
         :id="$props.name"
         :name="$props.name"
@@ -31,10 +31,9 @@ import { Field, ErrorMessage } from 'vee-validate'
 const $props = defineProps<{
     placeholder: string
     name: string
-    modelValue: any | null
     errors?: any
 }>()
-const $emit = defineEmits(['update:modelValue'])
+const $model = defineModel()
 
 const error = computed(() => {
     if($props.errors) {
@@ -44,11 +43,4 @@ const error = computed(() => {
     }
     return null
 })
-
-function alarm() {
-    alert()
-}
-
-// @select="$emit('update:modelValue', $event.target.value)"
-
 </script>
