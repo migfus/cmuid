@@ -20,19 +20,20 @@ class RoleAndPermissionsSeeder extends Seeder
     Permission::create(['name' => 'index register']);
     Permission::create(['name' => 'feedback register']);
 
+    // NOTE DEVICE
+    Permission::create(['name' => 'index device']);
+    Permission::create(['name' => 'store device']);
+
     // NOTE PROFILE
     Permission::create(['name' => 'index profile']);
     Permission::create(['name' => 'update profile']);
 
     $role = Role::create(['name' => 'Admin']);
     $role->givePermissionTo([
-      // 'index user',     'store user',     'update user',
-      // 'index post',     'store post',     'update post',
-      // 'index faq',      'store faq',      'update faq',
-      // 'index event',    'store event',    'update event',
+      'index device',   'store device',
       'index register', 'feedback register',
       'index dashboard',
-      'index profile', 'update profile'
+      'index profile',  'update profile'
     ]);
   }
 }

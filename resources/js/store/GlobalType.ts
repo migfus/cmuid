@@ -56,3 +56,10 @@ export type TGAuth = {
   avatar: string
   created_at: string
 }
+
+export type TGDevice = {
+  id: string // NOTE token
+  name: string
+  platform: string
+  last_response: string
+}

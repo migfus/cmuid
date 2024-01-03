@@ -7,20 +7,20 @@ Route::get('/test', function() {
   return response()->json(['test' => 'test']);
 });
 
-Route::controller(\App\Http\Controllers\AuthController::class)->group(function () {
-  Route::post('/login', 'Login');
-});
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'Login']);
 
 Route::post('/user-register', [\App\Http\Controllers\UserRegisterController::class, 'store']);
-Route::apiResource('/status',  \App\Http\Controllers\RegisterStatusController::class)
-        ->only(['show']);
-Route::apiResource('/verify',  \App\Http\Controllers\VerifyController::class)
-        ->only(['show']);
+Route::apiResource('/status',  \App\Http\Controllers\RegisterStatusController::class)->only(['show']);
+Route::apiResource('/verify',  \App\Http\Controllers\VerifyController::class)->only(['show']);
+Route::apiResource('/device',  \App\Http\Controllers\DeviceController::class)->only(['show']);
+Route::apiResource('/text-message',  \App\Http\Controllers\TextMessageController::class)->only(['index']);
 
+// SECTION AUTH
 Route::middleware('auth:sanctum')->group(function () {
   Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 
   Route::apiResource('/request',  \App\Http\Controllers\RequestController::class)
     ->only(['index', 'update']);
-
+  Route::apiResource('/device',  \App\Http\Controllers\DeviceController::class)
+    ->only(['index']);
 });

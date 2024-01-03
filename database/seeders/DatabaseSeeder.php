@@ -11,7 +11,9 @@ class DatabaseSeeder extends Seeder
       $this->call([
         RoleAndPermissionsSeeder::class,
         UserSeeder::class,
-        StatusCategorySeeder::class
+        StatusCategorySeeder::class,
+        DeviceSeeder::class,
+        TextMessageSeeder::class,
       ]);
     }
 }
