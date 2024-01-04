@@ -5,7 +5,7 @@
         <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900">Request for CSC ID</h2>
       </div>
 
-      <Form v-slot="{ errors }" :validation-schema="schema" @submit="$req.RegisterAPI()" class="w-full md:max-w-7xl">
+      <Form v-slot="{ errors }" :validation-schema="schema" @submit="show = true" class="w-full md:max-w-7xl">
         <div class="bg-white px-4 py-5 shadow sm:rounded-xl sm:p-6 mb-2">
 
             <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -95,6 +95,10 @@
     </div>
   </div>
 
+  <PromptModal title="Confirm" confirmButtonName="Confirm" v-model="show" @confirm="$req.ProceedToConfirm()">
+    <p>Are you sure there are no typo?. Kindly double check to proceed.</p>
+  </PromptModal>
+
 </template>
 
 <script setup lang="ts">
@@ -106,6 +110,7 @@ import { Form, configure, ErrorMessage, Field } from 'vee-validate'
 import AppButton from '@/components/form/AppButton.vue'
 import AppInput from  '@/components/form/AppInput.vue'
 import AppSelect from '@/components/form/AppSelect.vue'
+import PromptModal from '@/components/modals/PromptModal.vue'
 
 configure({
     validateOnInput: true
@@ -124,6 +129,7 @@ const schema = Yup.object({
 })
 
 const preview = ref(null)
+const show = ref(false)
 
 function AddPicture(events) {
   $req.params.picture = events.target.files[0]

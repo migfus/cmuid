@@ -31,6 +31,7 @@ class UserRegisterController extends Controller
       'unit'   => '',
       'email'  => '',
       'mobile' => 'required',
+      'type'   => 'required'
     ]);
 
     if($val->fails()) {

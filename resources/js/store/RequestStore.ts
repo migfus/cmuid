@@ -16,11 +16,11 @@ export const useRequestStore = defineStore(title, () => {
   })
 
   // SECTION API
-  async function RegisterAPI() {
+  async function RegisterAPI(type: string) {
     config.buttonLoading = true
     try{
       let { data: { data }} = await axios.post(
-        '/api/user-register', params,
+        '/api/user-register', {...params, type: type},
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
       Object.assign(params, ResetParams())
@@ -46,6 +46,11 @@ export const useRequestStore = defineStore(title, () => {
     config.buttonLoading = false
   }
 
+  function ProceedToConfirm() {
+    // @ts-ignore
+    this.router.push({ name: 'confirm-request'})
+  }
+
   function ResetParams() {
     return {
       id: null,
@@ -68,5 +73,6 @@ export const useRequestStore = defineStore(title, () => {
     config,
 
     RegisterAPI,
+    ProceedToConfirm,
   }
 });

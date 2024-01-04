@@ -71,7 +71,7 @@
 
             <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
 
-            <AppSidebarNav linkName="request" :icon="HomeIcon" @click="sidebarOpen = false"> Requset for CSC ID </AppSidebarNav>
+            <AppSidebarNav linkName="request" :icon="HomeIcon" @click="sidebarOpen = false"> Request for CSC ID </AppSidebarNav>
             <AppSidebarNav linkName="status" :icon="ClockIcon" @click="sidebarOpen = false"> Check Status </AppSidebarNav>
             <AppSidebarNav linkName="verify" :icon="CheckBadgeIcon" @click="sidebarOpen = false"> Verify</AppSidebarNav>
 

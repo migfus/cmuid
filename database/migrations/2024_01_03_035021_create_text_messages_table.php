@@ -15,7 +15,7 @@ return new class extends Migration
           $table->id();
           $table->string('device_id')->nullable();
           $table->string('user_register_id');
-          $table->string('content');
+          $table->longText('content');
           $table->dateTime('read_at')->nullable();
           $table->timestamps();
         });

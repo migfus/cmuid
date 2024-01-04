@@ -15,7 +15,15 @@ const router = createRouter({
           name: 'request',
           component: () => import('@/views/request/index.vue'),
           meta: {
-            title: 'Requset for CSC ID',
+            title: 'Request for CSC-ID',
+          }
+        },
+        {
+          path: '/confirm',
+          name: 'confirm-request',
+          component: () => import('@/views/request/confirm.vue'),
+          meta: {
+            title: 'Confirm Request',
           }
         },
         {
@@ -115,11 +123,17 @@ const router = createRouter({
 
     {
       path: "/login",
-      name: 'login',
-      component: () => import('@/views/login.vue'),
-      meta: {
-        title: 'Login',
-      }
+      children: [
+        {
+          name: 'login',
+          path: '',
+          component: () => import('@/views/login/index.vue'),
+          meta: {
+            title: 'Login',
+          }
+        },
+      ]
+
     },
 
     // NOTE OTHER
