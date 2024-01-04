@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import moment from 'moment'
-import { DevicePhoneMobileIcon, CalendarIcon } from '@heroicons/vue/20/solid'
+import { DevicePhoneMobileIcon, CalendarIcon,  } from '@heroicons/vue/20/solid'
 
 const $props = defineProps<{
   id: string,

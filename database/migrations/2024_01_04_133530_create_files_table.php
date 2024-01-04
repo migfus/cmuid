@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+      Schema::create('files', function (Blueprint $table) {
+        $table->id();
+        $table->text('user_register_id'); // attachement
+        $table->text('name');
+        $table->longText('url');
+        $table->timestamps();
+      });
     }
 
     /**

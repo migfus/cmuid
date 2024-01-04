@@ -112,9 +112,18 @@ const router = createRouter({
         {
           path: '/upload',
           name: 'upload',
-          component: () => import('@/views/dashboard/upload.vue'),
+          component: () => import('@/views/dashboard/upload/index.vue'),
           meta: {
-            title: 'Claimed',
+            title: 'Upload',
+            sideBar: true
+          }
+        },
+        {
+          path: '/uploaded',
+          name: 'uploaded',
+          component: () => import('@/views/dashboard/upload/index.vue'),
+          meta: {
+            title: 'Uploaded',
             sideBar: true
           }
         },

@@ -14,9 +14,17 @@ namespace App\Models{
 /**
  * App\Models\ClaimType
  *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|ClaimType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ClaimType newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ClaimType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClaimType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClaimType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClaimType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClaimType whereUpdatedAt($value)
  */
 	class ClaimType extends \Eloquent {}
 }
@@ -42,6 +50,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Device whereUpdatedAt($value)
  */
 	class Device extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\File
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|File newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|File newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|File query()
+ */
+	class File extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -159,6 +178,7 @@ namespace App\Models{
  *
  * @property string $id
  * @property int $status_category_id
+ * @property int $claim_type_id
  * @property string $picture
  * @property string $last_name
  * @property string $first_name
@@ -176,6 +196,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereClaimTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereDepartment($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereEmail($value)

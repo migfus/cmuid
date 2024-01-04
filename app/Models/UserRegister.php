@@ -32,4 +32,8 @@ class UserRegister extends Model
   public function status() {
     return $this->hasMany(RegisterStatus::class, 'user_register_id');
   }
+
+  public function files() {
+    return $this->hasMany(File::class, 'user_register_id');
+  }
 }

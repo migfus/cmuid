@@ -24,4 +24,6 @@ Route::middleware('auth:sanctum')->group(function () {
     ->only(['index', 'update']);
   Route::apiResource('/device',  \App\Http\Controllers\DeviceController::class)
     ->only(['index']);
+  Route::apiResource('/file',  \App\Http\Controllers\FileController::class)
+    ->only(['index']);
 });

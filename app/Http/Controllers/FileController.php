@@ -2,62 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+use App\Models\File;
+use App\Models\UserRegister;
 
 class FileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    // NOTE mix-match user_register & file
+    public function index(Request $req) {
+      if(!$req->user()->can('feedback register')) {
+        return $this->G_UnauthorizedResponse();
+      }
+
+      $data = UserRegister::doesntHave('files')->get();
+
+      return response()->json([
+        ...$this->G_ReturnDefault(),
+        'data' => $data,
+      ], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    // NOTE upload file and attach to user_register
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(File $file)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(File $file)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, File $file)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    // NOTE Remove attachement from user_register
     public function destroy(File $file)
     {
         //
