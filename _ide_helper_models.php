@@ -86,6 +86,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $device_id
+ * @property string $user_register_id
  * @property string $content
  * @property string|null $read_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -100,6 +101,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereReadAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereUserRegisterId($value)
  */
 	class TextMessage extends \Eloquent {}
 }

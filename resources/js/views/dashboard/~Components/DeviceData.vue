@@ -26,10 +26,6 @@
           </div>
         </div>
 
-        <div class="grid">
-          <img :src="qrcode" />
-        </div>
-
         <div class="grid grid-cols-2 mt-4 justify-evenly">
           <!-- <img :src="row.picture" class="h-48 w-auto rounded-xl"/>
           <div class="flex justify-end gap-2">
@@ -47,7 +43,6 @@
 <script setup lang="ts">
 import moment from 'moment'
 import { DevicePhoneMobileIcon, CalendarIcon } from '@heroicons/vue/20/solid'
-import { useQRCode } from '@vueuse/integrations/useQRCode'
 
 const $props = defineProps<{
   id: string,
@@ -55,5 +50,4 @@ const $props = defineProps<{
   platform: string
   last_response: string
 }>()
-const qrcode = useQRCode(`qr_${$props.id}`)
 </script>

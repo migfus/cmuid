@@ -15,12 +15,12 @@ class DeviceSeeder extends Seeder
      */
     public function run(): void
     {
-      Device::create([
-        'id' => 1234,
-        'name' => 'MIUI SOmething',
-        'platform' => 'Android',
-        'last_response' => Carbon::now(),
-      ]);
+      // Device::create([
+      //   'id' => 1234,
+      //   'name' => 'MIUI SOmething',
+      //   'platform' => 'Android',
+      //   'last_response' => Carbon::now(),
+      // ]);
 
 
     }

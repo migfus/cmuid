@@ -93,6 +93,15 @@ const router = createRouter({
           }
         },
         {
+          path: '/claimed',
+          name: 'claimed',
+          component: () => import('@/views/dashboard/claimed.vue'),
+          meta: {
+            title: 'Claimed',
+            sideBar: true
+          }
+        },
+        {
           path: '/devices',
           name: 'devices',
           component: () => import('@/views/dashboard/devices.vue'),

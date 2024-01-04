@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Device;
 
@@ -25,12 +26,30 @@ class DeviceController extends Controller
       ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    // NOTE Device will be added upon scanning
+    public function store(Request $req) {
+      $val = Validator::make($req->all(), [
+        'id' => 'required',
+        'name' => 'required',
+        'platform' => 'required'
+      ]);
+
+      if($val->fails()) {
+        return $this->G_ValidatorFailResponse($val);
+      }
+
+      $id = Device::create([
+        'id' => $req->id,
+        'name' => $req->name,
+        'platform' => $req->platform,
+        'last_response' => Carbon::now()
+      ]);
+
+      return response()->json([
+        ...$this->G_ReturnDefault(),
+        'data' => $req->id,
+      ], 200);
+
     }
 
     // NOTE Connect to device
@@ -62,8 +81,12 @@ class DeviceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(string $id) {
+      $id = Device::where('id', $id)->delete();
+
+      return response()->json([
+        ...$this->G_ReturnDefault(),
+        'data' => $id ? true : false,
+      ], $id ? 200 : 500);
     }
 }

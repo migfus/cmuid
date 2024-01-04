@@ -100,6 +100,7 @@ class TextMessageController extends Controller
 
       if($device) {
         TextMessage::where('id', $id)->update([
+          'device_id' => $req->device_id,
           'read_at' => Carbon::now(),
         ]);
 

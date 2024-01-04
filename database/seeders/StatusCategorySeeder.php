@@ -34,6 +34,10 @@ class StatusCategorySeeder extends Seeder
         'id' => 5,
         'name' => 'Done',
       ],
+      [
+        'id' => 6,
+        'name' => 'Claimed',
+      ],
     ];
 
     foreach($data as $row) {

@@ -28,6 +28,8 @@
                   <AppSidebarNav linkName="request-list" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
                   <AppSidebarNav linkName="completed" :icon="CheckCircleIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Completed </AppSidebarNav>
                   <AppSidebarNav linkName="canceled" :icon="XMarkIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Canceled </AppSidebarNav>
+                  <AppSidebarNav linkName="claimed" :icon="ArchiveBoxIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Claimed </AppSidebarNav>
+
                   <AppSidebarNav linkName="devices" :icon="DevicePhoneMobileIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Devices </AppSidebarNav>
 
                   <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
@@ -63,6 +65,8 @@
             <AppSidebarNav linkName="request-list" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
             <AppSidebarNav linkName="completed" :icon="CheckCircleIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Completed</AppSidebarNav>
             <AppSidebarNav linkName="canceled" :icon="XMarkIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Canceled </AppSidebarNav>
+            <AppSidebarNav linkName="claimed" :icon="ArchiveBoxIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Claimed </AppSidebarNav>
+
             <AppSidebarNav linkName="devices" :icon="DevicePhoneMobileIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Devices </AppSidebarNav>
 
             <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
@@ -141,7 +145,8 @@ import {
   ClockIcon,
   UserPlusIcon,
   CheckCircleIcon,
-DevicePhoneMobileIcon
+  DevicePhoneMobileIcon,
+  ArchiveBoxIcon
 } from '@heroicons/vue/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { usePreLoader } from '@/store/system/PreLoader'

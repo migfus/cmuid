@@ -11,6 +11,7 @@ class Device extends Model
 
 
   protected $fillable = [
+    'id',
     'name',
     'platform',
     'last_response',
