@@ -22,11 +22,11 @@
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
 
             <RouterLink to="/"
-              :class="[$route.name == 'register' ? 'border-primary-700 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+              :class="[$route.name == 'request' ? 'border-primary-700 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
                 'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
                 ]"
             >
-              Register
+              Request for CSC ID
             </RouterLink>
 
             <RouterLink to="/status"

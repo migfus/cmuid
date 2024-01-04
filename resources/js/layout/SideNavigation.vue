@@ -25,14 +25,14 @@
 
                   <!-- SECTION MOBILE NAV -->
                   <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'dashboard')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
-                  <AppSidebarNav linkName="request" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
+                  <AppSidebarNav linkName="request-list" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
                   <AppSidebarNav linkName="completed" :icon="CheckCircleIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Completed </AppSidebarNav>
                   <AppSidebarNav linkName="canceled" :icon="XMarkIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Canceled </AppSidebarNav>
                   <AppSidebarNav linkName="devices" :icon="DevicePhoneMobileIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Devices </AppSidebarNav>
 
                   <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
 
-                  <AppSidebarNav linkName="register" :icon="HomeIcon" @click="sidebarOpen = false"> Register </AppSidebarNav>
+                  <AppSidebarNav linkName="request" :icon="HomeIcon" @click="sidebarOpen = false"> Request for CSC ID </AppSidebarNav>
                   <AppSidebarNav linkName="status" :icon="ClockIcon" @click="sidebarOpen = false"> Check Status </AppSidebarNav>
                   <AppSidebarNav linkName="verify" :icon="CheckBadgeIcon" @click="sidebarOpen = false"> Verify</AppSidebarNav>
 
@@ -51,7 +51,7 @@
     <div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex flex-grow flex-col overflow-y-auto border-gray-200 bg-gray-800 pt-5">
-        <RouterLink :to="{name: 'register'}" class="flex flex-shrink-0 items-center px-4">
+        <RouterLink :to="{name: 'request'}" class="flex flex-shrink-0 items-center px-4">
           <object class="h-8 w-auto" data="/images/logo.svg" alt="Your Company" />
           <p class="ml-4 font-semibold text-white">OHRM | CMU</p>
         </RouterLink>
@@ -60,14 +60,14 @@
 
             <!-- SECTION DESKTOP NAV -->
             <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'dashboard')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
-            <AppSidebarNav linkName="request" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
+            <AppSidebarNav linkName="request-list" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
             <AppSidebarNav linkName="completed" :icon="CheckCircleIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Completed</AppSidebarNav>
             <AppSidebarNav linkName="canceled" :icon="XMarkIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Canceled </AppSidebarNav>
             <AppSidebarNav linkName="devices" :icon="DevicePhoneMobileIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Devices </AppSidebarNav>
 
             <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
 
-            <AppSidebarNav linkName="register" :icon="HomeIcon" @click="sidebarOpen = false"> Register </AppSidebarNav>
+            <AppSidebarNav linkName="request" :icon="HomeIcon" @click="sidebarOpen = false"> Requset for CSC ID </AppSidebarNav>
             <AppSidebarNav linkName="status" :icon="ClockIcon" @click="sidebarOpen = false"> Check Status </AppSidebarNav>
             <AppSidebarNav linkName="verify" :icon="CheckBadgeIcon" @click="sidebarOpen = false"> Verify</AppSidebarNav>
 

@@ -12,10 +12,10 @@ const router = createRouter({
       children: [
         {
           path: '',
-          name: 'register',
-          component: () => import('@/views/register/index.vue'),
+          name: 'request',
+          component: () => import('@/views/request/index.vue'),
           meta: {
-            title: 'CSC ID Registration',
+            title: 'Requset for CSC ID',
           }
         },
         {
@@ -67,7 +67,7 @@ const router = createRouter({
         },
         {
           path: '/request',
-          name: 'request',
+          name: 'request-list',
           component: () => import('@/views/dashboard/request.vue'),
           meta: {
             title: 'Requesting ID',

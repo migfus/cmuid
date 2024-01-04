@@ -13,7 +13,7 @@ Route::post('/user-register', [\App\Http\Controllers\UserRegisterController::cla
 Route::apiResource('/status',  \App\Http\Controllers\RegisterStatusController::class)->only(['show']);
 Route::apiResource('/verify',  \App\Http\Controllers\VerifyController::class)->only(['show']);
 Route::apiResource('/device',  \App\Http\Controllers\DeviceController::class)->only(['show']);
-Route::apiResource('/text-message',  \App\Http\Controllers\TextMessageController::class)->only(['index']);
+Route::apiResource('/text-message',  \App\Http\Controllers\TextMessageController::class)->only(['index', 'update']);
 
 // SECTION AUTH
 Route::middleware('auth:sanctum')->group(function () {

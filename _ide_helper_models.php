@@ -12,6 +12,29 @@
 
 namespace App\Models{
 /**
+ * App\Models\Device
+ *
+ * @property int $id
+ * @property string|null $name
+ * @property string|null $platform
+ * @property string $last_response
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Device newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Device newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Device query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Device whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Device whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Device whereLastResponse($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Device whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Device wherePlatform($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Device whereUpdatedAt($value)
+ */
+	class Device extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\RegisterStatus
  *
  * @property int $id
@@ -59,6 +82,30 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\TextMessage
+ *
+ * @property int $id
+ * @property string $device_id
+ * @property string $content
+ * @property string|null $read_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\UserRegister|null $user_register
+ * @method static \Illuminate\Database\Eloquent\Builder|TextMessage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TextMessage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TextMessage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereDeviceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereReadAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereUpdatedAt($value)
+ */
+	class TextMessage extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
@@ -98,6 +145,7 @@ namespace App\Models{
  * App\Models\UserRegister
  *
  * @property string $id
+ * @property int $status_category_id
  * @property string $picture
  * @property string $last_name
  * @property string $first_name
@@ -126,6 +174,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereMobile($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister wherePicture($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister wherePosition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereStatusCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereUnit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereUpdatedAt($value)
  */

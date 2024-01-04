@@ -10,8 +10,8 @@ export const useNavigationStore = defineStore("system/NavigationStore", () => {
 
   const pages: Array<pagesInt> = [
     {
-      name: 'Register',
-      link: { name: 'register'},
+      name: 'Request for CSC ID',
+      link: { name: 'request'},
     },
     {
       name: 'Check Status',

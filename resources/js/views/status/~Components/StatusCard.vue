@@ -45,7 +45,7 @@
                   <div class="min-w-0 flex-1 py-1.5">
                     <div class="text-sm text-gray-500">
                       <div class="font-medium text-gray-900">Waiting to process</div>
-                      There may be other CSC ID in under process. We'll notify you for any updates.
+                      This may take a while, we'll notify you for any updates.
                     </div>
                   </div>
                 </template>

@@ -10,6 +10,10 @@ class TextMessage extends Model
     use HasFactory;
 
   protected $fillable = [
-    'device_id', 'content', 'read_at'
+    'device_id', 'user_register_id', 'content', 'read_at'
   ];
+
+  public function user_register() {
+    return $this->belongsTo(UserRegister::class, 'user_register_id');
+  }
 }

@@ -12,7 +12,7 @@
           <p class="mt-1 truncate text-sm text-gray-500">{{ $status.content.info.position }}</p>
           <p class="mt-1 truncate text-sm text-gray-500">{{ $status.content.info.unit ?? ''}}, {{ $status.content.info.department ?? '' }}</p>
           <p class="mt-1 truncate text-sm text-gray-500">{{ $status.content.info.email ?? ''}}</p>
-          <p class="mt-1 truncate text-sm text-gray-500">0{{ $status.content.info.mobile }}</p>
+          <p class="mt-1 truncate text-sm text-gray-500">{{ MobileFormat($status.content.info.mobile) }}</p>
         </div>
       </div>
       <div class="p-5">
@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { FullName } from '@/helpers/Converter'
 import { useStatusStore } from '@/store/StatusStore'
+import { MobileFormat } from '@/helpers/Converter'
 
 const $status = useStatusStore()
 </script>

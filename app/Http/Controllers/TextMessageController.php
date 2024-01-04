@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 use App\Models\TextMessage;
 use App\Models\Device;
@@ -11,10 +13,32 @@ class TextMessageController extends Controller
 {
   // NOTE List of Text [pending, done]
   public function index(Request $req) {
+    $val = Validator::make($req->all(), [
+      'id' => 'required',
+      'type' => 'required'
+    ]);
+
+    if($val->fails()) {
+      return $this->G_ValidatorFailResponse($val);
+    }
+
     $device = Device::findOrFail($req->id)->first();
+    $data = [];
 
     if($device) {
-      $data = TextMessage::whereNull('read_at')->get();
+      switch($req->type) {
+        case 'pending':
+          $data = TextMessage::whereNull('read_at')
+            ->with('user_register')
+            ->orderBy('created_at', 'ASC')
+            ->get();
+          break;
+        default:
+          $data = TextMessage::whereNotNull('read_at')
+            ->with('user_register')
+            ->orderBy('created_at', 'ASC')
+            ->get();
+      }
 
       return response()->json([
         ...$this->G_ReturnDefault(),
@@ -60,12 +84,35 @@ class TextMessageController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, TextMessage $textMessage)
-    {
-        //
+    // NOTE Mark read_at assume that it had already sent.
+    public function update(Request $req, $id) {
+      $val = Validator::make($req->all(), [
+        'device_id' => 'required'
+      ]);
+
+      if($val->fails()) {
+        return $this->G_ValidatorFailResponse($val);
+      }
+
+      $device = Device::where('id', $req->device_id)->update([
+        'last_response' => Carbon::now(),
+      ]);
+
+      if($device) {
+        TextMessage::where('id', $id)->update([
+          'read_at' => Carbon::now(),
+        ]);
+
+        return response()->json([
+          ...$this->G_ReturnDefault(),
+          'data' => true,
+        ], 200);
+      }
+
+      return response()->json([
+        ...$this->G_ReturnDefault(),
+        'data' => false,
+      ], 402);
     }
 
     /**

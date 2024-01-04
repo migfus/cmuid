@@ -2,10 +2,10 @@
   <div class='h-full grid grid-cols-1'>
     <div class="grid grid-cols-1 py-8 justify-items-center">
       <div class="sm:mx-auto sm:w-full sm:max-w-md mb-8">
-        <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900">Register for CSC ID</h2>
+        <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900">Request for CSC ID</h2>
       </div>
 
-      <Form v-slot="{ errors }" :validation-schema="schema" @submit="$register.RegisterAPI()" class="w-full md:max-w-7xl">
+      <Form v-slot="{ errors }" :validation-schema="schema" @submit="$req.RegisterAPI()" class="w-full md:max-w-7xl">
         <div class="bg-white px-4 py-5 shadow sm:rounded-xl sm:p-6 mb-2">
 
             <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -30,7 +30,7 @@
                       </div>
                     </div>
 
-                    <img v-if="$register.params.picture" :src="preview" class="mt-2 rounded-xl shadow h-64 w-auto mb-2">
+                    <img v-if="$req.params.picture" :src="preview" class="mt-2 rounded-xl shadow h-64 w-auto mb-2">
                     <ErrorMessage name="picture" class="text-sm font-medium text-red-500"/>
                   </div>
 
@@ -40,19 +40,19 @@
 
                     <div class="grid grid-cols-12 gap-6">
                         <div class="col-span-12 sm:col-span-6">
-                            <AppInput v-model="$register.params.last_name" placeholder="Last Name" name="last_name" :errors="errors"/>
+                            <AppInput v-model="$req.params.last_name" placeholder="Last Name" name="last_name" :errors="errors"/>
                         </div>
 
                         <div class="col-span-12 sm:col-span-6">
-                            <AppInput v-model="$register.params.first_name" placeholder="First Name" name="first_name" :errors="errors"/>
+                            <AppInput v-model="$req.params.first_name" placeholder="First Name" name="first_name" :errors="errors"/>
                         </div>
 
                         <div class="col-span-12 sm:col-span-3">
-                            <AppInput v-model="$register.params.mid_name" mask="*." placeholder="Middle Initial Name" name="mid_name" :errors="errors"/>
+                            <AppInput v-model="$req.params.mid_name" mask="*." placeholder="Middle Initial Name" name="mid_name" :errors="errors"/>
                         </div>
 
                         <div class="col-span-12 sm:col-span-3">
-                            <AppSelect v-model="$register.params.ext_name" placeholder="Extension Name" name="ext_name" :errors="errors">
+                            <AppSelect v-model="$req.params.ext_name" placeholder="Extension Name" name="ext_name" :errors="errors">
                                 <option value="">n/a</option>
                                 <option value="JR">JR.</option>
                                 <option value="SR">SR.</option>
@@ -63,22 +63,22 @@
                         </div>
 
                         <div class="col-span-12 sm:col-span-6">
-                            <AppInput v-model="$register.params.position" placeholder="Position" name="position" :errors="errors"/>
+                            <AppInput v-model="$req.params.position" placeholder="Position" name="position" :errors="errors"/>
                         </div>
 
                         <div class="col-span-12 sm:col-span-6">
-                            <AppInput v-model="$register.params.department" placeholder="Department Name" name="department" :errors="errors"/>
+                            <AppInput v-model="$req.params.department" placeholder="Department Name" name="department" :errors="errors"/>
                         </div>
 
                         <div class="col-span-12 sm:col-span-6">
-                            <AppInput v-model="$register.params.unit" placeholder="Unit Name" name="unit" :errors="errors"/>
+                            <AppInput v-model="$req.params.unit" placeholder="Unit Name" name="unit" :errors="errors"/>
                         </div>
 
                         <div class="col-span-12 sm:col-span-6">
-                            <AppInput v-model="$register.params.mobile" mask="####-###-####" placeholder="Mobile Number" name="mobile" :errors="errors"/>
+                            <AppInput v-model="$req.params.mobile" mask="####-###-####" placeholder="Mobile Number" name="mobile" :errors="errors"/>
                         </div>
                         <div class="col-span-12 sm:col-span-6">
-                            <AppInput v-model="$register.params.email" placeholder="Email (Optional)" name="email" :errors="errors"/>
+                            <AppInput v-model="$req.params.email" placeholder="Email (Optional)" name="email" :errors="errors"/>
                         </div>
 
 
@@ -87,7 +87,7 @@
             </div>
 
             <div class="flex justify-end mt-8 gap-1">
-              <AppButton type="submit" color='success' :disabled="Object.keys(errors).length != 0" :loading="$register.config.buttonLoading">Register</AppButton>
+              <AppButton type="submit" color='success' :disabled="Object.keys(errors).length != 0" :loading="$req.config.buttonLoading">Request</AppButton>
             </div>
 
         </div>
@@ -99,7 +99,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRegisterStore } from '@/store/RegisterStore'
+import { useRequestStore } from '@/store/RequestStore'
 import * as Yup from 'yup'
 import { Form, configure, ErrorMessage, Field } from 'vee-validate'
 
@@ -111,7 +111,7 @@ configure({
     validateOnInput: true
 })
 
-const $register = useRegisterStore()
+const $req = useRequestStore()
 
 const schema = Yup.object({
   picture: Yup.mixed().required('Picture is required'),
@@ -126,13 +126,13 @@ const schema = Yup.object({
 const preview = ref(null)
 
 function AddPicture(events) {
-  $register.params.picture = events.target.files[0]
+  $req.params.picture = events.target.files[0]
 
   const reader = new FileReader()
   reader.onload = (e) => {
     preview.value = e.target.result
   }
   // @ts-ignore
-  reader.readAsDataURL($register.params.picture)
+  reader.readAsDataURL($req.params.picture)
 }
 </script>
