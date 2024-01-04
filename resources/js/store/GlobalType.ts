@@ -25,6 +25,8 @@ export type TGUserRegister = {
   mobile: number
   email?: string
   created_at: Date
+
+  files?: TGFile[]
 }
 
 export type TGStatus = {
@@ -62,4 +64,12 @@ export type TGDevice = {
   name: string
   platform: string
   last_response: string
+}
+
+export type TGFile = {
+  id: string
+  user_register_id: number
+  name: string
+  url: string
+  created_at: Date
 }

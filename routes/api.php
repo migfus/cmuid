@@ -25,5 +25,5 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::apiResource('/device',  \App\Http\Controllers\DeviceController::class)
     ->only(['index']);
   Route::apiResource('/file',  \App\Http\Controllers\FileController::class)
-    ->only(['index']);
+    ->only(['index', 'store', 'destroy']);
 });

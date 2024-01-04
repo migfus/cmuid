@@ -78,7 +78,7 @@
                       </p>
 
                       <div class="ml-2 flex justify-end">
-                        <AppButton @click="$file.ChangeForm(row, 'create')" size="sm" :loading="$file.config.buttonLoading">Add Attachement</AppButton>
+                        <AppButton @click="$file.ChangeForm(row, 'remove'); removePrompt = true" size="sm" color="danger" :loading="$file.config.buttonLoading">Remove Attachement</AppButton>
                       </div>
 
                       <p class="truncate text-md font-medium text-gray-600 mb-2">
@@ -103,7 +103,12 @@
                       {{ row.email }}
                     </p>
 
-                    <img :src="row.picture" class="truncate text-md font-medium h-32 w-auto" />
+                    <div class="grid grid-cols-2">
+                      <img :src="row.picture" class="truncate text-md font-medium h-32 w-auto" />
+                      <img v-if="row.files" :src="row.files[0].url ?? ''" class="truncate text-md font-medium h-32 w-auto" />
+                    </div>
+
+
                   </div>
                 </div>
               </li>
@@ -117,11 +122,14 @@
 
 
   </Layout>
+  <PromptModal @confirm="$file.RemoveAPI()" title="Remove Upload" confirmButtonName="Remove" v-model="removePrompt" type="error">
+    <p>Do you want to remove the attached soft-copy?</p>
+  </PromptModal>
 </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useFileStore } from '@/store/@admin/FileStore'
 import { FullName, MobileFormat } from '@/helpers/Converter'
 import moment from 'moment'
@@ -135,6 +143,7 @@ import BasicTransition from '@/components/transitions/BasicTransition.vue'
 import ContentCard from './~Components/ContentCard.vue'
 import DataTransition from '@/components/transitions/DataTransition.vue'
 import AppInput from '@/components/form/AppInput.vue'
+import PromptModal from '@/components/modals/PromptModal.vue'
 
 configure({
     validateOnInput: true
@@ -146,6 +155,7 @@ const schema = Yup.object({
 
 const $file = useFileStore()
 const preview = ref(null)
+const removePrompt = ref(false)
 
 function AddPicture(events) {
   $file.params.picture = events.target.files[0]
@@ -159,7 +169,9 @@ function AddPicture(events) {
 }
 
 onMounted(() => {
-  $file.query.filter = 'default mga yawa'
+  $file.query.filter = 'uploaded'
   $file.GetAPI()
 })
+
+
 </script>

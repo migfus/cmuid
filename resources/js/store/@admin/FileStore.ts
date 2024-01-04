@@ -2,34 +2,17 @@ import { ref, reactive } from "vue"
 import { defineStore } from "pinia"
 import axios from "axios"
 import { notify } from 'notiwind'
-import type { TGConfig, TGDevice, TGQuery,} from "../GlobalType"
-import { idGenerator } from "@/helpers/Converter"
+import type { TGConfig, TGQuery, TGUserRegister,} from "../GlobalType"
 
 type TParams = {
-  user_register_id: string
-}
-
-type TContent = {
-  id: number
-  last_name: string
-  first_name: string
-  mid_name: string
-  ext_name: string
-
-  position: string
-  department: string
-  unit: string
-
-  mobile: number
-  email: string
-
   picture: string
-  created_at: Date
+  user_register_id: string
+  id: string
 }
 
 const title = `@admin/FileStore`
 export const useFileStore = defineStore(title, () => {
-  const content = ref<TContent[]>([])
+  const content = ref<TGUserRegister[]>([])
 
   const config = reactive<TGConfig>({
     buttonLoading: false,
@@ -40,6 +23,7 @@ export const useFileStore = defineStore(title, () => {
   const query = reactive<TGQuery>({
     search: '',
     sort: 'DESC',
+    filter: 'yawa'
   })
 
   const params = reactive<TParams>(initParams())
@@ -66,8 +50,13 @@ export const useFileStore = defineStore(title, () => {
   async function PostAPI() {
     config.buttonLoading = true
     try{
-      let { data: { data }} = await axios.post(`/api/device`, {params: query})
-      content.value = data
+      let { data: { data }} = await axios.post(
+        `/api/file`,
+        params,
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+      )
+      ChangeForm(null, null)
+      GetAPI()
     }
     catch(e) {
       if(e.response.data.message != 'Invalid Input') {
@@ -81,9 +70,32 @@ export const useFileStore = defineStore(title, () => {
     config.buttonLoading = false
   }
 
-  function ChangeForm(row?: TContent , formMode = null) {
+  async function RemoveAPI() {
+    config.buttonLoading = true
+    try{
+      let { data: { data }} = await axios.delete(`/api/file/${params.id}`)
+      ChangeForm(null, null)
+      GetAPI()
+    }
+    catch(e) {
+      if(e.response.data.message != 'Invalid Input') {
+        notify({
+          group: "error",
+          title: "Server Error",
+          text: 'The server is doing something unnecessary.'
+        }, 5000)
+      }
+    }
+    config.buttonLoading = false
+  }
+
+  function ChangeForm(row?: TGUserRegister , formMode = null) {
     if(formMode == 'create') {
       config.form = 'create'
+      params.user_register_id = row.id
+    }
+    else if (formMode == 'remove') {
+      params.id = row.files[0].id
     }
     else {
       config.form = ''
@@ -98,7 +110,9 @@ export const useFileStore = defineStore(title, () => {
 
   function initParams() {
     return {
+      picture: null,
       user_register_id: null,
+      id: null
     }
   }
 
@@ -112,6 +126,7 @@ export const useFileStore = defineStore(title, () => {
 
     GetAPI,
     PostAPI,
+    RemoveAPI,
 
     Reset,
     ChangeForm,

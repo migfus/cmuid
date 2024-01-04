@@ -76,7 +76,7 @@ const router = createRouter({
         {
           path: '/request',
           name: 'request-list',
-          component: () => import('@/views/dashboard/request.vue'),
+          component: () => import('@/views/dashboard/request/index.vue'),
           meta: {
             title: 'Requesting ID',
             sideBar: true
@@ -121,7 +121,7 @@ const router = createRouter({
         {
           path: '/uploaded',
           name: 'uploaded',
-          component: () => import('@/views/dashboard/upload/index.vue'),
+          component: () => import('@/views/dashboard/upload/uploaded.vue'),
           meta: {
             title: 'Uploaded',
             sideBar: true
