@@ -84,4 +84,14 @@ class Controller extends BaseController
     }
     return $randomString;
   }
+
+  public function G_Fullname($l, $f, $m, $e) {
+    if($m != null && $e != null) {
+      return $l.", ".$f." ".$m.". ".$e.".";
+    }
+    else if ($m != null ) {
+      return $l.", ".$f." ".$m;
+    }
+    return $l.", ".$f;
+  }
 }

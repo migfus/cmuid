@@ -27,7 +27,7 @@
           </ul>
         </div>
 
-        <AppButton class="mt-4" :disabled="tier.disabled" @click="$req.RegisterAPI(tier.buttonType)">{{ tier.cta }}</AppButton>
+        <AppButton class="mt-4" :disabled="tier.disabled" @click="$req.RegisterAPI(tier.claimTypeID)">{{ tier.cta }}</AppButton>
       </div>
     </div>
   </div>
@@ -36,10 +36,14 @@
 <script setup lang="ts">
 import { XMarkIcon, LinkIcon, InboxArrowDownIcon, IdentificationIcon } from '@heroicons/vue/24/outline'
 import { useRequestStore } from '@/store/RequestStore'
+import { useRouter } from 'vue-router'
+import { onMounted } from 'vue'
 
 import AppButton from '@/components/form/AppButton.vue'
+import _sfc_main from 'notiwind/dist/NotificationGroup.vue'
 
 const $req = useRequestStore()
+const $router = useRouter()
 const pricing = {
   tiers: [
     {
@@ -50,7 +54,7 @@ const pricing = {
       ],
       cta: 'Proceed',
       icon: InboxArrowDownIcon,
-      buttonType: 'ohrm',
+      claimTypeID: 1,
     },
     {
       title: 'Soft Copy',
@@ -60,7 +64,7 @@ const pricing = {
       ],
       cta: 'Proceed',
       icon: LinkIcon,
-      buttonType: 'soft',
+      claimTypeID: 2,
     },
     {
       title: 'Plastic ID',
@@ -71,8 +75,14 @@ const pricing = {
       cta: 'Not Available',
       disabled: true,
       icon: IdentificationIcon,
-      buttonType: 'plastic',
+      claimTypeID: 3,
     },
   ],
 }
+
+onMounted(() => {
+  if(!$req.params.mobile || !$req.params.picture || !$req.params.position ) {
+    $router.push('/')
+  }
+})
 </script>

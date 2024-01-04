@@ -95,8 +95,8 @@
     </div>
   </div>
 
-  <PromptModal title="Confirm" confirmButtonName="Confirm" v-model="show" @confirm="$req.ProceedToConfirm()">
-    <p>Are you sure there are no typo?. Kindly double check to proceed.</p>
+  <PromptModal title="Confirm?" confirmButtonName="Confirm" v-model="show" @confirm="$req.ProceedToConfirm()">
+    <p>Are you sure there are no typo? Kindly double check to proceed.</p>
   </PromptModal>
 
 </template>

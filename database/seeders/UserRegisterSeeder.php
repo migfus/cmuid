@@ -16,6 +16,7 @@ class UserRegisterSeeder extends Seeder
     {
       UserRegister::create([
         'id' => '12345',
+        'claim_type_id' => 1,
         'status_category_id' => 3,
         'picture' => 'https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg',
         'last_name' => '[test]',

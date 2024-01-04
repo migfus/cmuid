@@ -110,6 +110,15 @@ const router = createRouter({
           }
         },
         {
+          path: '/upload',
+          name: 'upload',
+          component: () => import('@/views/dashboard/upload.vue'),
+          meta: {
+            title: 'Claimed',
+            sideBar: true
+          }
+        },
+        {
           path: '/devices',
           name: 'devices',
           component: () => import('@/views/dashboard/devices.vue'),

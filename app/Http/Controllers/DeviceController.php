@@ -42,7 +42,7 @@ class DeviceController extends Controller
         'id' => $req->id,
         'name' => $req->name,
         'platform' => $req->platform,
-        'last_response' => Carbon::now()
+        'last_response' => Carbon::now('UTC'),
       ]);
 
       return response()->json([

@@ -36,7 +36,8 @@ class TextMessageController extends Controller
         default:
           $data = TextMessage::whereNotNull('read_at')
             ->with('user_register')
-            ->orderBy('created_at', 'ASC')
+            ->orderBy('created_at', 'DESC')
+            ->limit(20)
             ->get();
       }
 
@@ -95,13 +96,13 @@ class TextMessageController extends Controller
       }
 
       $device = Device::where('id', $req->device_id)->update([
-        'last_response' => Carbon::now(),
+        'last_response' => Carbon::now('UTC'),
       ]);
 
       if($device) {
         TextMessage::where('id', $id)->update([
           'device_id' => $req->device_id,
-          'read_at' => Carbon::now(),
+          'read_at' => Carbon::now('UTC'),
         ]);
 
         return response()->json([

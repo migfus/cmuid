@@ -78,30 +78,45 @@ export const useRequestStore = defineStore(title, () => {
   }
 
 
-  function ShowChange(value: string, name = '') {
+  function ShowChange(value: string, name = '', claim_type_id: number) {
     config.show = value
     params.name = name
     const footer = `\nFrom the CSC ID System (OHRM),\n${moment().format('MMM DD, YYYY hh:mm A')}`
     const title = `Hello ${name},\n`
+    let doneMessage = ''
+    let doneSms = ''
+
+    switch(claim_type_id) {
+      case 3:
+        doneMessage = '<p>Your <strong>CSC ID</strong> is successfully processed. You can now claim to <strong>OHRM</strong>.</p>'
+        doneSms = `${title}Your CSC ID is successfully processed. You can now claim to Office of Human Resource Management. \nYou can verify the CSC ID using https://id.migfus.net/verify.\n${footer}`
+        break;
+      case 2:
+        doneMessage = '<p>Your <strong>CSC ID</strong> is successfully processed. You can now get the soft-copy provided link below.\n [link here]</p>'
+        doneSms = `${title}Your CSC ID is successfully processed. You can now claim to Office of Human Resource Management. \nYou can verify the CSC ID using https://id.migfus.net/verify.\n${footer}`
+        break;
+      default: // 1 - Claim to OHRM
+        doneMessage = '<p>Your <strong>CSC ID</strong> is successfully processed. You can now claim to <strong>OHRM</strong>.</p>'
+        doneSms = `${title}Your CSC ID is successfully processed. You can now claim to Office of Human Resource Management. \nYou can verify the CSC ID using https://id.migfus.net/verify.\n${footer}`
+    }
+
 
     switch(value) {
       case 'Feedback':
-        params.content = '<p>Feedback Here</p>'
-        params.sms = `${title}SMS Notification feedback here.${footer}`
+        params.content = '<p>[Feedback Here]</p>'
+        params.sms = `${title}[Feedback Here].${footer}`
         break;
       case 'Done':
-        params.content = '<p>Your <strong>CSC ID</strong> is successfully processed. You can now claim to <strong>OHRM</strong>.</p>'
-        params.sms = `${title}Your CSC ID is successfully processed. You can now claim to Office of Human Resource Management.
-          You can verify the CSC ID using https://id.migfus.net/verify.
-        ${footer}`
+        params.content = doneMessage
+        params.sms = doneSms
         break;
       case 'Cancel':
         params.content = "<p>Unfortunate the photo you submitted is <strong>unrecognizable</strong>. It may cause some issue upon making CSC ID for this issue.</p>"
         params.sms = `${title}Unfortunate the photo you submitted is unrecognizable may cause some issue upon making CSC ID for this issue.${footer}`
         break;
       case 'Claimed':
-        params.content = "<p>Your CSC ID has been Claimed by: </p>"
-        params.sms = `${title}Your CSC ID has been Claimed by: .${footer}`
+        params.content = "<p>Your CSC ID has been Claimed by: [name]</p>"
+        params.sms = `${title}Your CSC ID has been Claimed by: [name].${footer}`
         break;
       default:
         params.content = ''

@@ -18,21 +18,14 @@
 
           </div>
           <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-            <CalendarIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
             <p>
               Active
-              <time :datetime="moment($props.last_response).format('MM/DD/YYYY')">{{ moment($props.last_response).fromNow() }}</time>
+              <time :datetime="moment($props.last_response).format('MM/DD/YYYY')">{{ moment.utc($props.last_response).fromNow(true) }}</time>
             </p>
           </div>
         </div>
 
         <div class="grid grid-cols-2 mt-4 justify-evenly">
-          <!-- <img :src="row.picture" class="h-48 w-auto rounded-xl"/>
-          <div class="flex justify-end gap-2">
-            <AppButton @click="$request.params.id = row.id; $request.ShowChange('Cancel', FullName(row))" :loading="$request.config.buttonLoading" color="danger" class="mt-auto">Cancel</AppButton>
-            <AppButton @click="$request.params.id = row.id; $request.ShowChange('Feedback', FullName(row))" :loading="$request.config.buttonLoading" class="mt-auto">Feedback</AppButton>
-            <AppButton @click="$request.params.id = row.id; $request.ShowChange('Done', FullName(row))" :loading="$request.config.buttonLoading" class="mt-auto">Done</AppButton>
-          </div> -->
         </div>
 
       </div>

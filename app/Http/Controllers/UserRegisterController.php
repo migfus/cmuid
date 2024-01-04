@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Models\UserRegister;
 use App\Models\RegisterStatus;
+use App\Models\TextMessage;
 
 
 class UserRegisterController extends Controller
@@ -31,7 +32,7 @@ class UserRegisterController extends Controller
       'unit'   => '',
       'email'  => '',
       'mobile' => 'required',
-      'type'   => 'required'
+      'claim_type_id' => 'required'
     ]);
 
     if($val->fails()) {
@@ -48,6 +49,7 @@ class UserRegisterController extends Controller
     $id = UserRegister::create([
       'id' => $csc_id,
       'status_category_id' => 2,
+      'claim_type_id' => $req->claim_type_id,
       'picture' => $picture,
       'last_name'  => $req->last_name,
       'first_name' => $req->first_name,
@@ -68,6 +70,11 @@ class UserRegisterController extends Controller
     RegisterStatus::create([
       'user_register_id' => $id,
       'category_id' => 2,
+    ]);
+
+    TextMessage::create([
+      'user_register_id' => $id,
+      'content' => "Hello ".$this->G_Fullname($req->last_name, $req->first_name, $req->mid_name, $req->ext_name).",\nThank you for using the OHRM CSC-ID, we will notify you for any updates upon processing the request.\nFrom the OHRM CSC-ID System"
     ]);
 
 

@@ -12,6 +12,17 @@
 
 namespace App\Models{
 /**
+ * App\Models\ClaimType
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|ClaimType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClaimType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClaimType query()
+ */
+	class ClaimType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Device
  *
  * @property int $id
@@ -85,7 +96,7 @@ namespace App\Models{
  * App\Models\TextMessage
  *
  * @property int $id
- * @property string $device_id
+ * @property string|null $device_id
  * @property string $user_register_id
  * @property string $content
  * @property string|null $read_at

@@ -29,6 +29,7 @@
                   <AppSidebarNav linkName="completed" :icon="CheckCircleIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Completed </AppSidebarNav>
                   <AppSidebarNav linkName="canceled" :icon="XMarkIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Canceled </AppSidebarNav>
                   <AppSidebarNav linkName="claimed" :icon="ArchiveBoxIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Claimed </AppSidebarNav>
+                  <AppSidebarNav linkName="upload" :icon="ArrowUpOnSquareIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Upload Soft-Copy </AppSidebarNav>
 
                   <AppSidebarNav linkName="devices" :icon="DevicePhoneMobileIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Devices </AppSidebarNav>
 
@@ -66,6 +67,7 @@
             <AppSidebarNav linkName="completed" :icon="CheckCircleIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Completed</AppSidebarNav>
             <AppSidebarNav linkName="canceled" :icon="XMarkIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Canceled </AppSidebarNav>
             <AppSidebarNav linkName="claimed" :icon="ArchiveBoxIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Claimed </AppSidebarNav>
+            <AppSidebarNav linkName="upload" :icon="ArrowUpOnSquareIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Upload Soft-Copy </AppSidebarNav>
 
             <AppSidebarNav linkName="devices" :icon="DevicePhoneMobileIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Devices </AppSidebarNav>
 
@@ -146,7 +148,8 @@ import {
   UserPlusIcon,
   CheckCircleIcon,
   DevicePhoneMobileIcon,
-  ArchiveBoxIcon
+  ArchiveBoxIcon,
+  ArrowUpOnSquareIcon,
 } from '@heroicons/vue/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { usePreLoader } from '@/store/system/PreLoader'

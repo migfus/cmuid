@@ -16,11 +16,11 @@ export const useRequestStore = defineStore(title, () => {
   })
 
   // SECTION API
-  async function RegisterAPI(type: string) {
+  async function RegisterAPI(claim_type_id: number) {
     config.buttonLoading = true
     try{
       let { data: { data }} = await axios.post(
-        '/api/user-register', {...params, type: type},
+        '/api/user-register', {...params, claim_type_id: claim_type_id},
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
       Object.assign(params, ResetParams())
