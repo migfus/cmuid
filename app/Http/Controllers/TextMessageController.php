@@ -22,7 +22,10 @@ class TextMessageController extends Controller
       return $this->G_ValidatorFailResponse($val);
     }
 
-    $device = Device::findOrFail($req->id)->first();
+    $device = Device::where('id', $req->id)->update([
+      'last_response' => Carbon::now('UTC'),
+    ]);
+
     $data = [];
 
     if($device) {
