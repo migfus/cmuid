@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\UserRegister;
 use App\Models\RegisterStatus;
 use App\Models\TextMessage;
+use App\Models\ClaimType;
 
 class RequestController extends Controller
 {
@@ -30,27 +31,31 @@ class RequestController extends Controller
       $data = [];
 
       switch($req->filter) {
-        case 'done':
+        case 'completed':
           $data = UserRegister::
             where('status_category_id', 5)
+            ->with('claim_type')
             ->orderBy('created_at', $req->sort)
             ->get();
           break;
         case 'canceled':
           $data = UserRegister::
             where('status_category_id', 4)
+            ->with('claim_type')
             ->orderBy('created_at', $req->sort)
             ->get();
           break;
         case 'claimed':
           $data = UserRegister::
             where('status_category_id', 6)
+            ->with('claim_type')
             ->orderBy('created_at', $req->sort)
             ->get();
           break;
         default:
           $data = UserRegister::
             where('status_category_id', '<>', 5)->where('status_category_id', '<>', 4)
+            ->with('claim_type')
             ->orderBy('created_at', $req->sort)
             ->get();
       }
@@ -76,7 +81,7 @@ class RequestController extends Controller
     }
 
     $val = Validator::make($req->all(), [
-      'type' => 'required',
+      'form' => 'required',
       'content' => 'required',
       'sms' => '',
       'sendSMS' => '',
@@ -90,15 +95,15 @@ class RequestController extends Controller
       $this->SendSMS($req, $id);
     }
 
-    switch($req->type) {
-      case 'Done':
-        $this->MarkDone($req, $id, $req->user()->id);
+    switch($req->form) {
+      case 'complete':
+        $this->Complete($req, $id, $req->user()->id, 'Done');
         break;
-      case 'Cancel':
-        $this->Cancel($req, $id, $req->user()->id);
+      case 'cancel':
+        $this->Cancel($req, $id, $req->user()->id, 'Cancelled');
         break;
-      case 'Claimed':
-        $this->Claimed($req, $id, $req->user()->id);
+      case 'claim':
+        $this->Claim($req, $id, $req->user()->id, 'Claimed');
         break;
       default: //NOTE Feedback
         $this->Feedback($req, $id, $req->user()->id);
@@ -119,7 +124,7 @@ class RequestController extends Controller
     return true;
   }
 
-  private function MarkDone(Request $req, string $id, string $user_id) : void {
+  private function Complete(Request $req, string $id, string $user_id) : void {
     UserRegister::where('id', $id)
     ->update([
       'status_category_id' => 5 // NOTE Done
@@ -147,10 +152,6 @@ class RequestController extends Controller
   }
 
   private function Feedback(Request $req, string $id, string $user_id) : void {
-    UserRegister::where('id', $id)->update([
-      'status_category_id' => 3 // NOTE Done
-    ]);
-
     RegisterStatus::create([
       'user_register_id' => $id,
       'user_id' => $user_id,
@@ -159,7 +160,7 @@ class RequestController extends Controller
     ]);
   }
 
-  private function Claimed(Request $req, string $id, string $user_id) : void {
+  private function Claim(Request $req, string $id, string $user_id) : void {
     UserRegister::where('id', $id)->update([
       'status_category_id' => 6 // NOTE Claimed
     ]);

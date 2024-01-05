@@ -25,8 +25,14 @@ export type TGUserRegister = {
   mobile: number
   email?: string
   created_at: Date
+  claim_type_id: number
 
   files?: TGFile[]
+  claim_type: TGClaimType
+}
+
+export type TGClaimType = {
+  name: string
 }
 
 export type TGStatus = {

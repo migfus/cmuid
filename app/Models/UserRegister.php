@@ -36,4 +36,8 @@ class UserRegister extends Model
   public function files() {
     return $this->hasMany(File::class, 'user_register_id');
   }
+
+  public function claim_type() {
+    return $this->belongsTo(ClaimType::class);
+  }
 }

@@ -27,7 +27,7 @@
 
         <!-- SECTION CONTENT -->
         <ContentCard
-          title="Requesting"
+          title="Completed"
           :config="$req.config"
           @actionCreateClick="$req.ChangeForm(null, 'create')"
           @actionCancelClick="$req.ChangeForm(null)"
@@ -133,7 +133,7 @@ const smsLength = computed(() => {
 })
 
 onMounted(() => {
-  $req.query.filter = 'request'
+  $req.query.filter = 'completed'
   $req.GetAPI()
 })
 </script>

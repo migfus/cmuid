@@ -74,41 +74,48 @@ const router = createRouter({
           }
         },
         {
-          path: '/request',
-          name: 'request-list',
-          component: () => import('@/views/dashboard/request/index.vue'),
-          meta: {
-            title: 'Requesting ID',
-            sideBar: true
-          }
+          path: 'request',
+          children: [
+            {
+              path: '',
+              name: 'request-list',
+              component: () => import('@/views/dashboard/request/index.vue'),
+              meta: {
+                title: 'Requesting',
+                sideBar: true
+              },
+            },
+            {
+              path: 'completed',
+              name: 'completed',
+              component: () => import('@/views/dashboard/request/completed.vue'),
+              meta: {
+                title: 'Completed',
+                sideBar: true
+              },
+            },
+            {
+              path: 'canceled',
+              name: 'canceled',
+              component: () => import('@/views/dashboard/request/canceled.vue'),
+              meta: {
+                title: 'Canceled',
+                sideBar: true
+              }
+            },
+            {
+              path: 'claimed',
+              name: 'claimed',
+              component: () => import('@/views/dashboard/request/claimed.vue'),
+              meta: {
+                title: 'Claimed',
+                sideBar: true
+              }
+            },
+          ]
+
         },
-        {
-          path: '/completed',
-          name: 'completed',
-          component: () => import('@/views/dashboard/completed.vue'),
-          meta: {
-            title: 'Completed',
-            sideBar: true
-          }
-        },
-        {
-          path: '/canceled',
-          name: 'canceled',
-          component: () => import('@/views/dashboard/canceled.vue'),
-          meta: {
-            title: 'Canceled',
-            sideBar: true
-          }
-        },
-        {
-          path: '/claimed',
-          name: 'claimed',
-          component: () => import('@/views/dashboard/claimed.vue'),
-          meta: {
-            title: 'Claimed',
-            sideBar: true
-          }
-        },
+
         {
           path: '/upload',
           name: 'upload',

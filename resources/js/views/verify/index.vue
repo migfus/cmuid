@@ -9,7 +9,7 @@
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <Form v-slot="{errors}" class="space-y-6" :validation-schema="schema" @submit="submit()">
             <div>
-              <AppInput v-model="input.id" mask="csc_*****" name="id" placeholder="CSC ID" :errors="errors"/>
+              <AppInput v-model="input.id" mask="cscid_*****" name="id" placeholder="CSC ID" :errors="errors"/>
             </div>
 
             <div>
