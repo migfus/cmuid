@@ -56,9 +56,21 @@ namespace App\Models{
 /**
  * App\Models\File
  *
+ * @property int $id
+ * @property string $user_register_id
+ * @property string $name
+ * @property string $url
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|File newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|File newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|File query()
+ * @method static \Illuminate\Database\Eloquent\Builder|File whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|File whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|File whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|File whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|File whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|File whereUserRegisterId($value)
  */
 	class File extends \Eloquent {}
 }
@@ -191,8 +203,12 @@ namespace App\Models{
  * @property string $mobile
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ClaimType|null $claim_type
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\File> $files
+ * @property-read int|null $files_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RegisterStatus> $status
  * @property-read int|null $status_count
+ * @property-read \App\Models\StatusCategory|null $status_category
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister query()

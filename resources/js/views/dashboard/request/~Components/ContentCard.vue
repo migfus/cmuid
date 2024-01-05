@@ -61,6 +61,15 @@
                     <WalletIcon class="inline-block h-5 w-5 text-gray-400"/>
                     {{ row.claim_type.name }}
                   </p>
+
+                  <p class="truncate text-md font-medium text-gray-600 mb-2 flex justify-end">
+                    cscid_{{ row.id }}
+                  </p>
+
+                  <p class="truncate text-md font-medium text-gray-600 mb-2">
+                    <QueueListIcon class="inline-block h-5 w-5 text-gray-400"/>
+                    {{ row.status_category.name }}
+                  </p>
                 </div>
 
                 <img :src="row.picture" class="truncate text-md font-medium h-32 w-auto rounded-xl shadow mt-4" />
@@ -79,7 +88,7 @@ import { useRequestStore } from '@/store/@admin/RequestStore'
 import { FullName, MobileFormat } from '@/helpers/Converter'
 import moment from 'moment'
 
-import { UserCircleIcon, MapPinIcon, MapIcon, DevicePhoneMobileIcon, EnvelopeIcon, WalletIcon } from '@heroicons/vue/20/solid'
+import { UserCircleIcon, MapPinIcon, MapIcon, DevicePhoneMobileIcon, EnvelopeIcon, WalletIcon, QueueListIcon } from '@heroicons/vue/20/solid'
 import AppInput from '@/components/form/AppInput.vue'
 import DataTransition from '@/components/transitions/DataTransition.vue'
 import ActionButton from './ActionButton.vue'

@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     User::create(
       [
         'email' => 'staff@gmail.com',
-        'password'=> Hash::make('12345678'),
+        'password'=> Hash::make('@Onodera.09109123'),
         'avatar'   => 'https://static.vecteezy.com/system/resources/thumbnails/002/002/403/small/man-with-beard-avatar-character-isolated-icon-free-vector.jpg',
       ],
     )->assignRole('Admin');

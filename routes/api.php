@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use
 
 Route::get('/test', function() {
   return response()->json(['test' => 'test']);

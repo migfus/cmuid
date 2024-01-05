@@ -29,6 +29,11 @@ export type TGUserRegister = {
 
   files?: TGFile[]
   claim_type: TGClaimType
+  status_category: TGStatusCategory
+}
+
+export type TGStatusCategory = {
+  name: string
 }
 
 export type TGClaimType = {

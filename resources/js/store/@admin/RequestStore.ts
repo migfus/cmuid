@@ -83,7 +83,7 @@ export const useRequestStore = defineStore(title, () => {
     const title = `Hello,\n`
     const footer = `\nFrom the CSC ID System (OHRM).`
     let doneMessage =`<p>Your <strong>CSC ID</strong> is successfully processed. You can now claim to <strong>OHRM</strong>.</p>\n<p>You can verify using <a href="https://id.migfus.net/verify/${row.id}">https://id.migfus.net/verify/${row.id}</a><p>`
-    let doneSms = `${title}Your CSC ID is successfully processed. You can now claim to Office of Human Resource Management. ${footer}`
+    let doneSms = `${title}Your CSC ID is good to go!. Grab your ID to OHRM.${footer}`
 
 
     if(row.claim_type_id == 2) {

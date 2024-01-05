@@ -15,7 +15,7 @@ class RegisterStatusController extends Controller
       ->orderBy('created_at', 'ASC')
       ->get();
 
-    $info = UserRegister::where('id', $id)->first();
+    $info = UserRegister::where('id', $id)->with('files')->first();
 
     return response()->json([
       ...$this->G_ReturnDefault(),

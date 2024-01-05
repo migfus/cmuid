@@ -9,6 +9,7 @@ use App\Models\UserRegister;
 use App\Models\RegisterStatus;
 use App\Models\TextMessage;
 use App\Models\ClaimType;
+use App\Models\StatusCategory;
 
 class RequestController extends Controller
 {
@@ -34,28 +35,29 @@ class RequestController extends Controller
         case 'completed':
           $data = UserRegister::
             where('status_category_id', 5)
-            ->with('claim_type')
+            ->with(['claim_type', 'status_category'])
             ->orderBy('created_at', $req->sort)
             ->get();
           break;
         case 'canceled':
           $data = UserRegister::
             where('status_category_id', 4)
-            ->with('claim_type')
+            ->with(['claim_type', 'status_category'])
             ->orderBy('created_at', $req->sort)
             ->get();
           break;
         case 'claimed':
           $data = UserRegister::
             where('status_category_id', 6)
-            ->with('claim_type')
+            ->with(['claim_type', 'status_category'])
+
             ->orderBy('created_at', $req->sort)
             ->get();
           break;
         default:
           $data = UserRegister::
             where('status_category_id', '<>', 5)->where('status_category_id', '<>', 4)
-            ->with('claim_type')
+            ->with(['claim_type', 'status_category'])
             ->orderBy('created_at', $req->sort)
             ->get();
       }

@@ -117,22 +117,28 @@ const router = createRouter({
         },
 
         {
-          path: '/upload',
-          name: 'upload',
-          component: () => import('@/views/dashboard/upload/index.vue'),
-          meta: {
-            title: 'Upload',
-            sideBar: true
-          }
-        },
-        {
-          path: '/uploaded',
-          name: 'uploaded',
-          component: () => import('@/views/dashboard/upload/uploaded.vue'),
-          meta: {
-            title: 'Uploaded',
-            sideBar: true
-          }
+          path: 'upload',
+          children: [
+            {
+              path: '',
+              name: 'upload',
+              component: () => import('@/views/dashboard/upload/index.vue'),
+              meta: {
+                title: 'Upload',
+                sideBar: true
+              }
+            },
+            {
+              path: 'uploaded',
+              name: 'uploaded',
+              component: () => import('@/views/dashboard/upload/uploaded.vue'),
+              meta: {
+                title: 'Uploaded',
+                sideBar: true
+              }
+            },
+          ]
+
         },
         {
           path: '/devices',

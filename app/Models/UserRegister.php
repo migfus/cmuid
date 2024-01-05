@@ -40,4 +40,8 @@ class UserRegister extends Model
   public function claim_type() {
     return $this->belongsTo(ClaimType::class);
   }
+
+  public function status_category() {
+    return $this->belongsTo(StatusCategory::class);
+  }
 }

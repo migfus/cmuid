@@ -55,6 +55,6 @@ const input = reactive<InputInt>({
 });
 
 function submit() {
-  $router.push(`/status/${input.id.replace("csc_", "")}`)
+  $router.push(`/status/${input.id.replace("cscid_", "")}`)
 }
 </script>

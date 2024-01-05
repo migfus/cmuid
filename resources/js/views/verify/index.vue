@@ -55,6 +55,6 @@ const input = reactive<InputInt>({
 });
 
 function submit() {
-  $router.push(`/verify/${input.id.replace("csc_", "")}`)
+  $router.push(`/verify/${input.id.replace("cscid_", "")}`)
 }
 </script>

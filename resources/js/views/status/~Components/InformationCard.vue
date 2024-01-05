@@ -16,7 +16,21 @@
         </div>
       </div>
       <div class="p-5">
-        <img class="mt-2 rounded-xl shadow h-64 w-auto mb-2" :src="$status.content.info.picture" alt="" />
+        <div v-if="$status.content.info.files" class="grid justify-center">
+          <div class="font-bold text-center">CSC ID is ready to download</div>
+          <img class="rounded-xl shadow h-64 w-auto mb-2 mt-4" :src="$status.content.info.files[0].url" alt="" />
+          <a :href="$status.content.info.files[0].url" target="_blank">
+            <AppButton >Download Soft-Copy</AppButton>
+          </a>
+        </div>
+
+        <div class="grid justify-center mt-6">
+          <div class="font-bold text-center">Raw image</div>
+          <img class="mt-2 rounded-xl shadow h-64 w-auto mb-2" :src="$status.content.info.picture" alt="" />
+        </div>
+
+
+
       </div>
     </li>
   </ul>
@@ -26,6 +40,8 @@
 import { FullName } from '@/helpers/Converter'
 import { useStatusStore } from '@/store/StatusStore'
 import { MobileFormat } from '@/helpers/Converter'
+
+import AppButton from '@/components/form/AppButton.vue'
 
 const $status = useStatusStore()
 </script>
