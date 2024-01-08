@@ -33,7 +33,7 @@ namespace App\Models{
 /**
  * App\Models\Device
  *
- * @property int $id
+ * @property string $id
  * @property string|null $name
  * @property string|null $platform
  * @property string $last_response

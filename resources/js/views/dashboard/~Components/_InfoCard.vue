@@ -71,7 +71,7 @@ import { FullName, MobileFormat } from '@/helpers/Converter'
 import moment from 'moment'
 
 import DataTransition from '@/components/transitions/DataTransition.vue'
-import { CalendarIcon, MapPinIcon, MapIcon, DevicePhoneMobileIcon, EnvelopeIcon } from '@heroicons/vue/20/solid'
+import { MapPinIcon, MapIcon, DevicePhoneMobileIcon, EnvelopeIcon } from '@heroicons/vue/20/solid'
 import AppButton from '@/components/form/AppButton.vue'
 
 const $request = useRequestStore()

@@ -5,7 +5,7 @@
       <h1 class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl">Uh oh! I think you’re lost.</h1>
       <p class="mt-2 text-lg font-medium text-white">It looks like the page you’re looking for doesn't exist.</p>
       <div class="mt-6">
-        <RouterLink :to="{ name: 'home'}" class="inline-flex items-center">
+        <RouterLink to="/" class="inline-flex items-center">
           <AppButton color="white">Go Back Home</AppButton>
         </RouterLink>
       </div>
@@ -14,5 +14,5 @@
 </template>
 
 <script setup lang="ts">
-import AppButton from '@/components/form/AppButton.vue';
+import AppButton from '@/components/form/AppButton.vue'
 </script>

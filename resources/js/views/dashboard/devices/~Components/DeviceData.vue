@@ -1,4 +1,8 @@
 <template>
+  <h1 class="p-4 font-bold text-gray-500 flex justify-between">
+    <div>Devices</div>
+    <div @click="$device.params.id = $props.id; show = true" class="cursor-pointer">Remove</div>
+  </h1>
   <li>
     <div class="block hover:bg-gray-50">
       <div class="px-4 py-4 sm:px-6">
@@ -28,22 +32,39 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-2 mt-4 justify-evenly">
+        <div class="flex justify-center mt-4">
+          <img :src="qrcode" />
         </div>
 
       </div>
     </div>
   </li>
+
+
+  <PromptModal @confirm="$device.DestroyAPI" title="Destroy Device?" confirmButtonName="Confirm" v-model="show">
+    <p>Do you want to remove this device?</p>
+  </PromptModal>
 </template>
 
 <script setup lang="ts">
 import moment from 'moment'
 import { DevicePhoneMobileIcon, } from '@heroicons/vue/20/solid'
+import { useQRCode } from '@vueuse/integrations/useQRCode'
+import { useDeviceStore } from '@/store/@admin/DeviceStore'
+import { ref } from 'vue'
 
+import PromptModal from '@/components/modals/PromptModal.vue'
+
+const $device = useDeviceStore()
 const $props = defineProps<{
   id: string,
   name: string
   platform: string
   last_response: string
 }>()
+const qrcode = useQRCode(JSON.stringify({
+  link: window.location.origin,
+  id: $props.id
+}))
+const show = ref(false)
 </script>

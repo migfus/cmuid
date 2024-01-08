@@ -143,7 +143,7 @@ const router = createRouter({
         {
           path: '/devices',
           name: 'devices',
-          component: () => import('@/views/dashboard/devices.vue'),
+          component: () => import('@/views/dashboard/devices/index.vue'),
           meta: {
             title: 'Devices',
             sideBar: true

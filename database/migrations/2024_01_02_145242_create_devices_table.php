@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('devices', function (Blueprint $table) {
-            $table->string('id')->index();
-            $table->string('name')->nullable();
-            $table->string('platform')->nullable();
-            $table->dateTime('last_response');
-            $table->timestamps();
+          $table->string('id')->index();
+          $table->string('name')->nullable();
+          $table->string('platform')->nullable();
+          $table->dateTime('last_response');
+          $table->timestamps();
         });
     }
 

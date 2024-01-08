@@ -11,7 +11,7 @@ use App\Models\Device;
 
 class TextMessageController extends Controller
 {
-  // NOTE List of Text [pending, done]
+  // NOTE List of Text [pending, done][device]
   public function index(Request $req) {
     $val = Validator::make($req->all(), [
       'id' => 'required',
@@ -22,7 +22,9 @@ class TextMessageController extends Controller
       return $this->G_ValidatorFailResponse($val);
     }
 
-    $device = Device::where('id', $req->id)->update([
+    $device = Device::where('id', $req->id)->first();
+
+    Device::where('id', $req->id)->update([
       'last_response' => Carbon::now('UTC'),
     ]);
 
@@ -52,79 +54,41 @@ class TextMessageController extends Controller
 
     return response()->json([
       ...$this->G_ReturnDefault(),
-      'data' => true,
-    ], 200);
+      'data' => false,
+    ], 401);
   }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+
+  // NOTE Mark read_at assume that it had already sent.
+  public function update(Request $req, $id) {
+    $val = Validator::make($req->all(), [
+      'device_id' => 'required'
+    ]);
+
+    if($val->fails()) {
+      return $this->G_ValidatorFailResponse($val);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    $device = Device::where('id', $req->device_id)->first();
+    Device::where('id', $req->device_id)->update([
+      'last_response' => Carbon::now('UTC'),
+    ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(TextMessage $textMessage)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(TextMessage $textMessage)
-    {
-        //
-    }
-
-    // NOTE Mark read_at assume that it had already sent.
-    public function update(Request $req, $id) {
-      $val = Validator::make($req->all(), [
-        'device_id' => 'required'
+    if($device) {
+      TextMessage::where('id', $id)->update([
+        'device_id' => $req->device_id,
+        'read_at' => Carbon::now('UTC'),
       ]);
-
-      if($val->fails()) {
-        return $this->G_ValidatorFailResponse($val);
-      }
-
-      $device = Device::where('id', $req->device_id)->update([
-        'last_response' => Carbon::now('UTC'),
-      ]);
-
-      if($device) {
-        TextMessage::where('id', $id)->update([
-          'device_id' => $req->device_id,
-          'read_at' => Carbon::now('UTC'),
-        ]);
-
-        return response()->json([
-          ...$this->G_ReturnDefault(),
-          'data' => true,
-        ], 200);
-      }
 
       return response()->json([
         ...$this->G_ReturnDefault(),
-        'data' => false,
-      ], 402);
+        'data' => true,
+      ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(TextMessage $textMessage)
-    {
-        //
-    }
+    return response()->json([
+      ...$this->G_ReturnDefault(),
+      'data' => false,
+    ], 401);
+  }
 }

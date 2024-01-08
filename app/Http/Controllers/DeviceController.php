@@ -10,7 +10,7 @@ use App\Models\Device;
 
 class DeviceController extends Controller
 {
-    // NOTE list of devices
+    // NOTE list of devices [web]
     public function index(Request $req) {
       if(!$req->user()->can('index register')) {
         return $this->G_UnauthorizedResponse();
@@ -20,18 +20,22 @@ class DeviceController extends Controller
         orderBy('created_at', 'DESC')
         ->get();
 
+      // dd($data);
+
       return response()->json([
         ...$this->G_ReturnDefault(),
         'data' => $data,
       ], 200);
     }
 
-    // NOTE Device will be added upon scanning
+    // NOTE New device will be added [web]
     public function store(Request $req) {
+      if(!$req->user()->can('index register')) {
+        return $this->G_UnauthorizedResponse();
+      }
+
       $val = Validator::make($req->all(), [
-        'id' => 'required',
-        'name' => 'required',
-        'platform' => 'required'
+        'qr' => 'required'
       ]);
 
       if($val->fails()) {
@@ -39,7 +43,25 @@ class DeviceController extends Controller
       }
 
       $id = Device::create([
-        'id' => $req->id,
+        'id' => $req->qr['id'],
+        'last_response' => Carbon::now()->subYears(999),
+      ]);
+
+      return response()->json([
+        ...$this->G_ReturnDefault(),
+        'data' => true,
+      ], 200);
+
+    }
+
+    // NOTE Connect to device and update [device]
+    public function update(Request $req, string $id) {
+      $val = Validator::make($req->all(), [
+        'name' => 'required',
+        'platform' => 'required'
+      ]);
+
+      $data = Device::where('id', $id)->update([
         'name' => $req->name,
         'platform' => $req->platform,
         'last_response' => Carbon::now('UTC'),
@@ -47,46 +69,17 @@ class DeviceController extends Controller
 
       return response()->json([
         ...$this->G_ReturnDefault(),
-        'data' => $req->id,
-      ], 200);
-
-    }
-
-    // NOTE Connect to device
-    public function show(Request $req, string $id) {
-      $data = Device::findOrFail($id)->first();
-
-      if($data) {
-        Device::where('id', $id)->update([
-          'name' => $req->name,
-          'platform' => $req->platform,
-          'last_response' => Carbon::now('UTC'),
-        ]);
-      }
-
-      return response()->json([
-        ...$this->G_ReturnDefault(),
-        'data' => true,
+        'data' => $data ? true : false,
       ], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    // NOTE Remove device [web]
     public function destroy(string $id) {
       $id = Device::where('id', $id)->delete();
 
       return response()->json([
         ...$this->G_ReturnDefault(),
-        'data' => $id ? true : false,
-      ], $id ? 200 : 500);
+        'data' => true
+      ], 200);
     }
 }

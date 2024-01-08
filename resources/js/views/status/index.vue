@@ -51,7 +51,7 @@ const schema = Yup.object({
 })
 
 const input = reactive<InputInt>({
-  id: '',
+  id: 'cscid_',
 });
 
 function submit() {

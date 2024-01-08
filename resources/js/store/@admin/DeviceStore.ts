@@ -6,9 +6,11 @@ import type { TGConfig, TGDevice, TGQuery,} from "../GlobalType"
 import { idGenerator } from "@/helpers/Converter"
 
 type TParams = {
+  qr: {
+    link: string
+    id: string
+  },
   id: string
-  name: string
-  platform: string
 }
 
 const title = `@admin/DeviceStore`
@@ -45,13 +47,34 @@ export const useDeviceStore = defineStore(title, () => {
       }
     }
     config.contentLoading = false
+    params.id = idGenerator()
   }
 
   async function PostAPI() {
     config.buttonLoading = true
     try{
-      let { data: { data }} = await axios.post(`/api/device`, {params: query})
+      let { data: { data }} = await axios.post(`/api/device`, params)
       content.value = data
+      GetAPI()
+    }
+    catch(e) {
+      if(e.response.data.message != 'Invalid Input') {
+        notify({
+          group: "error",
+          title: "Server Error",
+          text: 'The server is doing something unnecessary.'
+        }, 5000)
+      }
+    }
+    config.buttonLoading = false
+  }
+
+  async function DestroyAPI() {
+    config.buttonLoading = true
+    try{
+      let { data: { data }} = await axios.delete(`/api/device/${params.id}`)
+      content.value = data
+      GetAPI()
     }
     catch(e) {
       if(e.response.data.message != 'Invalid Input') {
@@ -72,9 +95,11 @@ export const useDeviceStore = defineStore(title, () => {
 
   function initParams() {
     return {
-      id: idGenerator(),
-      name: 'Android Device',
-      platform: 'Android'
+      qr: {
+        id: idGenerator(),
+        link: window.location.origin
+      },
+      id: '',
     }
   }
 
@@ -88,6 +113,7 @@ export const useDeviceStore = defineStore(title, () => {
 
     GetAPI,
     PostAPI,
+    DestroyAPI,
 
     Reset
   }
