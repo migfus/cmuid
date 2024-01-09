@@ -16,7 +16,8 @@
         </div>
       </div>
       <div class="p-5">
-        <div v-if="$status.content.info.files" class="grid justify-center">
+        <div v-if="$status.content.info.files.length > 0" class="grid justify-center">
+          <!-- {{ $status.content.info.files}} -->
           <div class="font-bold text-center">CSC ID is ready to download</div>
           <img class="rounded-xl shadow h-64 w-auto mb-2 mt-4" :src="$status.content.info.files[0].url" alt="" />
           <a :href="$status.content.info.files[0].url" target="_blank">

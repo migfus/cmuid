@@ -12,7 +12,9 @@ type TParams = {
 
 const title = `@admin/FileStore`
 export const useFileStore = defineStore(title, () => {
-  const content = ref<TGUserRegister[]>([])
+  const content = ref<{
+    data: TGUserRegister[]
+  }>({ data: [] })
 
   const config = reactive<TGConfig>({
     buttonLoading: false,
@@ -29,10 +31,10 @@ export const useFileStore = defineStore(title, () => {
   const params = reactive<TParams>(initParams())
 
   // SECTION API
-  async function GetAPI() {
+  async function GetAPI(page = 1) {
     config.contentLoading = true
     try{
-      let { data: { data }} = await axios.get(`/api/file`, {params: query})
+      let { data: { data }} = await axios.get(`/api/file`, {params: {...query, page}})
       content.value = data
     }
     catch(e) {

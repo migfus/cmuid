@@ -29,42 +29,35 @@ class RequestController extends Controller
         return $this->G_ValidatorFailResponse($val);
       }
 
-      $data = [];
+      $data = UserRegister::where(function ($q) use($req) {
+        $q->whereRaw("CONCAT(`last_name`, ', ', `first_name`) LIKE ?", ['%'.$req->search.'%'])
+          ->orWhere('email', 'LIKE', '%'.$req->search.'%')
+          ->orWhere('department', 'LIKE', '%'.$req->search.'%')
+          ->orWhere('unit', 'LIKE', '%'.$req->search.'%')
+          ->orWhere('mobile', 'LIKE', '%'.$req->search.'%');
+      });
 
       switch($req->filter) {
-        case 'completed':
-          $data = UserRegister::
-            where('status_category_id', 5)
-            ->with(['claim_type', 'status_category'])
-            ->orderBy('created_at', $req->sort)
-            ->get();
-          break;
         case 'canceled':
-          $data = UserRegister::
-            where('status_category_id', 4)
-            ->with(['claim_type', 'status_category'])
-            ->orderBy('created_at', $req->sort)
-            ->get();
+          $data->where('status_category_id', 4);
+          break;
+        case 'completed':
+          $data->where('status_category_id', 5);
           break;
         case 'claimed':
-          $data = UserRegister::
-            where('status_category_id', 6)
-            ->with(['claim_type', 'status_category'])
-
-            ->orderBy('created_at', $req->sort)
-            ->get();
+          $data->where('status_category_id', 6);
           break;
         default:
-          $data = UserRegister::
-            where('status_category_id', '<>', 5)->where('status_category_id', '<>', 4)
-            ->with(['claim_type', 'status_category'])
-            ->orderBy('created_at', $req->sort)
-            ->get();
+          $data->where('status_category_id', '<', 4);
       }
+
 
       return response()->json([
         ...$this->G_ReturnDefault(),
-        'data' => $data,
+        'data' => $data
+          ->orderBy('created_at', $req->sort)
+          ->with(['claim_type', 'status_category'])
+          ->paginate(10),
       ], 200);
     }
 

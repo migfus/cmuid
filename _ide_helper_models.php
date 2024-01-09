@@ -31,6 +31,17 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Department
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Department newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Department newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Department query()
+ */
+	class Department extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Device
  *
  * @property string $id
@@ -146,6 +157,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TextMessage whereUserRegisterId($value)
  */
 	class TextMessage extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Unit
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Unit newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Unit newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Unit query()
+ */
+	class Unit extends \Eloquent {}
 }
 
 namespace App\Models{

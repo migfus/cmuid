@@ -15,7 +15,9 @@ type TParams = {
 
 const title = `@admin/RequestStore`
 export const useRequestStore = defineStore(title, () => {
-  const content = ref<TGUserRegister[]>(null)
+  const content = ref<{data: TGUserRegister[]}>({
+    data: []
+  })
 
   const config = reactive<TGConfig>({
     buttonLoading: false,
@@ -32,10 +34,10 @@ export const useRequestStore = defineStore(title, () => {
   const params = reactive<TParams>(InitParams())
 
   // SECTION API
-  async function GetAPI() {
+  async function GetAPI(page = 1) {
     config.contentLoading = true
     try{
-      let { data: { data }} = await axios.get(`/api/request`, {params: query})
+      let { data: { data }} = await axios.get(`/api/request`, {params: {...query, page: page}})
       content.value = data
     }
     catch(e) {

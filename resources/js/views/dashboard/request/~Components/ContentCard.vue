@@ -8,12 +8,12 @@
     </div>
   </h2>
 
-  <div class="sm:p-0 lg:pb-8">
+  <div class="sm:p-0">
 
     <div class="overflow-hidden bg-white shadow sm:rounded-xl mb-3">
       <ul role="list" class="divide-y divide-gray-200">
         <DataTransition>
-          <li v-for="row in $req.content" :key="row.id">
+          <li v-for="row in $req.content.data" :key="row.id">
             <div class="block">
               <div class="px-4 py-4 sm:px-6">
                 <div class="grid grid-cols-3 items-center justify-between">
@@ -72,28 +72,53 @@
                   </p>
                 </div>
 
-                <img :src="row.picture" class="truncate text-md font-medium h-32 w-auto rounded-xl shadow mt-4" />
+                <div class="flex relative">
+                  <a :href="row.picture" target="_blank" class="relative block bg-gray-900 group rounded-xl shadow my-2">
+                    <img :src="row.picture" class="absolute inset-0 object-cover w-auto h-32 group-hover:opacity-50 rounded-xl" />
+                    <div class="relative h-32 w-auto">
+                      <div class="transition-all transform translate-y-5 opacity-0 group-hover:opacity-100 group-hover:translate-y-0">
+                        <AppButton class="">Download</AppButton>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
               </div>
             </div>
           </li>
         </DataTransition>
       </ul>
     </div>
-
   </div>
+
+  <div class="flex justify-end bg-white p-4 rounded-xl shadow mb-2">
+    <TailwindPagination
+        :data="$req.content"
+        @pagination-change-page="$req.GetAPI"
+    />
+  </div>
+
 </template>
 
 <script setup lang="ts">
 import { useRequestStore } from '@/store/@admin/RequestStore'
 import { FullName, MobileFormat } from '@/helpers/Converter'
 import moment from 'moment'
+import { watch } from 'vue'
+import { useDebounceFn } from '@vueuse/core'
 
 import { UserCircleIcon, MapPinIcon, MapIcon, DevicePhoneMobileIcon, EnvelopeIcon, WalletIcon, QueueListIcon } from '@heroicons/vue/20/solid'
 import AppInput from '@/components/form/AppInput.vue'
 import DataTransition from '@/components/transitions/DataTransition.vue'
 import ActionButton from './ActionButton.vue'
+import AppButton from '@/components/form/AppButton.vue'
+import { TailwindPagination } from 'laravel-vue-pagination';
 
 const $req = useRequestStore()
+
+watch($req.query, useDebounceFn(() => {
+  $req.GetAPI()
+}, 1000))
 </script>
 
 <style scoped>

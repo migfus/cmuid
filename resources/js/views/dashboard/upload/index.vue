@@ -62,7 +62,7 @@
           </template>
           <template #default>
             <DataTransition>
-              <li v-for="row in $file.content" :key="row.id">
+              <li v-for="row in $file.content.data" :key="row.id">
                 <div class="block hover:bg-gray-50">
                   <div class="px-4 py-4 sm:px-6">
                     <div class="grid grid-cols-3 items-center justify-between">
@@ -111,6 +111,13 @@
           </template>
         </ContentCard>
 
+        <div class="flex justify-end bg-white p-4 rounded-xl shadow mb-2">
+          <TailwindPagination
+              :data="$file.content"
+              @pagination-change-page="$file.GetAPI"
+          />
+        </div>
+
 
       </div>
 
@@ -121,12 +128,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useFileStore } from '@/store/@admin/FileStore'
 import { FullName, MobileFormat } from '@/helpers/Converter'
 import moment from 'moment'
 import * as Yup from 'yup'
 import { Form, configure, ErrorMessage, Field } from 'vee-validate'
+import { useDebounceFn } from '@vueuse/core'
 
 import { UserCircleIcon, MapPinIcon, MapIcon, DevicePhoneMobileIcon, EnvelopeIcon, QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
 import Layout from    './~Components/Layout.vue'
@@ -135,6 +143,8 @@ import BasicTransition from '@/components/transitions/BasicTransition.vue'
 import ContentCard from './~Components/ContentCard.vue'
 import DataTransition from '@/components/transitions/DataTransition.vue'
 import AppInput from '@/components/form/AppInput.vue'
+import { TailwindPagination } from 'laravel-vue-pagination'
+
 
 configure({
     validateOnInput: true
@@ -157,6 +167,10 @@ function AddPicture(events) {
   // @ts-ignore
   reader.readAsDataURL($file.params.picture)
 }
+
+watch($file.query, useDebounceFn(() => {
+  $file.GetAPI()
+}, 1000))
 
 onMounted(() => {
   $file.query.filter = 'default mga yawa'

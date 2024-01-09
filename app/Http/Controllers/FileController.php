@@ -24,18 +24,18 @@ class FileController extends Controller
         return $this->G_ValidatorFailResponse($val);
       }
 
-      $data = null;
+      $data = UserRegister::where('claim_type_id', 2);
       switch($req->filter) {
         case 'uploaded':
-          $data = UserRegister::where('claim_type_id', 2)->with('files')->has('files')->get();
+          $data->with('files')->has('files');
           break;
         case
-          $data = UserRegister::where('claim_type_id', 2)->doesntHave('files')->get();
+          $data->doesntHave('files');
       }
 
       return response()->json([
         ...$this->G_ReturnDefault(),
-        'data' => $data,
+        'data' => $data->paginate(10),
       ], 200);
     }
 
