@@ -14,8 +14,7 @@ Route::apiResource('/status',  \App\Http\Controllers\RegisterStatusController::c
 Route::apiResource('/verify',  \App\Http\Controllers\VerifyController::class)->only(['show']);
 Route::apiResource('/device',  \App\Http\Controllers\DeviceController::class)->only(['show']);
 Route::apiResource('/text-message',  \App\Http\Controllers\TextMessageController::class)->only(['index', 'update']);
-Route::apiResource('/device', \App\Http\Controllers\DeviceController::class)
-  ->only(['update']);
+Route::apiResource('/device', \App\Http\Controllers\DeviceController::class)->only(['update']);
 
 // SECTION AUTH
 Route::middleware('auth:sanctum')->group(function () {
@@ -29,5 +28,4 @@ Route::middleware('auth:sanctum')->group(function () {
     ->only(['index', 'store', 'destroy']);
   Route::apiResource('/device', \App\Http\Controllers\DeviceController::class)
     ->only(['store', 'destroy']);
-
 });

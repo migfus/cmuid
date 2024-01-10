@@ -72,16 +72,30 @@
                   </p>
                 </div>
 
-                <div class="flex relative">
-                  <a :href="row.picture" target="_blank" class="relative block bg-gray-900 group rounded-xl shadow my-2">
-                    <img :src="row.picture" class="absolute inset-0 object-cover w-auto h-32 group-hover:opacity-50 rounded-xl" />
-                    <div class="relative h-32 w-auto">
-                      <div class="transition-all transform translate-y-5 opacity-0 group-hover:opacity-100 group-hover:translate-y-0">
-                        <AppButton class="">Download</AppButton>
+                <div class="grid grid-cols-1 sm:grid-cols-2">
+                  <div class="flex relative">
+                    <a :href="row.picture" target="_blank" class="relative block bg-gray-900 group rounded-xl shadow my-2">
+                      <img :src="row.thumbnail" class="absolute inset-0 object-cover w-auto h-32 group-hover:opacity-50 rounded-xl" />
+                      <div class="relative h-32 w-auto">
+                        <div class="transition-all transform translate-y-5 opacity-0 group-hover:opacity-100 group-hover:translate-y-0">
+                          <AppButton class="">Download</AppButton>
+                        </div>
                       </div>
-                    </div>
-                  </a>
+                    </a>
+                  </div>
+
+                  <div v-if="row.files" class="flex relative">
+                    <a :href="row.files[0].url ?? ''" target="_blank" class="relative block bg-gray-900 group rounded-xl shadow my-2">
+                      <img :src="row.files[0].url ?? ''" class="absolute inset-0 object-cover w-auto h-32 group-hover:opacity-50 rounded-xl" />
+                      <div class="relative h-32 w-auto">
+                        <div class="transition-all transform translate-y-5 opacity-0 group-hover:opacity-100 group-hover:translate-y-0">
+                          <AppButton class="">Download</AppButton>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
                 </div>
+
 
               </div>
             </div>

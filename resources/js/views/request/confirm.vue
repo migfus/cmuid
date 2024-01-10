@@ -27,7 +27,7 @@
           </ul>
         </div>
 
-        <AppButton class="mt-4" :disabled="tier.disabled" @click="$req.RegisterAPI(tier.claimTypeID)">{{ tier.cta }}</AppButton>
+        <AppButton class="mt-4" :disabled="tier.disabled" @click="$req.RegisterAPI(tier.claimTypeID)" :loading="$req.config.buttonLoading">{{ tier.cta }}</AppButton>
       </div>
     </div>
   </div>

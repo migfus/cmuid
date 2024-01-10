@@ -17,8 +17,18 @@
           <p class="mt-1 truncate text-sm text-gray-500">0{{ $verify.content.mobile }}</p>
         </div>
       </div>
-      <div class="p-5">
-        <img class="mt-2 rounded-xl shadow h-64 w-auto mb-2" :src="$verify.content.picture" alt="" />
+      <div class="p-5 grid grid-cols-1 sm:grid-cols-2">
+        <div class="">
+          <span class="font-strong">Raw Image</span>
+          <img class="mt-2 rounded-xl shadow h-64 w-auto mb-2" :src="$verify.content.picture" alt="" />
+        </div>
+        <div v-if="$verify.content.files">
+          <span>Download File</span>
+          <img class="mt-2 rounded-xl shadow h-64 w-auto mb-2" :src="$verify.content.files[0].url" alt="" />
+          <a :href="$verify.content.files[0].url" target="_blank">
+            <AppButton>Download File</AppButton>
+          </a>
+        </div>
       </div>
     </li>
   </ul>
@@ -27,6 +37,8 @@
 <script setup lang="ts">
 import { FullName } from '@/helpers/Converter'
 import { useVerifyStore } from '@/store/VerifyStore'
+
+import AppButton from '@/components/form/AppButton.vue';
 
 const $verify = useVerifyStore()
 </script>

@@ -10,7 +10,7 @@ class VerifyController extends Controller
 {
   public function show(Request $req, string $id) {
     $info = UserRegister::where('id', $id)
-      ->with(['status'])
+      ->with(['status', 'files'])
       ->whereHas('status', function($q) {
         $q->where('category_id', 5);
       })
