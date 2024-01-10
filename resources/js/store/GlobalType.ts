@@ -15,6 +15,7 @@ export type TGQuery = {
 export type TGUserRegister = {
   id: string
   picture: string
+  thumbnail: string
   last_name: string
   first_name: string
   mid_name?: string
@@ -43,13 +44,7 @@ export type TGClaimType = {
 export type TGStatus = {
   id: number,
   user_register_id: number
-  user_register: {
-    picture: string
-    last_name: string
-    first_name: string
-    mid_name?: string
-    ext_name?: string
-  }
+  user_register: TGUserRegister
   user_id?: number
   user: {
     email: string

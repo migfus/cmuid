@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
         DeviceSeeder::class,
         UserRegisterSeeder::class,
         TextMessageSeeder::class,
-        DepartmentSeeder::class,
-        UnitSeeder::class,
+        // DepartmentSeeder::class,
+        // UnitSeeder::class,
       ]);
     }
 }

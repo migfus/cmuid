@@ -174,6 +174,9 @@ watch($file.query, useDebounceFn(() => {
 
 onMounted(() => {
   $file.query.filter = 'default mga yawa'
-  $file.GetAPI()
+  if($file.notMountedCalledYet == true) {
+    $file.GetAPI()
+    $file.notMountedCalledYet = false
+  }
 })
 </script>

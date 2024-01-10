@@ -17,3 +17,7 @@ export const idGenerator = (length = 5) => {
   }
   return result;
 }
+
+export const ScrollUp = (y = 0) => {
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}

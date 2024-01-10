@@ -4,6 +4,8 @@ import axios from "axios"
 import { notify } from 'notiwind'
 import type { TGConfig, TGQuery, TGUserRegister,} from "../GlobalType"
 
+const notMountedCalledYet = ref<boolean>(true)
+
 type TParams = {
   picture: string
   user_register_id: string
@@ -125,6 +127,7 @@ export const useFileStore = defineStore(title, () => {
     content,
     query,
     params,
+    notMountedCalledYet,
 
     GetAPI,
     PostAPI,

@@ -39,7 +39,7 @@ class UserRegisterController extends Controller
       return $this->G_ValidatorFailResponse($val);
     }
 
-    $picture = $this->G_FileUpload($req->picture);
+    $image_uploaded = $this->G_FileUploadImage($req->picture);
     $csc_id = $this->generateRandomString();
 
     if(UserRegister::where('id', $csc_id)->exists()) {
@@ -50,7 +50,8 @@ class UserRegisterController extends Controller
       'id' => $csc_id,
       'status_category_id' => 2,
       'claim_type_id' => $req->claim_type_id,
-      'picture' => $picture,
+      'picture' => $image_uploaded['original'],
+      'thumbnail' => $image_uploaded['thumbnail'],
       'last_name'  => $req->last_name,
       'first_name' => $req->first_name,
       'mid_name' => $req->mid_name ? strtoupper(str_replace('.', '', $req->mid_name)) : null,

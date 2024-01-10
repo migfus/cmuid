@@ -18,6 +18,7 @@ class UserRegister extends Model
       'claim_type_id',
       'status_category_id',
       'picture',
+      'thumbnail',
       'last_name',
       'first_name',
       'mid_name',

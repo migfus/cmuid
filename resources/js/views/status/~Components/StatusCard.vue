@@ -16,7 +16,7 @@
 
                 <template v-if="row.category.name == 'Post'">
                   <div class="relative">
-                    <img class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white" :src="row.user_register.picture" alt="" />
+                    <img class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white" :src="row.user_register.thumbnail" alt="" />
                     <span class="absolute -bottom-0.5 -right-1 rounded-full bg-white px-0.5 py-px">
                       <PlusIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
                     </span>

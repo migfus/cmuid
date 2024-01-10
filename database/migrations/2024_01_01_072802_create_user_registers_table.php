@@ -16,6 +16,7 @@ return new class extends Migration
           $table->tinyInteger('status_category_id');
           $table->tinyInteger('claim_type_id');
           $table->string('picture');
+          $table->string('thumbnail');
           $table->string('last_name');
           $table->string('first_name');
           $table->string('mid_name')->nullable();

@@ -27,7 +27,7 @@
 
         <div class="grid justify-center mt-6">
           <div class="font-bold text-center">Raw image</div>
-          <img class="mt-2 rounded-xl shadow h-64 w-auto mb-2" :src="$status.content.info.picture" alt="" />
+          <img class="mt-2 rounded-xl shadow h-64 w-auto mb-2" :src="$status.content.info.thumbnail" alt="" />
         </div>
 
 

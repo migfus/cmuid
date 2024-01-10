@@ -3,7 +3,9 @@ import { defineStore } from "pinia"
 import axios from "axios"
 import { notify } from 'notiwind'
 import type { TGQuery, TGUserRegister, TGConfig } from "../GlobalType"
-import moment from 'moment'
+import { ScrollUp } from '@/helpers/Converter'
+
+const notMountedCalledYet = ref<boolean>(true)
 
 type TParams = {
   id: string
@@ -35,10 +37,18 @@ export const useRequestStore = defineStore(title, () => {
 
   // SECTION API
   async function GetAPI(page = 1) {
+    const controller = new AbortController()
     config.contentLoading = true
-    try{
-      let { data: { data }} = await axios.get(`/api/request`, {params: {...query, page: page}})
+    try  {
+      let { data: { data }} = await axios.get(
+        `/api/request`,
+        {
+          params: {...query, page: page},
+          signal: controller.signal
+        }
+      )
       content.value = data
+      ScrollUp()
     }
     catch(e) {
       if(e.response.data.message != 'Invalid Input') {
@@ -134,6 +144,7 @@ export const useRequestStore = defineStore(title, () => {
     content,
     query,
     params,
+    notMountedCalledYet,
 
     GetAPI,
     FeedbackAPI,

@@ -54,17 +54,23 @@ export const useRequestStore = defineStore(title, () => {
   function ResetParams() {
     return {
       id: null,
-      created_at: null,
+      picture: null,
+      thumbnail: null,
       last_name: null,
       first_name: null,
       mid_name: null,
-      ext_name: '',
+      ext_name: null,
+      position: null,
       department: null,
       unit: null,
-      email: null,
       mobile: null,
-      position: null,
-      picture: null,
+      email: null,
+      created_at: null,
+      claim_type_id: null,
+
+      files: null,
+      claim_type: null,
+      status_category: null,
     }
   }
 

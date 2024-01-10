@@ -25,6 +25,9 @@ const $req = useRequestStore()
 
 onMounted(() => {
   $req.query.filter = 'request'
-  $req.GetAPI()
+  if($req.notMountedCalledYet == true) {
+    $req.GetAPI();
+    $req.notMountedCalledYet = false
+  }
 })
 </script>
