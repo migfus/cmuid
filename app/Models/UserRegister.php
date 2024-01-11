@@ -7,28 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserRegister extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    public $incrementing = false;
+  public $incrementing = false;
 
-    protected $keyType = 'string';
+  protected $keyType = 'string';
 
-    protected $fillable = [
-      'id',
-      'claim_type_id',
-      'status_category_id',
-      'picture',
-      'thumbnail',
-      'last_name',
-      'first_name',
-      'mid_name',
-      'ext_name',
-      'position',
-      'department',
-      'unit',
-      'email',
-      'mobile',
-    ];
+  protected $fillable = [
+    'id',
+    'claim_type_id',
+    'status_category_id',
+    'picture',
+    'thumbnail',
+    'last_name',
+    'first_name',
+    'mid_name',
+    'ext_name',
+    'position',
+    'department',
+    'unit',
+    'email',
+    'mobile',
+  ];
 
   public function status() {
     return $this->hasMany(RegisterStatus::class, 'user_register_id');

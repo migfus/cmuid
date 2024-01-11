@@ -9,7 +9,6 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
       <div v-for="row in $device.content" :key="row.id" class="overflow-hidden bg-white shadow sm:rounded-xl">
         <ul role="list" class="divide-y divide-gray-200 rounded-xl">
-
           <DeviceData :id="row.id" :name="row.name" :platform="row.platform" :last_response="row.last_response"/>
         </ul>
       </div>
@@ -19,8 +18,6 @@
   <PromptModal @confirm="$device.PostAPI" title="Add Device?" confirmButtonName="Confirm" v-model="show">
     <p>Do you want to add another device?</p>
   </PromptModal>
-
-
 </template>
 
 <script setup lang="ts">

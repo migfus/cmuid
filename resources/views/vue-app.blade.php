@@ -78,5 +78,3 @@
 </body>
 </html>
 
-
-$2y$10$zJGtJTNTOCp99VcVBPvXkuut/OPlFe2tEFbJsdDDc4Sum8jEpz.gO

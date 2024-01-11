@@ -1,13 +1,4 @@
 <template>
-  <!-- <label
-    :for="$props.name"
-    :class="[
-        'block text-sm font-medium text-gray-700',
-        error && 'text-red-500'
-    ]"
-  >{{ $props.placeholder }}</label> -->
-
-
   <div class="flex h-5 items-center">
     <input
       v-model="$model"
@@ -38,13 +29,10 @@ const $model = defineModel()
 
 const error = computed(() => {
   if($props.errors) {
-      if($props.errors[$props.name]) {
-          return $props.errors[$props.name]
-      }
+    if($props.errors[$props.name]) {
+      return $props.errors[$props.name]
+    }
   }
   return null
 })
-
-
-// alert($props.modelValue)
 </script>

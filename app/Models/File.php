@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-    use HasFactory;
-
+  use HasFactory;
 
   protected $fillable = [
-    'id', 'user_register_id', 'name', 'url'
+    'id',
+    'user_register_id',
+    'name',
+    'url'
   ];
 }

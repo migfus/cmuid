@@ -85,22 +85,4 @@ class UserRegisterController extends Controller
     ], 200);
 
   }
-
-  // NOTE Detailed data
-  // [any] -> csc_id
-  public function show(UserRegistration $userRegistration) {
-      //
-  }
-
-  // NOTE Update in dashboard
-  // [admin]
-  public function update(Request $request, UserRegistration $userRegistration) {
-      //
-  }
-
-  // NOTE Delete record in dashboard
-  // [admin]
-  public function destroy(UserRegistration $userRegistration) {
-      //
-  }
 }

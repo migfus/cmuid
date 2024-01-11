@@ -31,17 +31,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\Department
- *
- * @method static \Illuminate\Database\Eloquent\Builder|Department newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Department newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Department query()
- */
-	class Department extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\Device
  *
  * @property string $id
@@ -161,17 +150,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\Unit
- *
- * @method static \Illuminate\Database\Eloquent\Builder|Unit newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Unit newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Unit query()
- */
-	class Unit extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\User
  *
  * @property int $id
@@ -214,6 +192,7 @@ namespace App\Models{
  * @property int $status_category_id
  * @property int $claim_type_id
  * @property string $picture
+ * @property string $thumbnail
  * @property string $last_name
  * @property string $first_name
  * @property string|null $mid_name
@@ -247,6 +226,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister wherePicture($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister wherePosition($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereStatusCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereThumbnail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereUnit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserRegister whereUpdatedAt($value)
  */

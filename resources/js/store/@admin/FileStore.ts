@@ -14,9 +14,7 @@ type TParams = {
 
 const title = `@admin/FileStore`
 export const useFileStore = defineStore(title, () => {
-  const content = ref<{
-    data: TGUserRegister[]
-  }>({ data: [] })
+  const content = ref<{ data: TGUserRegister[] }>({ data: [] })
 
   const config = reactive<TGConfig>({
     buttonLoading: false,
@@ -119,8 +117,6 @@ export const useFileStore = defineStore(title, () => {
       id: null
     }
   }
-
-
 
   return {
     config,

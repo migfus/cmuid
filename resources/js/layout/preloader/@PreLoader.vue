@@ -4,9 +4,7 @@
       <object data="/images/logo-anim.svg" style="width: 140px; height: auto; z-index: 10" class="mt-5"/>
       <div v-if="$preLoader.config.loading" class="loader my-10 ml-10"></div>
     </div>
-
   </div>
-
 </template>
 
 <script setup lang="ts">

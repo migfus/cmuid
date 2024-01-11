@@ -26,29 +26,29 @@
                   </div>
                 </div>
 
-                  <div class="mt-2">
-                      <div class="mt-1 flex justify-center rounded-xl border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
-                          <div class="space-y-1 text-center">
-                              <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                  <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                              </svg>
-                              <div class="flex text-sm text-gray-600">
-                                  <label for="file-upload" class="relative cursor-pointer rounded-xl bg-white font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
-                                      <span>Upload a file</span>
-                                      <input @change="SelectFile" ref="uploadInput" id="file-upload" name="file-upload" type="file" accept="image/jpg, image/jpeg, image/png, image/gif" class="sr-only" />
-                                  </label>
-                                  <p class="pl-1">or drag and drop</p>
-                              </div>
-                              <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-                          </div>
-                      </div>
-                  </div>
+                <div class="mt-2">
+                    <div class="mt-1 flex justify-center rounded-xl border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+                        <div class="space-y-1 text-center">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <div class="flex text-sm text-gray-600">
+                                <label for="file-upload" class="relative cursor-pointer rounded-xl bg-white font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
+                                    <span>Upload a file</span>
+                                    <input @change="SelectFile" ref="uploadInput" id="file-upload" name="file-upload" type="file" accept="image/jpg, image/jpeg, image/png, image/gif" class="sr-only" />
+                                </label>
+                                <p class="pl-1">or drag and drop</p>
+                            </div>
+                            <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                        </div>
+                    </div>
+                </div>
 
               </div>
               <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row sm:px-6 gap-1 mb-3">
-                  <AppButton block color="white" @click="GetResult()" class="mt-1">Save</AppButton>
-                  <AppButton block color="white" @click="Reset()" class="mt-1">Reset</AppButton>
-                  <AppButton block color="danger" @click="$emit('update:show', false)" class="mt-1">Cancel</AppButton>
+                <AppButton block color="white" @click="GetResult()" class="mt-1">Save</AppButton>
+                <AppButton block color="white" @click="Reset()" class="mt-1">Reset</AppButton>
+                <AppButton block color="danger" @click="$emit('update:show', false)" class="mt-1">Cancel</AppButton>
               </div>
 
             </DialogPanel>
@@ -72,49 +72,49 @@ const $show_model = defineModel<boolean>()
 const uploadInput = ref(null);
 const defaultImage = $model.value;
 const config = {
-    cropperOption: {
-        viewMode: 2,
-        dragMode: 'crop',
-        aspectRatio: 1,
-    },
-    cropperBoxStyle: {
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#f8f8f8',
-        margin: 'auto',
-    }
+  cropperOption: {
+    viewMode: 2,
+    dragMode: 'crop',
+    aspectRatio: 1,
+  },
+  cropperBoxStyle: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#f8f8f8',
+    margin: 'auto',
+  }
 }
 
 function SelectFile(event: Event) {
-    // @ts-ignore
-    const { files } = event.target
-    if (!files || !files.length) return
+  // @ts-ignore
+  const { files } = event.target
+  if (!files || !files.length) return
 
-    const file = files[0]
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => {
-        $model.value = String(reader.result)
-        if (!uploadInput.value) return
-        uploadInput.value.value = ''
-    }
+  const file = files[0]
+  const reader = new FileReader()
+  reader.readAsDataURL(file)
+  reader.onload = () => {
+    $model.value = String(reader.result)
+    if (!uploadInput.value) return
+    uploadInput.value.value = ''
+  }
 }
 
 async function GetResult() {
-    if (!cropper) return
-    const base64 = cropper.getDataURL({
-        maxWidth: 200,
-        maxHeight: 200,
-        imageSmoothingQuality: 'high'
-    })
-    $model.value = base64
-    $emit('update')
-    $emit('update:show', false)
+  if (!cropper) return
+  const base64 = cropper.getDataURL({
+    maxWidth: 200,
+    maxHeight: 200,
+    imageSmoothingQuality: 'high'
+  })
+  $model.value = base64
+  $emit('update')
+  $emit('update:show', false)
 }
 
 function Reset() {
-    if (!cropper) return
-    cropper.reset()
-    $model.value = defaultImage
+  if (!cropper) return
+  cropper.reset()
+  $model.value = defaultImage
 }
 </script>

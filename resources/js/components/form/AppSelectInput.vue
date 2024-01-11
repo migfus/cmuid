@@ -3,8 +3,7 @@
     v-model="$model"
     class="block w-full rounded-md border-gray-300 shadow focus:border-gray-300 focus:ring-gray-300 sm:text-sm"
   >
-    <slot>
-    </slot>
+    <slot></slot>
   </select>
 </template>
 
@@ -20,5 +19,4 @@ const $props = defineProps({
 const $model = defineModel<string>();
 
 const { placeholder } = toRefs($props)
-
 </script>

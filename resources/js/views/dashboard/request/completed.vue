@@ -8,8 +8,8 @@
         <!-- SECTION CONTENT -->
         <ContentCard />
       </div>
-  </Layout>
-</div>
+    </Layout>
+  </div>
 </template>
 
 <script setup lang="ts">

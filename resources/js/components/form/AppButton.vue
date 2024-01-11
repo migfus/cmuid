@@ -11,7 +11,7 @@
       ]"
       :disabled="$props.loading || $props.disabled"
       :type="type"
-  >
+    >
       <BasicTransition>
         <div v-if="$props.loading" role="status">
           <svg aria-hidden="true" class="w-3 h-3 mt-1 mr-2 text-white animate-spin fill-black" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,8 +22,6 @@
         </div>
         <XMarkIcon v-if="$props.disabled" class="h-4 w-4 text-gray-700 mr-2 ml-0" aria-hidden="true" style="margin-top: 2px;"/>
       </BasicTransition>
-
-
       <slot></slot>
     </button>
   </BasicTransition>
@@ -37,56 +35,56 @@ import { XMarkIcon } from '@heroicons/vue/24/outline'
 import BasicTransition from '@/components/transitions/BasicTransition.vue'
 
 const $props = defineProps<{
-    color?: string
-    size?: string
-    loading?: boolean
-    disabled?: boolean
-    dataDismiss?: string // for modal (no function, for error fix)
-    mr?: string
-    ml?: string
-    mb?: string
-    push?: string
-    type?: string
-    block?: boolean
-    errorDisabled? : any
-    btnCss?: string
+  color?: string
+  size?: string
+  loading?: boolean
+  disabled?: boolean
+  dataDismiss?: string // for modal (no function, for error fix)
+  mr?: string
+  ml?: string
+  mb?: string
+  push?: string
+  type?: string
+  block?: boolean
+  errorDisabled? : any
+  btnCss?: string
 }>()
 
 const color = computed(() => {
-    if($props.disabled) {
-        return 'bg-gray-400 text-black cursor-not-allowed'
-    }
-    switch ($props.color) {
-        case 'info':
-            return 'bg-blue-400 hover:bg-blue-500 focus:ring-blue-500 text-white'
-        case 'warning':
-            return 'bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-500 text-yellow-800'
-        case 'danger':
-            return 'bg-red-300 hover:bg-red-400 focus:ring-red-400 text-red-800'
-        // case 'success' :
-        //     return 'bg-teal-200 hover:bg-teal-400 focus:ring-teal-500 text-green-800'
-        case 'success':
-            return 'bg-green-300 hover:bg-primary-400 focus:ring-primary-500 text-primary-800'
-        default:
-          return 'border-1 border-slate-300 bg-gray-300 hover:bg-gray-200 focus:ring-slate-400 text-black'
-    }
+  if($props.disabled) {
+    return 'bg-gray-400 text-black cursor-not-allowed'
+  }
+  switch ($props.color) {
+    case 'info':
+        return 'bg-blue-400 hover:bg-blue-500 focus:ring-blue-500 text-white'
+    case 'warning':
+        return 'bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-500 text-yellow-800'
+    case 'danger':
+        return 'bg-red-300 hover:bg-red-400 focus:ring-red-400 text-red-800'
+    // case 'success' :
+    //     return 'bg-teal-200 hover:bg-teal-400 focus:ring-teal-500 text-green-800'
+    case 'success':
+        return 'bg-green-300 hover:bg-primary-400 focus:ring-primary-500 text-primary-800'
+    default:
+      return 'border-1 border-slate-300 bg-gray-300 hover:bg-gray-200 focus:ring-slate-400 text-black'
+  }
 })
 
 const size = computed(() => {
-    switch ($props.size) {
-        case 'sm':
-            return 'text-xs !px-3 !py-1'
-        default:
-            return 'text-sm'
-    }
+  switch ($props.size) {
+    case 'sm':
+        return 'text-xs !px-3 !py-1'
+    default:
+        return 'text-sm'
+  }
 })
 const type = computed(() => {
-    switch ($props.type) {
-        case 'submit':
-            return 'submit'
-        default:
-            return 'button'
-    }
+  switch ($props.type) {
+    case 'submit':
+        return 'submit'
+    default:
+        return 'button'
+  }
 })
 
 </script>

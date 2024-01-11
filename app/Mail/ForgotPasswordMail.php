@@ -26,5 +26,5 @@ class ForgotPasswordMail extends Mailable
       return $this->from(env('MAIL_FROM_ADDRESS', 'admin@fchhis.migfus.net'), 'Account Recovery')
           ->subject('Account Recovery')
           ->view('emails.recovery',['code' => $this->code, 'logo' => $this->logo]);
-  }
+    }
 }

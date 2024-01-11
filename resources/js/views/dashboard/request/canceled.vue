@@ -1,13 +1,13 @@
 <template>
   <div>
     <Layout>
-      <div class="divide-y divide-gray-200 lg:col-span-9">
-        <!-- SECTION FORMS -->
-        <FormCard />
+    <div class="divide-y divide-gray-200 lg:col-span-9">
+      <!-- SECTION FORMS -->
+      <FormCard />
 
-        <!-- SECTION CONTENT -->
-        <ContentCard />
-      </div>
+      <!-- SECTION CONTENT -->
+      <ContentCard />
+    </div>
   </Layout>
 </div>
 </template>

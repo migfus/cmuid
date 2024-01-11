@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClaimType extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-      'id',
-      'name'
-    ];
+  protected $fillable = [
+    'id',
+    'name'
+  ];
 }

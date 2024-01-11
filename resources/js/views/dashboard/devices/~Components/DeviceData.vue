@@ -40,7 +40,6 @@
     </div>
   </li>
 
-
   <PromptModal @confirm="$device.DestroyAPI" title="Destroy Device?" confirmButtonName="Confirm" v-model="show">
     <p>Do you want to remove this device?</p>
   </PromptModal>

@@ -35,12 +35,10 @@
             </div>
           </Form>
 
-
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup lang="ts">
@@ -74,7 +72,6 @@ const input = reactive<InputInt>({
   email: '',
   password: '',
 });
-
 
 onMounted(() => {
   if($route.query.email) {

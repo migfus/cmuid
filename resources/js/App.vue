@@ -4,7 +4,6 @@
 
     <SideNavigation v-if="$route.meta.sideBar"/>
     <TopNavigation v-else/>
-
   </div>
 </template>
 

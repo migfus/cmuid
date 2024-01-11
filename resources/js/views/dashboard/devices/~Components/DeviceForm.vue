@@ -16,13 +16,11 @@
       </div>
     </div>
   </main>
-
 </template>
 
 <script setup lang="ts">
 import { useDeviceStore } from '@/store/@admin/DeviceStore'
 import { useQRCode } from '@vueuse/integrations/useQRCode'
-import { idGenerator } from '@/helpers/Converter'
 
 import AppButton from '@/components/form/AppButton.vue'
 

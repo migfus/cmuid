@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Device extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
   public $incrementing = false;
-
 
   protected $fillable = [
     'id',

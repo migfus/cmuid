@@ -17,9 +17,7 @@ type TParams = {
 
 const title = `@admin/RequestStore`
 export const useRequestStore = defineStore(title, () => {
-  const content = ref<{data: TGUserRegister[]}>({
-    data: []
-  })
+  const content = ref<{data: TGUserRegister[]}>({ data: [] })
 
   const config = reactive<TGConfig>({
     buttonLoading: false,

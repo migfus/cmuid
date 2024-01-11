@@ -1,6 +1,6 @@
 <template>
   <div>
-    yersy
+    Dashdash board board
   </div>
 </template>
 

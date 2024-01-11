@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, isNavigationFailure, NavigationFailureType } from "vue-router"
+import { createRouter, createWebHistory } from "vue-router"
 import { useAuthStore } from "@/store/@auth/AuthStore"
 import { usePreLoader } from "@/store/system/PreLoader"
 import ability from '@/Ability'
@@ -198,26 +198,6 @@ router.beforeEach(async (to, from, next) => {
     return true;
   })
 
-  // const $auth = useAuthStore();
-
-  // if ($auth.token == "" && to.name !== "login") {
-  //   return { name: "login" };
-  // }
-
-  // if(to.meta.auth && $auth.token == '' && to.meta.name != 'login') {
-  //   return { name: 'login'};
-  //   // return false
-  // }
-
-  // if(to.meta.role) {
-  //   if($auth.content.auth.role == 2) {
-
-  //   }
-  //   else if(to.meta.role != $auth.content.auth.role && to.meta.name != 'error') {
-  //     // return { name: 'error'}
-  //     return false
-  //   }
-  // }
   if(!canNavigate) {
     next(new Error('Route Disabled (no permission)'))
   }
@@ -226,7 +206,6 @@ router.beforeEach(async (to, from, next) => {
 });
 
 router.afterEach((to, from, failure) => {
-
   const $load = usePreLoader()
   $load.config.loading = false
 

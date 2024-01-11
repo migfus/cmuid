@@ -60,7 +60,6 @@ export type TGStatus = {
 export type TGAuth = {
   id: number
   email: string
-  // password: string
   avatar: string
   created_at: string
 }

@@ -1,5 +1,4 @@
 <template>
-
   <Disclosure as="nav" class="bg-white shadow" v-slot="{ open }">
     <!-- <HeaderBanner /> -->
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -24,7 +23,7 @@
             <RouterLink to="/"
               :class="[$route.name == 'request' ? 'border-primary-700 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
                 'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
-                ]"
+              ]"
             >
               Request for CSC ID
             </RouterLink>
@@ -32,7 +31,7 @@
             <RouterLink to="/status"
               :class="[$route.name == 'status' ? 'border-primary-700 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
                 'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
-                ]"
+              ]"
             >
               Check Status
             </RouterLink>
@@ -40,7 +39,7 @@
             <RouterLink to="/verify"
               :class="[$route.name == 'verify' ? 'border-primary-700 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
                 'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
-                ]"
+              ]"
             >
               Verify ID
             </RouterLink>
@@ -65,7 +64,8 @@
             :class="[row.link.name == $route.name ?
               'block border-l-4 border-primary-500 bg-primary-50 py-2 pl-3 pr-4 text-base font-medium text-primary-700' :
               'block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700',
-              'flex-nowrap']
+              'flex-nowrap'
+            ]
             ">
             <DisclosureButton style="width: 100%; text-align: left;">
               {{ row.name }}

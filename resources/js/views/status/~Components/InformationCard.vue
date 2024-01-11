@@ -30,8 +30,6 @@
           <img class="mt-2 rounded-xl shadow h-64 w-auto mb-2" :src="$status.content.info.thumbnail" alt="" />
         </div>
 
-
-
       </div>
     </li>
   </ul>

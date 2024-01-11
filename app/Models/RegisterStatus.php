@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class RegisterStatus extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-      'user_register_id',
-      'user_id',
-      'category_id',
-      'content'
-    ];
+  protected $fillable = [
+    'user_register_id',
+    'user_id',
+    'category_id',
+    'content'
+  ];
 
   public function category() {
     return $this->belongsTo(StatusCategory::class);

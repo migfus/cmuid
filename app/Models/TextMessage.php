@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class TextMessage extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
   protected $fillable = [
-    'device_id', 'user_register_id', 'content', 'read_at'
+    'device_id',
+    'user_register_id',
+    'content',
+    'read_at'
   ];
 
   public function user_register() {

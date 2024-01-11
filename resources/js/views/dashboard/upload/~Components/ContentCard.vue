@@ -20,8 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import AppButton from '@/components/form/AppButton.vue'
-
 
 const $props = defineProps<{
   title: string

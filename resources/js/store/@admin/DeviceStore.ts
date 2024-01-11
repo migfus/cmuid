@@ -103,8 +103,6 @@ export const useDeviceStore = defineStore(title, () => {
     }
   }
 
-
-
   return {
     config,
     content,

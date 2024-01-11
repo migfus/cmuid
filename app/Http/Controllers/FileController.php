@@ -10,75 +10,75 @@ use App\Models\UserRegister;
 
 class FileController extends Controller
 {
-    // NOTE mix-match user_register & file
-    public function index(Request $req) {
-      if(!$req->user()->can('feedback register')) {
-        return $this->G_UnauthorizedResponse();
-      }
-
-      $val = Validator::make($req->all(), [
-        'filter' => 'required'
-      ]);
-
-      if($val->fails()) {
-        return $this->G_ValidatorFailResponse($val);
-      }
-
-      $data = UserRegister::where('claim_type_id', 2);
-      switch($req->filter) {
-        case 'uploaded':
-          $data->with('files')->has('files');
-          break;
-        case
-          $data->doesntHave('files');
-      }
-
-      return response()->json([
-        ...$this->G_ReturnDefault(),
-        'data' => $data->paginate(10),
-      ], 200);
+  // NOTE mix-match user_register & file
+  public function index(Request $req) {
+    if(!$req->user()->can('feedback register')) {
+      return $this->G_UnauthorizedResponse();
     }
 
-    // NOTE upload file and attach to user_register
-    public function store(Request $req) {
-      if(!$req->user()->can('feedback register')) {
-        return $this->G_UnauthorizedResponse();
-      }
+    $val = Validator::make($req->all(), [
+      'filter' => 'required'
+    ]);
 
-      $val = Validator::make($req->all(), [
-        'picture' => 'required|file|max:2042',
-        'user_register_id' => 'required',
-      ]);
-
-      if($val->fails()) {
-        return $this->G_ValidatorFailResponse($val);
-      }
-
-      $picture = $this->G_FileUpload($req->picture);
-
-      $data = File::create([
-        'user_register_id' => $req->user_register_id,
-        'name' => $req->user_register_id,
-        'url' => $picture,
-      ]);
-
-      return response()->json([
-        ...$this->G_ReturnDefault(),
-        'data' => true
-      ]);
+    if($val->fails()) {
+      return $this->G_ValidatorFailResponse($val);
     }
 
-    // NOTE Remove attachement from user_register
-    public function destroy(Request $req, $id) {
-      if(!$req->user()->can('feedback register')) {
-        return $this->G_UnauthorizedResponse();
-      }
-
-      $data = File::where('id', $id)->delete();
-
-      return response()->json([
-        ...$this->G_ReturnDefault(),
-        'data' => $data
-      ]);
+    $data = UserRegister::where('claim_type_id', 2);
+    switch($req->filter) {
+      case 'uploaded':
+        $data->with('files')->has('files');
+        break;
+      case
+        $data->doesntHave('files');
     }
+
+    return response()->json([
+      ...$this->G_ReturnDefault(),
+      'data' => $data->paginate(10),
+    ], 200);
+  }
+
+  // NOTE upload file and attach to user_register
+  public function store(Request $req) {
+    if(!$req->user()->can('feedback register')) {
+      return $this->G_UnauthorizedResponse();
+    }
+
+    $val = Validator::make($req->all(), [
+      'picture' => 'required|file|max:2042',
+      'user_register_id' => 'required',
+    ]);
+
+    if($val->fails()) {
+      return $this->G_ValidatorFailResponse($val);
+    }
+
+    $picture = $this->G_FileUpload($req->picture);
+
+    $data = File::create([
+      'user_register_id' => $req->user_register_id,
+      'name' => $req->user_register_id,
+      'url' => $picture,
+    ]);
+
+    return response()->json([
+      ...$this->G_ReturnDefault(),
+      'data' => true
+    ]);
+  }
+
+  // NOTE Remove attachement from user_register
+  public function destroy(Request $req, $id) {
+    if(!$req->user()->can('feedback register')) {
+      return $this->G_UnauthorizedResponse();
+    }
+
+    $data = File::where('id', $id)->delete();
+
+    return response()->json([
+      ...$this->G_ReturnDefault(),
+      'data' => $data
+    ]);
+  }
 }

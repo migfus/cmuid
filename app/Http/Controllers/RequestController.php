@@ -13,61 +13,53 @@ use App\Models\StatusCategory;
 
 class RequestController extends Controller
 {
-    // NOTE List of ID Request
-    public function index(Request $req) {
-      if(!$req->user()->can('index register')) {
-        return $this->G_UnauthorizedResponse();
-      }
-
-      $val = Validator::make($req->all(), [
-        'search' => '',
-        'sort' => 'required',
-        'filter' => 'required'
-      ]);
-
-      if($val->fails()) {
-        return $this->G_ValidatorFailResponse($val);
-      }
-
-      $data = UserRegister::where(function ($q) use($req) {
-        $q->whereRaw("CONCAT(`last_name`, ', ', `first_name`) LIKE ?", ['%'.$req->search.'%'])
-          ->orWhere('email', 'LIKE', '%'.$req->search.'%')
-          ->orWhere('department', 'LIKE', '%'.$req->search.'%')
-          ->orWhere('unit', 'LIKE', '%'.$req->search.'%')
-          ->orWhere('mobile', 'LIKE', '%'.$req->search.'%');
-      });
-
-      switch($req->filter) {
-        case 'canceled':
-          $data->where('status_category_id', 4);
-          break;
-        case 'completed':
-          $data->where('status_category_id', 5);
-          break;
-        case 'claimed':
-          $data->where('status_category_id', 6);
-          break;
-        default:
-          $data->where('status_category_id', '<', 4);
-      }
-
-
-      return response()->json([
-        ...$this->G_ReturnDefault(),
-        'data' => $data
-          ->orderBy('created_at', $req->sort)
-          ->with(['claim_type', 'status_category'])
-          ->paginate(10),
-      ], 200);
+  // NOTE List of ID Request
+  public function index(Request $req) {
+    if(!$req->user()->can('index register')) {
+      return $this->G_UnauthorizedResponse();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $req)
-    {
-        //
+    $val = Validator::make($req->all(), [
+      'search' => '',
+      'sort' => 'required',
+      'filter' => 'required'
+    ]);
+
+    if($val->fails()) {
+      return $this->G_ValidatorFailResponse($val);
     }
+
+    $data = UserRegister::where(function ($q) use($req) {
+      $q->whereRaw("CONCAT(`last_name`, ', ', `first_name`) LIKE ?", ['%'.$req->search.'%'])
+        ->orWhere('email', 'LIKE', '%'.$req->search.'%')
+        ->orWhere('department', 'LIKE', '%'.$req->search.'%')
+        ->orWhere('unit', 'LIKE', '%'.$req->search.'%')
+        ->orWhere('mobile', 'LIKE', '%'.$req->search.'%');
+    });
+
+    switch($req->filter) {
+      case 'canceled':
+        $data->where('status_category_id', 4);
+        break;
+      case 'completed':
+        $data->where('status_category_id', 5);
+        break;
+      case 'claimed':
+        $data->where('status_category_id', 6);
+        break;
+      default:
+        $data->where('status_category_id', '<', 4);
+    }
+
+
+    return response()->json([
+      ...$this->G_ReturnDefault(),
+      'data' => $data
+        ->orderBy('created_at', $req->sort)
+        ->with(['claim_type', 'status_category'])
+        ->paginate(10),
+    ], 200);
+  }
 
   // NOTE Cancel/Mark Done queries
   public function update(Request $req, string $id) {
@@ -110,61 +102,61 @@ class RequestController extends Controller
     ], 200);
   }
 
-  private function SendSMS(Request $req, $id) {
-    TextMessage::create([
-      'user_register_id' => $id,
-      'content' => $req->sms,
-    ]);
+    private function SendSMS(Request $req, $id) {
+      TextMessage::create([
+        'user_register_id' => $id,
+        'content' => $req->sms,
+      ]);
 
-    return true;
-  }
+      return true;
+    }
 
-  private function Complete(Request $req, string $id, string $user_id) : void {
-    UserRegister::where('id', $id)
-    ->update([
-      'status_category_id' => 5 // NOTE Done
-    ]);
+    private function Complete(Request $req, string $id, string $user_id) : void {
+      UserRegister::where('id', $id)
+      ->update([
+        'status_category_id' => 5 // NOTE Done
+      ]);
 
-    RegisterStatus::create([
-      'user_register_id' => $id,
-      'user_id' => $user_id,
-      'category_id' => 5,
-      'content' => $req->content,
-    ]);
-  }
+      RegisterStatus::create([
+        'user_register_id' => $id,
+        'user_id' => $user_id,
+        'category_id' => 5,
+        'content' => $req->content,
+      ]);
+    }
 
-  private function Cancel(Request $req, string $id, string $user_id) : void {
-    UserRegister::where('id', $id)->update([
-      'status_category_id' => 4 // NOTE Done
-    ]);
+    private function Cancel(Request $req, string $id, string $user_id) : void {
+      UserRegister::where('id', $id)->update([
+        'status_category_id' => 4 // NOTE Done
+      ]);
 
-    RegisterStatus::create([
-      'user_register_id' => $id,
-      'user_id' => $user_id,
-      'category_id' => 4,
-      'content' => $req->content,
-    ]);
-  }
+      RegisterStatus::create([
+        'user_register_id' => $id,
+        'user_id' => $user_id,
+        'category_id' => 4,
+        'content' => $req->content,
+      ]);
+    }
 
-  private function Feedback(Request $req, string $id, string $user_id) : void {
-    RegisterStatus::create([
-      'user_register_id' => $id,
-      'user_id' => $user_id,
-      'category_id' => 3,
-      'content' => $req->content,
-    ]);
-  }
+    private function Feedback(Request $req, string $id, string $user_id) : void {
+      RegisterStatus::create([
+        'user_register_id' => $id,
+        'user_id' => $user_id,
+        'category_id' => 3,
+        'content' => $req->content,
+      ]);
+    }
 
-  private function Claim(Request $req, string $id, string $user_id) : void {
-    UserRegister::where('id', $id)->update([
-      'status_category_id' => 6 // NOTE Claimed
-    ]);
+    private function Claim(Request $req, string $id, string $user_id) : void {
+      UserRegister::where('id', $id)->update([
+        'status_category_id' => 6 // NOTE Claimed
+      ]);
 
-    RegisterStatus::create([
-      'user_register_id' => $id,
-      'user_id' => $user_id,
-      'category_id' => 6,
-      'content' => $req->content,
-    ]);
-  }
+      RegisterStatus::create([
+        'user_register_id' => $id,
+        'user_id' => $user_id,
+        'category_id' => 6,
+        'content' => $req->content,
+      ]);
+    }
 }
