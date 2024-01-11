@@ -13,8 +13,8 @@ type TParams = {
   sendSMS: boolean
 }
 
-const title = `@admin/RequestStore`
-export const useRequestStore = defineStore(title, () => {
+const title = `@admin/CompleteRequestStore`
+export const useCompleteRequestStore = defineStore(title, () => {
   const content = ref<{data: TGUserRegister[]}>({ data: [] })
 
   const config = reactive<TGConfig>({
@@ -26,7 +26,7 @@ export const useRequestStore = defineStore(title, () => {
   const query = reactive<TGQuery>({
     search: '',
     sort: 'DESC',
-    filter: 'request',
+    filter: 'completed',
   })
 
   const params = reactive<TParams>(InitParams())

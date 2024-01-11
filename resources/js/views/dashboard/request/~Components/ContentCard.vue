@@ -1,10 +1,10 @@
 <template>
   <h2 class="bg-white mb-3 sm:rounded-xl p-5 shadow font-bold text-gray-600 grid grid-cols-12">
     <div class="col-span-6 mt-1 header-title">
-      {{ $req.query.filter }}
+      {{ $props.data.query.filter }}
     </div>
     <div class="col-span-6">
-      <AppInput v-model="$req.query.search" name="search" placeholder="Search" noLabel/>
+      <AppInput v-model="$props.data.query.search" name="search" placeholder="Search" noLabel/>
     </div>
   </h2>
 
@@ -13,7 +13,7 @@
     <div class="overflow-hidden bg-white shadow sm:rounded-xl mb-3">
       <ul role="list" class="divide-y divide-gray-200">
         <DataTransition>
-          <li v-for="row in $req.content.data" :key="row.id">
+          <li v-for="row in $props.data.content.data" :key="row.id">
             <div class="block">
               <div class="px-4 py-4 sm:px-6">
                 <div class="grid grid-cols-3 items-center justify-between">
@@ -30,10 +30,10 @@
 
                   <div class="ml-2 flex justify-end">
                     <ActionButton
-                      @complete="$req.ChangeForm(row, 'complete')"
-                      @cancel="$req.ChangeForm(row, 'cancel')"
-                      @claim="$req.ChangeForm(row, 'claim')"
-                      @feedback="$req.ChangeForm(row, 'feedback')"
+                      @complete="$props.data.ChangeForm(row, 'complete')"
+                      @cancel="$props.data.ChangeForm(row, 'cancel')"
+                      @claim="$props.data.ChangeForm(row, 'claim')"
+                      @feedback="$props.data.ChangeForm(row, 'feedback')"
                       defaultButtonName="Complete"
                     />
                   </div>
@@ -105,17 +105,18 @@
     </div>
   </div>
 
-  <div class="flex justify-end bg-white p-4 rounded-xl shadow mb-2">
+  <div v-if="$props.data.content.total > 10" class="flex justify-end bg-white p-4 rounded-xl shadow mb-2">
     <TailwindPagination
-        :data="$req.content"
-        @pagination-change-page="$req.GetAPI"
+      :data="$props.data.content"
+      @pagination-change-page="$props.data.GetAPI"
+      activeClasses="bg-gray-300"
+      itemClasses="shadow border-0"
     />
   </div>
 
 </template>
 
 <script setup lang="ts">
-import { useRequestStore } from '@/store/@admin/RequestStore'
 import { FullName, MobileFormat } from '@/helpers/Converter'
 import moment from 'moment'
 import { watch } from 'vue'
@@ -128,10 +129,12 @@ import ActionButton from './ActionButton.vue'
 import AppButton from '@/components/form/AppButton.vue'
 import { TailwindPagination } from 'laravel-vue-pagination';
 
-const $req = useRequestStore()
+const $props = defineProps<{
+  data: any
+}>()
 
-watch($req.query, useDebounceFn(() => {
-  $req.GetAPI()
+watch($props.data.query, useDebounceFn(() => {
+  $props.data.GetAPI()
 }, 1000))
 </script>
 

@@ -68,10 +68,6 @@
       </div>
     </div>
 
-
-
-
-
   </div>
 
 	@vite('resources/js/app.ts')
