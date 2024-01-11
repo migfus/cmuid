@@ -17,7 +17,8 @@ class FileController extends Controller
     }
 
     $val = Validator::make($req->all(), [
-      'filter' => 'required'
+      'filter' => 'required',
+      'search' => '',
     ]);
 
     if($val->fails()) {
@@ -27,10 +28,13 @@ class FileController extends Controller
     $data = UserRegister::where('claim_type_id', 2);
     switch($req->filter) {
       case 'uploaded':
-        $data->with('files')->has('files');
+        $data->whereRaw("CONCAT(`last_name`, ', ', `first_name`) LIKE ?", ['%'.$req->search.'%'])
+          ->with('files')
+          ->has('files');
         break;
       case
-        $data->doesntHave('files');
+        $data->whereRaw("CONCAT(`last_name`, ', ', `first_name`) LIKE ?", ['%'.$req->search.'%'])
+          ->doesntHave('files');
     }
 
     return response()->json([

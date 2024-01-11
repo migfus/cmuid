@@ -110,10 +110,12 @@
           </template>
         </ContentCard>
 
-        <div class="flex justify-end bg-white p-4 rounded-xl shadow mb-2">
+        <div v-if="$file.content.total > 10" class="flex justify-end bg-white p-4 rounded-xl shadow mb-2">
           <TailwindPagination
-              :data="$file.content"
-              @pagination-change-page="$file.GetAPI"
+            :data="$file.content"
+            @pagination-change-page="$file.GetAPI"
+            activeClasses="bg-gray-300"
+            itemClasses="shadow border-0"
           />
         </div>
       </div>
@@ -123,7 +125,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import { useFileStore } from '@/store/@admin/FileStore'
+import { useUploadSoftCopyStore } from '@/store/@admin/UploadSoftCopyStore'
 import { FullName, MobileFormat } from '@/helpers/Converter'
 import moment from 'moment'
 import * as Yup from 'yup'
@@ -147,7 +149,7 @@ const schema = Yup.object({
   picture: Yup.mixed().required('Picture is required'),
 })
 
-const $file = useFileStore()
+const $file = useUploadSoftCopyStore()
 const preview = ref(null)
 
 function AddPicture(events) {

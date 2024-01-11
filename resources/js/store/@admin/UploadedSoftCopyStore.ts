@@ -12,9 +12,9 @@ type TParams = {
   id: string
 }
 
-const title = `@admin/FileStore`
-export const useFileStore = defineStore(title, () => {
-  const content = ref<{ data: TGUserRegister[] }>({ data: [] })
+const title = `@admin/UploadedSoftCopyStore`
+export const useUploadedSoftCopyStore = defineStore(title, () => {
+  const content = ref<{ data: TGUserRegister[], total: number }>({ data: [], total: 0 })
 
   const config = reactive<TGConfig>({
     buttonLoading: false,
