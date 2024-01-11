@@ -45,8 +45,11 @@
             <div class="mt-10 md:mt-0">
               <h3 class="text-sm font-semibold leading-6 text-gray-900">Others</h3>
               <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.legal" :key="item.name">
+                <li v-for="item in navigation.others" :key="item.name">
                   <RouterLink :to="{ name: item.href }" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</RouterLink>
+                </li>
+                <li>
+                  <a href="https://trello.com/b/j06zEFhY/csc-id" targe="_blank" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Development 0.0.2</a>
                 </li>
               </ul>
             </div>
@@ -87,7 +90,7 @@ const navigation = {
     // { name: 'Press', href: '#' },
     // { name: 'Partners', href: '#' },
   ],
-  legal: [
+  others: [
     // { name: 'Terms & Agreement', href: 'terms-agreement' },
     // { name: 'Sitemap', href: 'sitemap' },
   ],

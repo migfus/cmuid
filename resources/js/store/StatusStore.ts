@@ -30,7 +30,7 @@ export const useStatusStore = defineStore(title, () => {
         notify({
           group: "error",
           title: "Invalid CSC ID",
-          text: 'Mistyped? Please try again.'
+          text: 'The CSC-ID may not exist.'
         }, 5000)
         // @ts-ignore
         this.router.push('/status');

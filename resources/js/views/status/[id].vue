@@ -3,7 +3,6 @@
     <InformationCard class="col-span-6 md:col-span-3"/>
     <StatusCard class="col-span-6 md:col-span-3"/>
   </div>
-
 </template>
 
 <script setup lang="ts">
