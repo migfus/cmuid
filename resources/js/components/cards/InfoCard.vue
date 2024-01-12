@@ -61,9 +61,9 @@
           {{ $props.data.claim_type.name }}
         </p>
 
-        <p class="truncate text-md font-medium text-gray-600 mb-2 sm:flex justify-end hidden">
+        <RouterLink :to="`/status/${$props.data.id}`" class="truncate text-md font-medium text-gray-600 mb-2 sm:flex justify-end hidden">
           cscid_{{ $props.data.id }}
-        </p>
+        </RouterLink>
 
 
       </div>
@@ -84,22 +84,21 @@
         </div>
 
         <div v-if="$props.data.files" class="flex relative">
-          <a :href="$props.data.files[0].url" target="_blank" class="group/item">
-            <div class="grou/edit invisible group-hover/item:visible absolute flex justify-center p-2 ">
-              <AppButton size="sm">
-                <ArrowDownCircleIcon class="inline-block h-5 w-5 text-gray-600"/>
-              </AppButton>
-            </div>
+          <div v-if="$props.data.files.length > 0">
+            <a :href="$props.data.files[0].url" target="_blank" class="group/item">
+              <div class="grou/edit invisible group-hover/item:visible absolute flex justify-center p-2 ">
+                <AppButton size="sm">
+                  <ArrowDownCircleIcon class="inline-block h-5 w-5 text-gray-600"/>
+                </AppButton>
+              </div>
 
-            <img :src="$props.data.files[0].url" class="w-auto h-32 rounded-xl" />
-            <span class="text-gray-600">CSC ID</span>
-          </a>
+              <img :src="$props.data.files[0].url" class="w-auto h-32 rounded-xl" />
+              <span class="text-gray-600">CSC ID</span>
+            </a>
+          </div>
+
         </div>
-
       </div>
-
-
-
     </div>
   </div>
 </template>

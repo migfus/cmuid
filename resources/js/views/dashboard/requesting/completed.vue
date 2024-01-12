@@ -10,7 +10,7 @@
                 <form class="rounded-xl divide-y divide-gray-200 lg:col-span-9">
                   <div class="py-6 px-4 sm:p-6 lg:pb-8">
                     <div>
-                      <h2 class="text-lg font-medium leading-6 text-gray-900">Requesting</h2>
+                      <h2 class="text-lg font-medium leading-6 text-gray-900">Completed</h2>
                     </div>
                     <div class="mt-6">
                       <div class="grid grid-cols-12 gap-2">
@@ -42,7 +42,21 @@
         </BasicTransition>
 
         <!-- SECTION CONTENT -->
-        <ContentCard :data="$req"/>
+        <ContentCard :data="$req">
+          <DataTransition>
+            <li v-for="row in $req.content.data" :key="row.id">
+              <InfoCardVue :data="row">
+                <ActionButtonVue
+                  @complete="$req.ChangeForm(row, 'complete')"
+                  @cancel="$req.ChangeForm(row, 'cancel')"
+                  @claim="$req.ChangeForm(row, 'claim')"
+                  @feedback="$req.ChangeForm(row, 'feedback')"
+                  defaultButtonName="Complete"
+                />
+              </InfoCardVue>
+            </li>
+          </DataTransition>
+        </ContentCard>
       </div>
     </Layout>
   </div>
@@ -50,7 +64,7 @@
 
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
-import { useRequestStore } from '@/store/@admin/RequestStore'
+import { useCompleteRequestStore } from '@/store/@admin/CompleteRequestStore'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
@@ -60,14 +74,18 @@ import BasicTransition from '@/components/transitions/BasicTransition.vue'
 import AppButton from '@/components/form/AppButton.vue'
 import AppTextArea from '@/components/form/AppTextArea.vue'
 import { Switch } from '@headlessui/vue'
+import DataTransition from '@/components/transitions/DataTransition.vue'
+import InfoCardVue from '@/components/cards/InfoCard.vue'
+import ActionButtonVue from './~Components/ActionButton.vue'
 
-const $req = useRequestStore()
+const $req = useCompleteRequestStore()
 
 const smsLength = computed(() => {
   return $req.params.sms.length
 })
 
 onMounted(() => {
+  $req.query.filter = 'completed'
   $req.GetAPI();
 })
 </script>

@@ -11,11 +11,13 @@ export const useRequestNumberStore = defineStore(title, () => {
     completed: number
     canceled: number
     claimed: number
+    upload: number
   }>({
     requesting: 0,
     completed: 0,
     canceled: 0,
-    claimed: 0
+    claimed: 0,
+    upload: 0
   })
 
   const config = reactive<TGConfig>({

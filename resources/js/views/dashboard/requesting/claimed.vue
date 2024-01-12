@@ -42,7 +42,21 @@
         </BasicTransition>
 
         <!-- SECTION CONTENT -->
-        <ContentCard :data="$req"/>
+        <ContentCard :data="$req">
+          <DataTransition>
+            <li v-for="row in $req.content.data" :key="row.id">
+              <InfoCardVue :data="row">
+                <ActionButtonVue
+                  @complete="$req.ChangeForm(row, 'complete')"
+                  @cancel="$req.ChangeForm(row, 'cancel')"
+                  @claim="$req.ChangeForm(row, 'claim')"
+                  @feedback="$req.ChangeForm(row, 'feedback')"
+                  defaultButtonName="Complete"
+                />
+              </InfoCardVue>
+            </li>
+          </DataTransition>
+        </ContentCard>
       </div>
   </Layout>
 </div>
@@ -60,6 +74,9 @@ import BasicTransition from '@/components/transitions/BasicTransition.vue'
 import AppButton from '@/components/form/AppButton.vue'
 import AppTextArea from '@/components/form/AppTextArea.vue'
 import { Switch } from '@headlessui/vue'
+import DataTransition from '@/components/transitions/DataTransition.vue'
+import ActionButtonVue from './~Components/ActionButton.vue'
+import InfoCardVue from '@/components/cards/InfoCard.vue'
 
 const $req = useClaimedRequestStore()
 

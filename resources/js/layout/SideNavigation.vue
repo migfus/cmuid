@@ -60,8 +60,14 @@
 
             <!-- SECTION DESKTOP NAV -->
             <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'dashboard')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
-            <AppSidebarNav linkName="request-list" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
-            <AppSidebarNav linkName="upload" :icon="ArrowUpOnSquareIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Upload Soft-Copy </AppSidebarNav>
+            <AppSidebarNav linkName="request-list" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false">
+              Requesting
+              <span v-if="$number.content.requesting > 0" class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 ml-2">{{ $number.content.requesting }}</span>
+            </AppSidebarNav>
+            <AppSidebarNav linkName="upload" :icon="ArrowUpOnSquareIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false">
+              Upload Soft-Copy
+              <span v-if="$number.content.upload > 0" class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 ml-2">{{ $number.content.upload }}</span>
+            </AppSidebarNav>
 
             <AppSidebarNav linkName="devices" :icon="DevicePhoneMobileIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Devices </AppSidebarNav>
 
@@ -116,7 +122,7 @@
 </template>
 
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import {
   Dialog,
   DialogPanel,
@@ -131,24 +137,28 @@ import {
   CheckBadgeIcon,
   ClockIcon,
   UserPlusIcon,
-  CheckCircleIcon,
   DevicePhoneMobileIcon,
-  ArchiveBoxIcon,
   ArrowUpOnSquareIcon,
 } from '@heroicons/vue/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { usePreLoader } from '@/store/system/PreLoader'
 import { useAbility } from '@casl/vue'
+import { useRequestNumberStore } from '@/store/@admin/RequestNumberStore'
 
 import BreadCrumbs from '@/layout/BreadCrumbs.vue'
-import HeaderBanner from '@/layout/HeaderBanner.vue'
+// import HeaderBanner from '@/layout/HeaderBanner.vue'
 import PreLoader from '@/layout/preloader/@PreLoader.vue'
 import ProfileDropdown from './ProfileDropdown.vue'
 import FooterLayout from './Footer.vue'
 import AppSidebarNav from '@/components/AppSidebarNav.vue'
 
 const $preLoader = usePreLoader()
+const $number = useRequestNumberStore()
 const { can } =  useAbility();
 
 const sidebarOpen = ref(false);
+
+onMounted(() => {
+  $number.GetAPI()
+})
 </script>

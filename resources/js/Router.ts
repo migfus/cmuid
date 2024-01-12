@@ -79,7 +79,7 @@ const router = createRouter({
             {
               path: '',
               name: 'request-list',
-              component: () => import('@/views/dashboard/request/index.vue'),
+              component: () => import('@/views/dashboard/requesting/index.vue'),
               meta: {
                 title: 'Requesting',
                 sideBar: true
@@ -88,7 +88,7 @@ const router = createRouter({
             {
               path: 'completed',
               name: 'completed',
-              component: () => import('@/views/dashboard/request/completed.vue'),
+              component: () => import('@/views/dashboard/requesting/completed.vue'),
               meta: {
                 title: 'Completed',
                 sideBar: true
@@ -97,7 +97,7 @@ const router = createRouter({
             {
               path: 'canceled',
               name: 'canceled',
-              component: () => import('@/views/dashboard/request/canceled.vue'),
+              component: () => import('@/views/dashboard/requesting/canceled.vue'),
               meta: {
                 title: 'Canceled',
                 sideBar: true
@@ -106,7 +106,7 @@ const router = createRouter({
             {
               path: 'claimed',
               name: 'claimed',
-              component: () => import('@/views/dashboard/request/claimed.vue'),
+              component: () => import('@/views/dashboard/requesting/claimed.vue'),
               meta: {
                 title: 'Claimed',
                 sideBar: true

@@ -1,16 +1,16 @@
 <template>
   <div>
     <Layout>
-      <div class="lg:col-span-9">
-        <!-- SECTION FORMS -->
-        <BasicTransition>
+    <div class="lg:col-span-9">
+      <!-- SECTION FORMS -->
+      <BasicTransition>
           <main v-if="$req.config.form != ''" class="relative">
             <div class="mx-auto max-w-screen-xl pb-3">
               <div class="overflow-hidden sm:rounded-xl bg-white shadow">
                 <form class="rounded-xl divide-y divide-gray-200 lg:col-span-9">
                   <div class="py-6 px-4 sm:p-6 lg:pb-8">
                     <div>
-                      <h2 class="text-lg font-medium leading-6 text-gray-900">Completed</h2>
+                      <h2 class="text-lg font-medium leading-6 text-gray-900">Canceled</h2>
                     </div>
                     <div class="mt-6">
                       <div class="grid grid-cols-12 gap-2">
@@ -41,16 +41,30 @@
           </main>
         </BasicTransition>
 
-        <!-- SECTION CONTENT -->
-        <ContentCard :data="$req"/>
-      </div>
-    </Layout>
-  </div>
+      <!-- SECTION CONTENT -->
+        <ContentCard :data="$req">
+          <DataTransition>
+            <li v-for="row in $req.content.data" :key="row.id">
+              <InfoCardVue :data="row">
+                <ActionButtonVue
+                  @complete="$req.ChangeForm(row, 'complete')"
+                  @cancel="$req.ChangeForm(row, 'cancel')"
+                  @claim="$req.ChangeForm(row, 'claim')"
+                  @feedback="$req.ChangeForm(row, 'feedback')"
+                  defaultButtonName="Complete"
+                />
+              </InfoCardVue>
+            </li>
+          </DataTransition>
+        </ContentCard>
+    </div>
+  </Layout>
+</div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
-import { useCompleteRequestStore } from '@/store/@admin/CompleteRequestStore'
+import { useCanceledRequestStore } from '@/store/@admin/CanceledRequestStore'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
@@ -60,15 +74,17 @@ import BasicTransition from '@/components/transitions/BasicTransition.vue'
 import AppButton from '@/components/form/AppButton.vue'
 import AppTextArea from '@/components/form/AppTextArea.vue'
 import { Switch } from '@headlessui/vue'
+import DataTransition from '@/components/transitions/DataTransition.vue'
+import ActionButtonVue from './~Components/ActionButton.vue'
+import InfoCardVue from '@/components/cards/InfoCard.vue'
 
-const $req = useCompleteRequestStore()
+const $req = useCanceledRequestStore()
 
 const smsLength = computed(() => {
   return $req.params.sms.length
 })
 
 onMounted(() => {
-  $req.query.filter = 'completed'
   $req.GetAPI();
 })
 </script>
