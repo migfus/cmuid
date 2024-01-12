@@ -30,7 +30,6 @@ class DownloadController extends Controller
         ]);
       }
 
-
     }
 
     return redirect()->to(url($data->url));
