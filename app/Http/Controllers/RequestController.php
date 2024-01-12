@@ -56,7 +56,7 @@ class RequestController extends Controller
       ...$this->G_ReturnDefault(),
       'data' => $data
         ->orderBy('created_at', $req->sort)
-        ->with(['claim_type', 'status_category'])
+        ->with(['claim_type', 'status_category', 'files'])
         ->paginate(10),
     ], 200);
   }

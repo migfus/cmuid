@@ -25,7 +25,7 @@ export const useUploadedSoftCopyStore = defineStore(title, () => {
   const query = reactive<TGQuery>({
     search: '',
     sort: 'DESC',
-    filter: 'yawa'
+    filter: 'uploaded'
   })
 
   const params = reactive<TParams>(initParams())

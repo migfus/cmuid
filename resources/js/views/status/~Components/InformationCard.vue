@@ -20,7 +20,7 @@
           <!-- {{ $status.content.info.files}} -->
           <div class="font-bold text-center">CSC ID is ready to download</div>
           <img class="rounded-xl shadow h-64 w-auto mb-2 mt-4" :src="$status.content.info.files[0].url" alt="" />
-          <a :href="$status.content.info.files[0].url" target="_blank">
+          <a :href="`/api/download/${$status.content.info.files[0].id}`" target="_blank">
             <AppButton >Download Soft-Copy</AppButton>
           </a>
         </div>

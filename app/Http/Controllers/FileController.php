@@ -29,11 +29,12 @@ class FileController extends Controller
     switch($req->filter) {
       case 'uploaded':
         $data->whereRaw("CONCAT(`last_name`, ', ', `first_name`) LIKE ?", ['%'.$req->search.'%'])
-          ->with('files')
+          ->with(['files', 'claim_type'])
           ->has('files');
         break;
       case
         $data->whereRaw("CONCAT(`last_name`, ', ', `first_name`) LIKE ?", ['%'.$req->search.'%'])
+          ->with(['claim_type'])
           ->doesntHave('files');
     }
 

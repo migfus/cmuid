@@ -15,10 +15,12 @@ Route::apiResource('/verify',  \App\Http\Controllers\VerifyController::class)->o
 Route::apiResource('/device',  \App\Http\Controllers\DeviceController::class)->only(['show']);
 Route::apiResource('/text-message',  \App\Http\Controllers\TextMessageController::class)->only(['index', 'update']);
 Route::apiResource('/device', \App\Http\Controllers\DeviceController::class)->only(['update']);
+Route::apiResource('/download', \App\Http\Controllers\DownloadController::class)->only(['show']); // download file by file-id
 
 // SECTION AUTH
 Route::middleware('auth:sanctum')->group(function () {
   Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+  Route::get('/dashboard/request', [\App\Http\Controllers\DashboardController::class, 'RequestNumber']);
 
   Route::apiResource('/request',  \App\Http\Controllers\RequestController::class)
     ->only(['index', 'update']);

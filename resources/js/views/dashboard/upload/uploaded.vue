@@ -1,7 +1,7 @@
 <template>
   <div>
     <Layout>
-      <div class="divide-y divide-gray-200 lg:col-span-9">
+      <div class="lg:col-span-9">
         <BasicTransition>
           <Form v-if="$file.config.form" v-slot="{ errors }" :validation-schema="schema" @submit="$file.PostAPI()" class="divide-y divide-gray-200 lg:col-span-9">
             <!-- Profile section -->
@@ -63,54 +63,9 @@
           <template #default>
             <DataTransition>
               <li v-for="row in $file.content.data" :key="row.id">
-                <div class="block hover:bg-gray-50">
-                  <div class="px-4 py-4 sm:px-6">
-                    <div class="grid grid-cols-3 items-center justify-between">
-
-                      <p class="truncate text-md font-medium text-gray-600 mb-2">
-                        <UserCircleIcon class="inline-block h-5 w-5 text-gray-400"/>
-                        {{ FullName(row) }}
-                      </p>
-
-                      <p class="truncate text-md font-medium text-gray-600 mb-2">
-                        <MapPinIcon class="inline-block h-5 w-5 text-gray-400"/>
-                        {{ row.position }}
-                      </p>
-
-                      <div class="ml-2 flex justify-end">
-                        <AppButton @click="$file.ChangeForm(row, 'remove'); removePrompt = true" size="sm" color="danger" :loading="$file.config.buttonLoading">Remove Attachement</AppButton>
-                      </div>
-
-                      <p class="truncate text-md font-medium text-gray-600 mb-2">
-                        <MapIcon class="inline-block h-5 w-5 text-gray-400"/>
-                        {{ `${row.unit}, ${row.department}` }}
-                      </p>
-
-                      <p class="truncate text-md font-medium text-gray-600 mb-2">
-                        <DevicePhoneMobileIcon  class="inline-block h-5 w-5 text-gray-400"/>
-                        {{ MobileFormat(row.mobile) }}
-                      </p>
-
-                      <p class="truncate text-md font-medium text-gray-600 mb-2 flex justify-end">
-                        {{ moment(row.created_at).fromNow(true) }}
-                      </p>
-
-
-                    </div>
-
-                    <p class="truncate text-md font-medium text-gray-600 mb-2">
-                      <EnvelopeIcon class="inline-block h-5 w-5 text-gray-400"/>
-                      {{ row.email }}
-                    </p>
-
-                    <div class="grid grid-cols-2">
-                      <img :src="row.picture" class="truncate text-md font-medium h-32 w-auto" />
-                      <img v-if="row.files" :src="row.files[0].url ?? ''" class="truncate text-md font-medium h-32 w-auto" />
-                    </div>
-
-
-                  </div>
-                </div>
+                <InfoCard :data="row">
+                  <AppButton @click="$file.ChangeForm(row, 'create')" size="sm" :loading="$file.config.buttonLoading">Add Attachement</AppButton>
+                </InfoCard>
               </li>
             </DataTransition>
           </template>
@@ -135,13 +90,13 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { useUploadedSoftCopyStore } from '@/store/@admin/UploadedSoftCopyStore'
-import { FullName, MobileFormat } from '@/helpers/Converter'
-import moment from 'moment'
 import * as Yup from 'yup'
 import { Form, configure, ErrorMessage, Field } from 'vee-validate'
 import { useDebounceFn } from '@vueuse/core'
 
-import { UserCircleIcon, MapPinIcon, MapIcon, DevicePhoneMobileIcon, EnvelopeIcon, QuestionMarkCircleIcon } from '@heroicons/vue/20/solid'
+import {
+  QuestionMarkCircleIcon,
+} from '@heroicons/vue/20/solid'
 import Layout from    './~Components/Layout.vue'
 import AppButton from '@/components/form/AppButton.vue'
 import BasicTransition from '@/components/transitions/BasicTransition.vue'
@@ -150,7 +105,7 @@ import DataTransition from '@/components/transitions/DataTransition.vue'
 import AppInput from '@/components/form/AppInput.vue'
 import PromptModal from '@/components/modals/PromptModal.vue'
 import { TailwindPagination } from 'laravel-vue-pagination'
-
+import InfoCard from '@/components/cards/InfoCard.vue'
 
 configure({
     validateOnInput: true
@@ -180,10 +135,6 @@ watch($file.query, useDebounceFn(() => {
 }, 1000))
 
 onMounted(() => {
-  $file.query.filter = 'uploaded'
-  if($file.notMountedCalledYet == true) {
-    $file.GetAPI()
-    $file.notMountedCalledYet = false
-  }
+  $file.GetAPI()
 })
 </script>

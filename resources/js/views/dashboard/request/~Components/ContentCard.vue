@@ -84,7 +84,7 @@
                     </a>
                   </div>
 
-                  <div v-if="row.files" class="flex relative">
+                  <div v-if="row.files.length > 0" class="flex relative">
                     <a :href="row.files[0].url ?? ''" target="_blank" class="relative block bg-gray-900 group rounded-xl shadow my-2">
                       <img :src="row.files[0].url ?? ''" class="absolute inset-0 object-cover w-auto h-32 group-hover:opacity-50 rounded-xl" />
                       <div class="relative h-32 w-auto">
