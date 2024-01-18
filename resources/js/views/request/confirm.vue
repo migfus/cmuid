@@ -40,7 +40,7 @@ import { useRouter } from 'vue-router'
 import { onMounted } from 'vue'
 
 import AppButton from '@/components/form/AppButton.vue'
-import _sfc_main from 'notiwind/dist/NotificationGroup.vue'
+// import _sfc_main from 'notiwind/dist/NotificationGroup.vue'
 
 const $req = useRequestPublicStore()
 const $router = useRouter()

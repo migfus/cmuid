@@ -143,7 +143,7 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { usePreLoader } from '@/store/system/PreLoader'
 import { useAbility } from '@casl/vue'
-import { useRequestNumberStore } from '@/store/@admin/RequestNumberStore'
+import { useRequestingStatisticsDashboardStore } from '@/store/dashboard/RequestingStatisticsDashboardStore'
 
 import BreadCrumbs from '@/layout/BreadCrumbs.vue'
 // import HeaderBanner from '@/layout/HeaderBanner.vue'
@@ -153,7 +153,7 @@ import FooterLayout from './Footer.vue'
 import AppSidebarNav from '@/components/AppSidebarNav.vue'
 
 const $preLoader = usePreLoader()
-const $number = useRequestNumberStore()
+const $number = useRequestingStatisticsDashboardStore()
 const { can } =  useAbility();
 
 const sidebarOpen = ref(false);

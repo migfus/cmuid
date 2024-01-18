@@ -62,9 +62,9 @@
 
 <script setup lang='ts'>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { useAuthStore } from '@/store/@auth/AuthStore'
+import { useAuthPublicStore } from '@/store/public/AuthPublicStore'
 import { BellIcon, WindowIcon, XMarkIcon, UserPlusIcon, ArrowUpOnSquareIcon, DevicePhoneMobileIcon } from '@heroicons/vue/24/outline'
 import AppButton from '@/components/form/AppButton.vue'
 
-const $auth = useAuthStore()
+const $auth = useAuthPublicStore()
 </script>

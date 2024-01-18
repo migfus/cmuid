@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useAuthStore } from "@/store/@auth/AuthStore"
+import { useAuthPublicStore } from "@/store/public/AuthPublicStore"
 import { notify } from "notiwind"
 
 export default function JWTInterceptor() {
-  const $auth = useAuthStore();
+  const $auth = useAuthPublicStore();
 
   axios.interceptors.request.use(config => {
     if ($auth.token)

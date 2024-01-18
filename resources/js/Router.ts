@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
-import { useAuthStore } from "@/store/@auth/AuthStore"
+import { useAuthPublicStore } from "@/store/public/AuthPublicStore"
 import { usePreLoader } from "@/store/system/PreLoader"
 import ability from '@/Ability'
 
@@ -13,7 +13,7 @@ const router = createRouter({
         {
           path: '',
           name: 'request',
-          component: () => import('@/views/request/index.vue'),
+          component: () => import('./views/request/index.vue'),
           meta: {
             title: 'Request for CSC-ID',
           }
@@ -183,7 +183,7 @@ const router = createRouter({
 const TITLE = "CMU OHRM ID"
 router.beforeEach(async (to, from, next) => {
   const $load = usePreLoader()
-  const $auth = useAuthStore()
+  const $auth = useAuthPublicStore()
 
   $load.config.loading = true
   $load.config.to = to.name
