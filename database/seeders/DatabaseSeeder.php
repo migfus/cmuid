@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         UserSeeder::class,
         StatusCategorySeeder::class,
         DeviceSeeder::class,
-        RequestSeeder::class,
+        RequestingSeeder::class,
         TextMessageSeeder::class,
       ]);
     }

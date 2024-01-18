@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('register_statuses', function (Blueprint $table) {
+        Schema::create('request_statuses', function (Blueprint $table) {
           $table->uuid('id')->primary();
-          $table->string('user_register_id');
+          $table->uuid('requesting_id');
           $table->bigInteger('user_id')->nullable();
           $table->tinyInteger('category_id');
           $table->string('content')->nullable();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('register_statuses');
+        Schema::dropIfExists('request_statuses');
     }
 };

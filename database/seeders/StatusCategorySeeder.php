@@ -15,27 +15,27 @@ class StatusCategorySeeder extends Seeder
   public function run(): void {
     $data = [
       [
-        'id' => 1,
+        'id' => env('DB_STATUS_CATEGORY_POST', ''),
         'name' => 'Post',
       ],
       [
-        'id' => 2,
+        'id' => env('DB_STATUS_CATEGORY_PENDING', ''),
         'name' => 'Pending',
       ],
       [
-        'id' => 3,
+        'id' => env('DB_STATUS_CATEGORY_FEEDBACK', ''),
         'name' => 'Feedback',
       ],
       [
-        'id' => 4,
+        'id' => env('DB_STATUS_CATEGORY_CANCELLED', ''),
         'name' => 'Cancelled',
       ],
       [
-        'id' => 5,
+        'id' => env('DB_STATUS_CATEGORY_DONE', ''),
         'name' => 'Done',
       ],
       [
-        'id' => 6,
+        'id' => env('DB_STATUS_CATEGORY_CLAIMED', ''),
         'name' => 'Claimed',
       ],
     ];

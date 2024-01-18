@@ -14,15 +14,15 @@ class ClaimTypeSeeder extends Seeder
     public function run(): void
     {
       ClaimType::create([
-        'id' => 1,
+        'id' => env('DB_CLAIM_TYPE_OHRM', 'shit'),
         'name' => 'Claim to ORHM'
       ]);
       ClaimType::create([
-        'id' => 2,
+        'id' => env('DB_CLAIM_TYPE_SOFT', 'shit'),
         'name' => 'Claim by Soft-copy'
       ]);
       ClaimType::create([
-        'id' => 3,
+        'id' => env('DB_CLAIM_TYPE_PLASTIC', 'shit'),
         'name' => 'Claim by Plastic ID'
       ]);
     }

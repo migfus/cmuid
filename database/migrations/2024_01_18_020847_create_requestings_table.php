@@ -12,8 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('requestings', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+          $table->string('id', 6)->primary();
+          $table->uuid('status_category_id');
+          $table->uuid('claim_type_id');
+          $table->string('picture');
+          $table->string('thumbnail');
+          $table->string('last_name');
+          $table->string('first_name');
+          $table->string('mid_name')->nullable();
+          $table->string('ext_name')->nullable();
+          $table->string('position');
+          $table->string('department')->nullable(); // NOTE for prototype purposes, idk the data yet.
+          $table->string('unit')->nullable(); // NOTE same as department
+          $table->string('email')->nullable();
+          $table->decimal('mobile', 10, 0)->unsigned();
+          $table->timestamps();
         });
     }
 
