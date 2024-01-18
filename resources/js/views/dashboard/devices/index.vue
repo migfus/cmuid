@@ -1,7 +1,15 @@
 <template>
   <BasicTransition>
-    <div class="bg-white rounded-xl my-2 shadow py-4 flex justify-end px-4">
-      <AppButton @click="show = true">Add Device</AppButton>
+    <div class="bg-white rounded-xl mb-3 shadow py-4 flex justify-between px-4">
+      <div class="font-medium text-lg text-gray-600 mt-1">
+        SMS Devices
+      </div>
+      <div class="flex gap-2">
+        <a href="/assets/OHRM SMS 0.0.3.apk" target="_blank">
+          <AppButton class="inline">Download Android App</AppButton>
+        </a>
+        <AppButton @click="show = true" class="inline">Add Device</AppButton>
+      </div>
     </div>
   </BasicTransition>
 

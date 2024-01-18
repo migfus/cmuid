@@ -1,8 +1,8 @@
 <template>
   <footer class="bg-white" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
-    <div :class="[$props.sideBar ? 'max-w-full' : 'max-w-7xl ', 'mx-auto px-6 pb-8 pt-4 sm:pt-24 lg:px-8 lg:pt-32']">
-      <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+    <div :class="[$props.sideBar ? 'max-w-full' : 'max-w-7xl ', 'mx-auto px-6 pb-8 pt-12 sm:pt-24 lg:px-8 lg:pt-12']">
+      <div class="xl:grid xl:grid-cols-3 xl:gap-4">
         <div class="space-y-6">
           <object class="h-48 mb-4" data="/images/logo-anim.svg" alt="Company name" />
           <a href="https://maps.app.goo.gl/Pyp6oks9RvfraMvM6" target="_blank" class="text-sm leading-6 text-gray-600 mt-0 font-bold">OHRM, Admin. Bldg., CMU, Musuan, Maramag, Bukidnon</a>
@@ -49,15 +49,15 @@
                   <RouterLink :to="{ name: item.href }" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</RouterLink>
                 </li>
                 <li>
-                  <a href="https://trello.com/b/j06zEFhY/csc-id" targe="_blank" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Development 0.0.2</a>
+                  <a href="https://trello.com/b/j06zEFhY/csc-id" targe="_blank" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Development 0.0.3</a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <div class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
-        <p class="text-xs leading-5 text-gray-500">&copy; 2023 Office of Human Resource Management (OHRM) | Central Mindanao University (CMU).</p>
+      <div class="mt-8 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-8">
+        <p class="text-xs leading-5 text-gray-500">&copy; 2024 Office of Human Resource Management (OHRM) | Central Mindanao University (CMU).</p>
       </div>
     </div>
   </footer>

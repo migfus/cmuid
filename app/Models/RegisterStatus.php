@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class RegisterStatus extends Model
 {
-  use HasFactory;
+  use HasFactory, HasUuids;
 
   protected $fillable = [
     'user_register_id',
@@ -15,6 +16,8 @@ class RegisterStatus extends Model
     'category_id',
     'content'
   ];
+
+  protected $incrementing = false;
 
   public function category() {
     return $this->belongsTo(StatusCategory::class);

@@ -64,7 +64,7 @@
             <DataTransition>
               <li v-for="row in $file.content.data" :key="row.id">
                 <InfoCard :data="row">
-                  <AppButton @click="$file.ChangeForm(row, 'create')" size="sm" :loading="$file.config.buttonLoading">Add Attachement</AppButton>
+                  <AppButton @click="removePrompt = true" size="sm" :loading="$file.config.buttonLoading">Remove Attachement</AppButton>
                 </InfoCard>
               </li>
             </DataTransition>

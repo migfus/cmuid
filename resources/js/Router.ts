@@ -74,11 +74,11 @@ const router = createRouter({
           }
         },
         {
-          path: 'request',
+          path: 'requesting',
           children: [
             {
               path: '',
-              name: 'request-list',
+              name: 'requesting',
               component: () => import('@/views/dashboard/requesting/index.vue'),
               meta: {
                 title: 'Requesting',

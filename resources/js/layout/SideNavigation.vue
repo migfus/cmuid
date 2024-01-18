@@ -25,7 +25,7 @@
 
                   <!-- SECTION MOBILE NAV -->
                   <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'dashboard')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
-                  <AppSidebarNav linkName="request-list" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
+                  <AppSidebarNav linkName="requesting" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Requesting</AppSidebarNav>
                   <AppSidebarNav linkName="upload" :icon="ArrowUpOnSquareIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Upload Soft-Copy </AppSidebarNav>
 
                   <AppSidebarNav linkName="devices" :icon="DevicePhoneMobileIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false"> Devices </AppSidebarNav>
@@ -60,7 +60,7 @@
 
             <!-- SECTION DESKTOP NAV -->
             <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('index', 'dashboard')" @click="sidebarOpen = false"> Dashboard </AppSidebarNav>
-            <AppSidebarNav linkName="request-list" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false">
+            <AppSidebarNav linkName="requesting" :icon="UserPlusIcon" :disabled="!can('index', 'register')" @click="sidebarOpen = false">
               Requesting
               <span v-if="$number.content.requesting > 0" class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 ml-2">{{ $number.content.requesting }}</span>
             </AppSidebarNav>
@@ -109,7 +109,7 @@
 
       <main class="flex-1">
         <BreadCrumbs />
-        <div class="py-6">
+        <div class="py-4">
           <div class="mx-auto max-w-full sm:px-6 md:px-8">
             <PreLoader v-if="$preLoader.config.loading"/>
             <RouterView v-else></RouterView>

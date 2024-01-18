@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\UrlGenerator;
 use Intervention\Image\ImageManager;
+use Illuminate\Support\Str;
 
 use App\Models\User;
 
@@ -70,7 +71,7 @@ class Controller extends BaseController
   public function G_FileUpload($file) : string {
 
     $target_dir = "uploads/";
-    $image = time().'.'.$file->extension();
+    $image = Str::uuid().'.'.$file->extension();
     $file->move(public_path($target_dir), $image);
 
     return '/'.$target_dir.$image;
@@ -78,7 +79,7 @@ class Controller extends BaseController
 
   public function G_FileUploadImage($file, $target_dir = 'uploads/') {
     // NOTE UPLOAD ORIGINAL
-    $image = time().'.'.$file->extension();
+    $image = Str::uuid().'.'.$file->extension();
     $file->move(public_path($target_dir), $image);
     $original = '/'.$target_dir.$image;
 

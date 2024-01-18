@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('text_messages', function (Blueprint $table) {
-          $table->id();
+          $table->uuid('id')->primary();
           $table->string('device_id')->nullable();
           $table->string('user_register_id');
           $table->longText('content');

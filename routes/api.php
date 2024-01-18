@@ -7,27 +7,54 @@ Route::get('/test', function() {
   return response()->json(['test' => 'test']);
 });
 
-Route::post('/login', [\App\Http\Controllers\AuthController::class, 'Login']);
+// SECTION PUBLIC
+Route::group(['prefix' => 'public', 'as' => 'public.'], function () {
+  // NOTE AUTH [Login]
+  Route::post('/login', [\App\Http\Controllers\Public\AuthPublicController::class, 'Login']);
 
-Route::post('/user-register', [\App\Http\Controllers\UserRegisterController::class, 'store']);
-Route::apiResource('/status',  \App\Http\Controllers\RegisterStatusController::class)->only(['show']);
-Route::apiResource('/verify',  \App\Http\Controllers\VerifyController::class)->only(['show']);
-Route::apiResource('/device',  \App\Http\Controllers\DeviceController::class)->only(['show']);
-Route::apiResource('/text-message',  \App\Http\Controllers\TextMessageController::class)->only(['index', 'update']);
-Route::apiResource('/device', \App\Http\Controllers\DeviceController::class)->only(['update']);
-Route::apiResource('/download', \App\Http\Controllers\DownloadController::class)->only(['show']); // download file by file-id
+  // NOTE REQUEST [register/request]
+  Route::post('/user-register', [\App\Http\Controllers\UserRegisterPublicController::class, 'store']);
 
-// SECTION AUTH
+  // NOTE STATUS [list]
+  Route::apiResource('/status',  \App\Http\Controllers\RegisterStatusPublicController::class)->only(['show']);
+  Route::apiResource('/verify',  \App\Http\Controllers\VerifyPublicController::class)->only(['show']);
+
+  // NOTE DOWNLOAD [download]
+  Route::apiResource('/download', \App\Http\Controllers\DownloadPublicController::class)->only(['show']); // download file by file-id
+});
+
+
+// SECTION DEVICE
+Route::group(['prefix' => 'device', 'as' => 'device.'], function () {
+  // NOTE DEVICE [TOKEN]
+  Route::apiResource('/device',  \App\Http\Controllers\DeviceDeviceController::class)
+    ->only(['show', 'update']);
+
+  // NOTE TEXTMESSAGE [List, Update]
+  Route::apiResource('/text-message',  \App\Http\Controllers\TextMessageDeviceController::class)->only(['index', 'update']);
+});
+
+
+// SECTION AUTH PROTECTED
 Route::middleware('auth:sanctum')->group(function () {
-  Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
-  Route::get('/dashboard/request', [\App\Http\Controllers\DashboardController::class, 'RequestNumber']);
+  // NOTE AUTH
+  Route::get('/logout', [\App\Http\Controllers\AuthPublicController::class, 'logout']);
 
-  Route::apiResource('/request',  \App\Http\Controllers\RequestController::class)
-    ->only(['index', 'update']);
-  Route::apiResource('/device',  \App\Http\Controllers\DeviceController::class)
-    ->only(['index']);
-  Route::apiResource('/file',  \App\Http\Controllers\FileController::class)
-    ->only(['index', 'store', 'destroy']);
-  Route::apiResource('/device', \App\Http\Controllers\DeviceController::class)
-    ->only(['store', 'destroy']);
+  // SECTION DASHBOARD
+  Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
+    // NOTE DASHBOARD [STATS, SUMMARY]
+    Route::get('/dashboard/request', [\App\Http\Controllers\DashboardPublicController::class, 'RequestNumber']);
+
+    // NOTE DEVICE [MANAGEMENT]
+    Route::apiResource('/device', \App\Http\Controllers\DevicePublicController::class)
+      ->only(['store', 'destroy', 'index']);
+
+    // NOTE FILE [MANAGEMENT]
+    Route::apiResource('/file',  \App\Http\Controllers\FilePublicController::class)
+      ->only(['index', 'store', 'destroy']);
+
+    // NOTE REQUEST [MANAGEMENT]
+    Route::apiResource('/requesting',  \App\Http\Controllers\RequestingPublicController::class)
+      ->only(['index', 'update']);
+  });
 });
