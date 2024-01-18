@@ -85,7 +85,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import { useUploadSoftCopyStore } from '@/store/@admin/UploadSoftCopyStore'
+import { useUploadSoftCopyDashboardStore } from '@/store/dashboard/UploadSoftCopyDashboardStore'
 import * as Yup from 'yup'
 import { Form, configure, ErrorMessage, Field } from 'vee-validate'
 import { useDebounceFn } from '@vueuse/core'
@@ -108,7 +108,7 @@ const schema = Yup.object({
   picture: Yup.mixed().required('Picture is required'),
 })
 
-const $file = useUploadSoftCopyStore()
+const $file = useUploadSoftCopyDashboardStore()
 const preview = ref(null)
 
 function AddPicture(events) {

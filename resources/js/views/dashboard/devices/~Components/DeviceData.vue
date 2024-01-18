@@ -49,12 +49,12 @@
 import moment from 'moment'
 import { DevicePhoneMobileIcon, } from '@heroicons/vue/20/solid'
 import { useQRCode } from '@vueuse/integrations/useQRCode'
-import { useDeviceStore } from '@/store/@admin/DeviceStore'
+import { useDeviceDashboardStore } from '@/store/dashboard/DeviceDashboardStore'
 import { ref } from 'vue'
 
 import PromptModal from '@/components/modals/PromptModal.vue'
 
-const $device = useDeviceStore()
+const $device = useDeviceDashboardStore()
 const $props = defineProps<{
   id: string,
   name: string

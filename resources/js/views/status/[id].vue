@@ -10,10 +10,10 @@ import StatusCard from './~Components/StatusCard.vue'
 import InformationCard from './~Components/InformationCard.vue'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { useStatusStore } from '@/store/StatusStore'
+import { useStatusPublicStore } from '@/store/public/StatusPublicStore'
 
 const $route = useRoute()
-const $status = useStatusStore()
+const $status = useStatusPublicStore()
 
 onMounted(() => {
   // @ts-ignore

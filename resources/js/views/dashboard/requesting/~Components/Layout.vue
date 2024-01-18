@@ -44,12 +44,12 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { useRequestNumberStore } from '@/store/@admin/RequestNumberStore'
+import { useRequestingStatisticsDashboardStore } from '@/store/dashboard/RequestingStatisticsDashboardStore'
 
 import { CheckCircleIcon, UserPlusIcon, XCircleIcon, ArchiveBoxArrowDownIcon,  } from '@heroicons/vue/24/outline'
 
 const $route = useRoute()
-const $number = useRequestNumberStore()
+const $number = useRequestingStatisticsDashboardStore()
 
 function namingFormat(num: number) {
   if(num > 1) {

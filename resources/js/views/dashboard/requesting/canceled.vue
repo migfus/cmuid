@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
-import { useCanceledRequestStore } from '@/store/@admin/CanceledRequestStore'
+import { useCanceledRequestDashboardStore } from '@/store/dashboard/CanceledRequestDashboardStore'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
@@ -78,7 +78,7 @@ import DataTransition from '@/components/transitions/DataTransition.vue'
 import ActionButtonVue from './~Components/ActionButton.vue'
 import InfoCardVue from '@/components/cards/InfoCard.vue'
 
-const $req = useCanceledRequestStore()
+const $req = useCanceledRequestDashboardStore()
 
 const smsLength = computed(() => {
   return $req.params.sms.length

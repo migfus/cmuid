@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
-import { useRequestStore } from '@/store/@admin/RequestStore'
+import { useRequestingDashboardStore } from '@/store/dashboard/RequestingDashboardStore'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
@@ -78,7 +78,7 @@ import ActionButton from './~Components/ActionButton.vue'
 import InfoCard from '@/components/cards/InfoCard.vue'
 import ContentCard from './~Components/ContentCard.vue'
 
-const $req = useRequestStore()
+const $req = useRequestingDashboardStore()
 
 const smsLength = computed(() => {
   return $req.params.sms.length

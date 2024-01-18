@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
-import { useClaimedRequestStore } from '@/store/@admin/ClaimedRequestStore'
+import { useClaimedRequestDashboardStore } from '@/store/dashboard/ClaimedRequestDashboardStore'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
@@ -78,7 +78,7 @@ import DataTransition from '@/components/transitions/DataTransition.vue'
 import ActionButtonVue from './~Components/ActionButton.vue'
 import InfoCardVue from '@/components/cards/InfoCard.vue'
 
-const $req = useClaimedRequestStore()
+const $req = useClaimedRequestDashboardStore()
 
 const smsLength = computed(() => {
   return $req.params.sms.length

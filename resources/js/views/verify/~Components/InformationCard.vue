@@ -36,9 +36,9 @@
 
 <script setup lang="ts">
 import { FullName } from '@/helpers/Converter'
-import { useVerifyStore } from '@/store/VerifyStore'
+import { useVerifyPublicStore } from '@/store/public/VerifyPublicStore'
 
 import AppButton from '@/components/form/AppButton.vue';
 
-const $verify = useVerifyStore()
+const $verify = useVerifyPublicStore()
 </script>

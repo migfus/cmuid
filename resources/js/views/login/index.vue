@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '@/store/@auth/AuthStore'
+import { useAuthPublicStore } from '@/store/public/AuthPublicStore'
 import { reactive, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { Form, configure } from 'vee-validate'
@@ -51,7 +51,7 @@ import * as Yup from 'yup'
 import AppButton from '@/components/form/AppButton.vue'
 import AppInput from '@/components/form/AppInput.vue'
 
-const $auth = useAuthStore()
+const $auth = useAuthPublicStore()
 const $route = useRoute()
 
 configure({

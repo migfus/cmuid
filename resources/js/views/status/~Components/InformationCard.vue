@@ -37,10 +37,10 @@
 
 <script setup lang="ts">
 import { FullName } from '@/helpers/Converter'
-import { useStatusStore } from '@/store/StatusStore'
+import { useStatusPublicStore } from '@/store/public/StatusPublicStore'
 import { MobileFormat } from '@/helpers/Converter'
 
 import AppButton from '@/components/form/AppButton.vue'
 
-const $status = useStatusStore()
+const $status = useStatusPublicStore()
 </script>

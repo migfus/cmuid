@@ -30,10 +30,10 @@
 <script setup lang="ts">
 import {useRoute} from 'vue-router'
 import { CheckCircleIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
-import { useRequestNumberStore } from '@/store/@admin/RequestNumberStore'
+import { useRequestingStatisticsDashboardStore } from '@/store/dashboard/RequestingStatisticsDashboardStore'
 
 const $route = useRoute()
-const $number = useRequestNumberStore()
+const $number = useRequestingStatisticsDashboardStore()
 
 function ScrollUp() {
   let w = window.innerWidth;

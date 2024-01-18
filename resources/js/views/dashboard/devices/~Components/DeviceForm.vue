@@ -19,11 +19,11 @@
 </template>
 
 <script setup lang="ts">
-import { useDeviceStore } from '@/store/@admin/DeviceStore'
+import { useDeviceDashboardStore } from '@/store/dashboard/DeviceDashboardStore'
 import { useQRCode } from '@vueuse/integrations/useQRCode'
 
 import AppButton from '@/components/form/AppButton.vue'
 
-const $device = useDeviceStore()
+const $device = useDeviceDashboardStore()
 const qrcode = useQRCode(JSON.stringify($device.params))
 </script>

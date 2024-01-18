@@ -117,9 +117,9 @@
 
 <script setup lang="ts">
 import { ClockIcon, XMarkIcon, PlusIcon, ChatBubbleOvalLeftEllipsisIcon, CheckCircleIcon } from '@heroicons/vue/20/solid'
-import { useStatusStore } from '@/store/StatusStore'
+import { useStatusPublicStore } from '@/store/public/StatusPublicStore'
 import { FullName } from "@/helpers/Converter"
 import moment from 'moment'
 
-const $status = useStatusStore()
+const $status = useStatusPublicStore()
 </script>

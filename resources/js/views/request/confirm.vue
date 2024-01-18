@@ -35,14 +35,14 @@
 
 <script setup lang="ts">
 import { XMarkIcon, LinkIcon, InboxArrowDownIcon, IdentificationIcon } from '@heroicons/vue/24/outline'
-import { useRequestStore } from '@/store/RequestStore'
+import { useRequestPublicStore } from '@/store/public/RequestPublicStore'
 import { useRouter } from 'vue-router'
 import { onMounted } from 'vue'
 
 import AppButton from '@/components/form/AppButton.vue'
 import _sfc_main from 'notiwind/dist/NotificationGroup.vue'
 
-const $req = useRequestStore()
+const $req = useRequestPublicStore()
 const $router = useRouter()
 const pricing = {
   tiers: [

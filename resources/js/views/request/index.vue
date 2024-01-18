@@ -98,7 +98,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRequestStore } from '@/store/RequestStore'
+import { useRequestPublicStore } from '@/store/public/RequestPublicStore'
 import * as Yup from 'yup'
 import { Form, configure, ErrorMessage, Field } from 'vee-validate'
 
@@ -111,7 +111,7 @@ configure({
     validateOnInput: true
 })
 
-const $req = useRequestStore()
+const $req = useRequestPublicStore()
 
 const schema = Yup.object({
   picture: Yup.mixed().required('Picture is required'),

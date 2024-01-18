@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
-import { useCompleteRequestStore } from '@/store/@admin/CompleteRequestStore'
+import { useCompleteRequestDashboardStore } from '@/store/dashboard/CompleteRequestDashboardStore'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
@@ -78,7 +78,7 @@ import DataTransition from '@/components/transitions/DataTransition.vue'
 import InfoCardVue from '@/components/cards/InfoCard.vue'
 import ActionButtonVue from './~Components/ActionButton.vue'
 
-const $req = useCompleteRequestStore()
+const $req = useCompleteRequestDashboardStore()
 
 const smsLength = computed(() => {
   return $req.params.sms.length

@@ -8,12 +8,12 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { useVerifyStore } from '@/store/VerifyStore'
+import { useVerifyPublicStore } from '@/store/public/VerifyPublicStore'
 
 import InformationCard from './~Components/InformationCard.vue'
 
 const $route = useRoute()
-const $verify = useVerifyStore()
+const $verify = useVerifyPublicStore()
 
 onMounted(() => {
   // @ts-ignore

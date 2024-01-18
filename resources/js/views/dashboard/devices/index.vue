@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { useDeviceStore } from '@/store/@admin/DeviceStore'
+import { useDeviceDashboardStore } from '@/store/dashboard/DeviceDashboardStore'
 import { onMounted, ref, onUnmounted } from 'vue'
 
 import BasicTransition from '@/components/transitions/BasicTransition.vue'
@@ -38,7 +38,7 @@ import DeviceData from './~Components/DeviceData.vue'
 import AppButton from '@/components/form/AppButton.vue'
 import PromptModal from '@/components/modals/PromptModal.vue'
 
-const $device = useDeviceStore()
+const $device = useDeviceDashboardStore()
 
 const show = ref(false)
 let myTimer;
