@@ -2,11 +2,12 @@ import { reactive } from "vue"
 import { defineStore } from "pinia"
 import axios from "axios"
 import { notify } from 'notiwind'
-import type { TGConfig, TGUserRegister } from "./GlobalType"
+import type { TGConfig, TGUserRegister } from "../GlobalType"
 
 
-const title = `RequestStore`
-export const useRequestStore = defineStore(title, () => {
+const title = `public/RequestPublicStore`
+const base_url = '/api/public/requesting'
+export const useRequestPublicStore = defineStore(title, () => {
 
   const params = reactive<TGUserRegister>(ResetParams())
 
@@ -20,7 +21,7 @@ export const useRequestStore = defineStore(title, () => {
     config.buttonLoading = true
     try{
       let { data: { data }} = await axios.post(
-        '/api/user-register', {...params, claim_type_id: claim_type_id},
+        base_url, {...params, claim_type_id: claim_type_id},
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
       Object.assign(params, ResetParams())

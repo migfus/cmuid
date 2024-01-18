@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
           $table->string('id')->index();
+          $table->string('user_id');
           $table->string('name')->nullable();
           $table->string('platform')->nullable();
           $table->dateTime('last_response');

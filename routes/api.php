@@ -3,10 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/test', function() {
-  return response()->json(['test' => 'test']);
-});
-
 // SECTION PUBLIC
 Route::group(['prefix' => 'public', 'as' => 'public.'], function () {
   // NOTE AUTH [Login]

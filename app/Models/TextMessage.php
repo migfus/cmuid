@@ -12,7 +12,7 @@ class TextMessage extends Model
 
   protected $fillable = [
     'device_id',
-    'user_register_id',
+    'requesting_id',
     'content',
     'read_at'
   ];

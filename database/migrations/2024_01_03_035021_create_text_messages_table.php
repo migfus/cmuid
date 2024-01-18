@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('text_messages', function (Blueprint $table) {
-          $table->uuid('id')->primary();
-          $table->string('device_id')->nullable();
-          $table->string('user_register_id');
-          $table->longText('content');
-          $table->dateTime('read_at')->nullable();
-          $table->timestamps();
-        });
+      Schema::create('text_messages', function (Blueprint $table) {
+        $table->uuid('id')->primary();
+        $table->string('device_id')->nullable();
+        $table->string('requesting_id');
+        $table->longText('content');
+        $table->dateTime('read_at')->nullable();
+        $table->timestamps();
+      });
     }
 
     /**

@@ -13,8 +13,9 @@ type TParams = {
   sendSMS: boolean
 }
 
-const title = `@admin/ClaimedRequestStore`
-export const useClaimedRequestStore = defineStore(title, () => {
+const title = `dashboard/CanceledRequestDashboardStore`
+const base_url = `/api/dashboard/requesting`
+export const useCanceledRequestDashboardStore = defineStore(title, () => {
   const content = ref<{data: TGUserRegister[]}>({ data: [] })
 
   const config = reactive<TGConfig>({
@@ -26,7 +27,7 @@ export const useClaimedRequestStore = defineStore(title, () => {
   const query = reactive<TGQuery>({
     search: '',
     sort: 'DESC',
-    filter: 'claimed',
+    filter: 'canceled',
   })
 
   const params = reactive<TParams>(InitParams())
@@ -37,7 +38,7 @@ export const useClaimedRequestStore = defineStore(title, () => {
     config.contentLoading = true
     try  {
       let { data: { data }} = await axios.get(
-        `/api/request`,
+        base_url,
         {
           params: {...query, page: page},
           signal: controller.signal
@@ -61,7 +62,7 @@ export const useClaimedRequestStore = defineStore(title, () => {
   async function FeedbackAPI() {
     config.buttonLoading = true
     try{
-      let { data: { data }} = await axios.put(`/api/request/${params.id}`, {form: config.form, ...params})
+      let { data: { data }} = await axios.put(`${base_url}/${params.id}`, {form: config.form, ...params})
       GetAPI()
       ChangeForm(null, '')
     }

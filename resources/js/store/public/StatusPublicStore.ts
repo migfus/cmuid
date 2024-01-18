@@ -2,15 +2,16 @@ import { ref, reactive } from "vue"
 import { defineStore } from "pinia"
 import axios from "axios"
 import { notify } from 'notiwind'
-import type { TGConfig, TGUserRegister, TGStatus } from "./GlobalType"
+import type { TGConfig, TGUserRegister, TGStatus } from "../GlobalType"
 
 type TParams = {
   status: TGStatus[]
   info: TGUserRegister
 }
 
-const title = `StatusStore`
-export const useStatusStore = defineStore(title, () => {
+const title = `public/StatusPublicStore`
+const base_url = `/api/public/status`
+export const useStatusPublicStore = defineStore(title, () => {
   const content = ref<TParams>(null)
 
   const config = reactive<TGConfig>({
@@ -22,7 +23,7 @@ export const useStatusStore = defineStore(title, () => {
   async function ShowAPI(id: string) {
     config.contentLoading = true
     try{
-      let { data: { data }} = await axios.get(`/api/status/${id}`)
+      let { data: { data }} = await axios.get(`${base_url}/${id}`)
       console.log('RegisterAPI', data)
       content.value = data
 

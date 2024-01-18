@@ -13,7 +13,8 @@ return new class extends Migration
     {
       Schema::create('files', function (Blueprint $table) {
         $table->uuid('id')->primary();
-        $table->text('user_register_id'); // attachement
+        $table->text('user_id'); // attachement
+        $table->text('requesting_id'); // attachement
         $table->text('name');
         $table->longText('url');
         $table->timestamps();

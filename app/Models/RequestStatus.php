@@ -11,9 +11,9 @@ class RequestStatus extends Model
   use HasFactory, HasUuids;
 
   protected $fillable = [
-    'user_register_id',
+    'requesting_id',
     'user_id',
-    'category_id',
+    'status_category_id',
     'content'
   ];
 

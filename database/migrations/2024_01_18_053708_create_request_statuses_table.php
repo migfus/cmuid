@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('request_statuses', function (Blueprint $table) {
-          $table->uuid('id')->primary();
-          $table->uuid('requesting_id');
-          $table->bigInteger('user_id')->nullable();
-          $table->tinyInteger('category_id');
-          $table->string('content')->nullable();
-          $table->timestamps();
-        });
+      Schema::create('request_statuses', function (Blueprint $table) {
+        $table->uuid('id')->primary();
+        $table->uuid('requesting_id');
+        $table->bigInteger('user_id')->nullable();
+        $table->uuid('status_category_id');
+        $table->string('content')->nullable();
+        $table->timestamps();
+      });
     }
 
     /**

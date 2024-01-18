@@ -13,8 +13,9 @@ type TParams = {
   id: string
 }
 
-const title = `@admin/DeviceStore`
-export const useDeviceStore = defineStore(title, () => {
+const title = `dashboard/DeviceDashboardStore`
+const base_url = `/api/dashboard/device`
+export const useDeviceDashboardStore = defineStore(title, () => {
   const content = ref<TGDevice[]>(null)
 
   const config = reactive<TGConfig>({
@@ -34,7 +35,7 @@ export const useDeviceStore = defineStore(title, () => {
   async function GetAPI() {
     config.contentLoading = true
     try{
-      let { data: { data }} = await axios.get(`/api/device`, {params: query})
+      let { data: { data }} = await axios.get(base_url, {params: query})
       content.value = data
     }
     catch(e) {
@@ -53,7 +54,7 @@ export const useDeviceStore = defineStore(title, () => {
   async function PostAPI() {
     config.buttonLoading = true
     try{
-      let { data: { data }} = await axios.post(`/api/device`, params)
+      let { data: { data }} = await axios.post(base_url, params)
       content.value = data
       GetAPI()
     }
@@ -72,7 +73,7 @@ export const useDeviceStore = defineStore(title, () => {
   async function DestroyAPI() {
     config.buttonLoading = true
     try{
-      let { data: { data }} = await axios.delete(`/api/device/${params.id}`)
+      let { data: { data }} = await axios.delete(`${base_url}/${params.id}`)
       content.value = data
       GetAPI()
     }

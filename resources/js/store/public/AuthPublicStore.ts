@@ -22,8 +22,9 @@ interface TInput {
   password: string
 }
 
-const title = `auth/AuthStore`
-export const useAuthStore = defineStore(title, () => {
+const title = `public/AuthPublicStore`
+const base_url = '/api/public'
+export const useAuthPublicStore = defineStore(title, () => {
 
   const _token = useStorage<String>(`${title}/token`, null, localStorage)
   const _content = useStorage<TContent>(`${title}/content`, null, localStorage, {serializer: StorageSerializers.object})
@@ -40,7 +41,7 @@ export const useAuthStore = defineStore(title, () => {
   async function LoginAPI(input: TInput) {
     config.loading = true
     try{
-      let { data: { data }} = await axios.post('/api/login', input)
+      let { data: { data }} = await axios.post(`${base_url}/login`, input)
       UpdateData(data)
       _token.value = data.token
       token.value = data.token

@@ -13,8 +13,9 @@ type TParams = {
   sendSMS: boolean
 }
 
-const title = `@admin/RequestStore`
-export const useRequestStore = defineStore(title, () => {
+const title = `dashboard/RequestingDashboardStore`
+const base_url = `/api/dashboard/requesting`
+export const useRequestingDashboardStore = defineStore(title, () => {
   const content = ref<{data: TGUserRegister[]}>({ data: [] })
 
   const config = reactive<TGConfig>({
@@ -37,7 +38,7 @@ export const useRequestStore = defineStore(title, () => {
     config.contentLoading = true
     try  {
       let { data: { data }} = await axios.get(
-        `/api/request`,
+        base_url,
         {
           params: {...query, page: page},
           signal: controller.signal
@@ -61,7 +62,7 @@ export const useRequestStore = defineStore(title, () => {
   async function FeedbackAPI() {
     config.buttonLoading = true
     try{
-      let { data: { data }} = await axios.put(`/api/request/${params.id}`, {form: config.form, ...params})
+      let { data: { data }} = await axios.put(`${base_url}/${params.id}`, {form: config.form, ...params})
       GetAPI()
       ChangeForm(null, '')
     }

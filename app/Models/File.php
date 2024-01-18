@@ -13,7 +13,7 @@ class File extends Model
 
   protected $fillable = [
     'id',
-    'user_register_id',
+    'requesting_id',
     'name',
     'url'
   ];

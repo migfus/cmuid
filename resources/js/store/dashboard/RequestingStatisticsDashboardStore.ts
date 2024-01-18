@@ -4,8 +4,9 @@ import axios from "axios"
 import { notify } from 'notiwind'
 import type { TGConfig } from "../GlobalType"
 
-const title = `@admin/RequestNumberStore`
-export const useRequestNumberStore = defineStore(title, () => {
+const title = `dashboard/RequestingStatisticsDashboardStore`
+const base_url = `/api/dashboard/requesting-statistics`
+export const useRequestingStatisticsDashboardStore = defineStore(title, () => {
   const content = ref<{
     requesting: number
     completed: number
@@ -29,7 +30,7 @@ export const useRequestNumberStore = defineStore(title, () => {
   async function GetAPI() {
     config.contentLoading = true
     try  {
-      let { data: { data }} = await axios.get(`/api/dashboard/request`)
+      let { data: { data }} = await axios.get(base_url)
       content.value = data
     }
     catch(e) {

@@ -12,8 +12,9 @@ type TParams = {
   id: string
 }
 
-const title = `@admin/UploadedSoftCopyStore`
-export const useUploadedSoftCopyStore = defineStore(title, () => {
+const title = `dashboard/UploadedSoftCopyDashboardStore`
+const base_url = '/api/dashboard/upload'
+export const useUploadedSoftCopyDashboardStore = defineStore(title, () => {
   const content = ref<{ data: TGUserRegister[], total: number }>({ data: [], total: 0 })
 
   const config = reactive<TGConfig>({
@@ -34,7 +35,7 @@ export const useUploadedSoftCopyStore = defineStore(title, () => {
   async function GetAPI(page = 1) {
     config.contentLoading = true
     try{
-      let { data: { data }} = await axios.get(`/api/file`, {params: {...query, page}})
+      let { data: { data }} = await axios.get(base_url, {params: {...query, page}})
       content.value = data
     }
     catch(e) {
@@ -53,7 +54,7 @@ export const useUploadedSoftCopyStore = defineStore(title, () => {
     config.buttonLoading = true
     try{
       let { data: { data }} = await axios.post(
-        `/api/file`,
+        base_url,
         params,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       )
@@ -75,7 +76,7 @@ export const useUploadedSoftCopyStore = defineStore(title, () => {
   async function RemoveAPI() {
     config.buttonLoading = true
     try{
-      let { data: { data }} = await axios.delete(`/api/file/${params.id}`)
+      let { data: { data }} = await axios.delete(`${base_url}/${params.id}`)
       ChangeForm(null, null)
       GetAPI()
     }

@@ -2,10 +2,11 @@ import { ref, reactive } from "vue"
 import { defineStore } from "pinia"
 import axios from "axios"
 import { notify } from 'notiwind'
-import type { TGConfig, TGUserRegister } from "./GlobalType"
+import type { TGConfig, TGUserRegister } from "../GlobalType"
 
-const title = `VerifyStore`
-export const useVerifyStore = defineStore(title, () => {
+const title = `public/VerifyPublicStore`
+const base_url = `/api/public/verify`
+export const useVerifyPublicStore = defineStore(title, () => {
   const content = ref<TGUserRegister>(null)
 
   const config = reactive<TGConfig>({
@@ -17,7 +18,7 @@ export const useVerifyStore = defineStore(title, () => {
   async function ShowAPI(id: string) {
     config.contentLoading = true
     try{
-      let { data: { data }} = await axios.get(`/api/verify/${id}`)
+      let { data: { data }} = await axios.get(`${base_url}/${id}`)
       content.value = data
 
       if(!content.value) {
