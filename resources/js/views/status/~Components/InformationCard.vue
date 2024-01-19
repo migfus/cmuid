@@ -6,7 +6,7 @@
           <div class="flex items-center space-x-3">
             <h3 class="truncate text-sm font-medium text-gray-900">{{ FullName($status.content.info) }}</h3>
             <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
-              {{  $status.content.status[$status.content.status.length - 1].category.name }}
+              {{  $status.content.status[$status.content.status.length - 1].status_category.name }}
             </span>
           </div>
           <p class="mt-1 truncate text-sm text-gray-500">{{ $status.content.info.position }}</p>

@@ -36,7 +36,7 @@ class Requesting extends Model
   }
 
   public function files() {
-    return $this->hasMany(File::class, 'user_register_id');
+    return $this->hasMany(File::class, 'requesting_id');
   }
 
   public function claim_type() {

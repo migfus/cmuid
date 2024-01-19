@@ -12,9 +12,9 @@
 
             <div class="relative flex items-start space-x-3">
 
-              <template v-if="row.category.name == 'Post'">
+              <template v-if="row.status_category.name == 'Post'">
                 <div class="relative">
-                  <img class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white" :src="row.user_register.thumbnail" alt="" />
+                  <img class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white" :src="row.requesting.thumbnail" alt="" />
                   <span class="absolute -bottom-0.5 -right-1 rounded-full bg-white px-0.5 py-px">
                     <PlusIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
                   </span>
@@ -22,7 +22,7 @@
                 <div class="min-w-0 flex-1">
                   <div>
                     <div class="text-sm">
-                      <div class="font-medium text-gray-900">{{ FullName(row.user_register) }}</div>
+                      <div class="font-medium text-gray-900">{{ FullName(row.requesting) }}</div>
                     </div>
                     <p class="mt-0.5 text-sm text-gray-500">Registered in {{ moment(row.created_at).fromNow(true) }}</p>
                   </div>
@@ -32,7 +32,7 @@
                 </div>
               </template>
 
-              <template v-else-if="row.category.name === 'Pending'" condition="row.category.name === 'Pending'">
+              <template v-else-if="row.status_category.name === 'Pending'" condition="row.category.name === 'Pending'">
                 <div>
                   <div class="relative px-1">
                     <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white">
@@ -48,7 +48,7 @@
                 </div>
               </template>
 
-              <template v-if="row.category.name == 'Feedback'">
+              <template v-if="row.status_category.name == 'Feedback'">
                 <div class="relative">
                   <img class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white" :src="row.user.avatar" alt="" />
                   <span class="absolute -bottom-0.5 -right-1 rounded-full bg-white px-0.5 py-px">
@@ -68,7 +68,7 @@
                 </div>
               </template>
 
-              <template v-else-if="row.category.name === 'Cancelled'">
+              <template v-else-if="row.status_category.name === 'Cancelled'">
                 <div>
                   <div class="relative px-1">
                     <div class="flex h-8 w-8 items-center justify-center rounded-full bg-red-100 ring-8 ring-white">
@@ -87,7 +87,7 @@
                 </div>
               </template>
 
-              <template v-else-if="row.category.name === 'Done'">
+              <template v-else-if="row.status_category.name === 'Done'">
                 <div>
                   <div class="relative px-1">
                     <div class="flex h-8 w-8 items-center justify-center rounded-full bg-green-100 ring-8 ring-white">

@@ -8,11 +8,11 @@ Route::group(['prefix' => 'public', 'as' => 'public.'], function () {
   // NOTE AUTH [Login]
   Route::post('/login', [\App\Http\Controllers\Public\AuthPublicController::class, 'Login']);
 
-  // NOTE REQUEST [register/request]
-  Route::post('/user-register', [\App\Http\Controllers\UserRegisterPublicController::class, 'store']);
+  // NOTE REQUEST [request csc id]
+  Route::post('/requesting', [\App\Http\Controllers\Public\RequestingPublicController::class, 'store']);
 
   // NOTE STATUS [list]
-  Route::apiResource('/status',  \App\Http\Controllers\RegisterStatusPublicController::class)->only(['show']);
+  Route::apiResource('/status',  \App\Http\Controllers\Public\RequestStatusPublicController::class)->only(['show']);
   Route::apiResource('/verify',  \App\Http\Controllers\VerifyPublicController::class)->only(['show']);
 
   // NOTE DOWNLOAD [download]

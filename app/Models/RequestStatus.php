@@ -17,14 +17,14 @@ class RequestStatus extends Model
     'content'
   ];
 
-  protected $incrementing = false;
+  public $incrementing = false;
 
-  public function category() {
+  public function status_category() {
     return $this->belongsTo(StatusCategory::class);
   }
 
-  public function user_register() {
-    return $this->belongsTo(UserRegister::class);
+  public function requesting() {
+    return $this->belongsTo(Requesting::class);
   }
 
   public function user() {

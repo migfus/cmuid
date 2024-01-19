@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Public;
 
 use Illuminate\Http\Request;
 
-use App\Models\RegisterStatus;
-use App\Models\UserRegister;
+use App\Models\RequestStatus;
+use App\Models\Requesting;
 
-class RegisterStatusPublicController extends Controller
+class RequestStatusPublicController extends Controller
 {
   public function show(Request $req, $id) {
-    $status = RegisterStatus::where('user_register_id', $id)
-      ->with(['category', 'user_register', 'user'])
+    $status = RequestStatus::where('requesting_id', $id)
+      ->with(['status_category', 'requesting', 'user'])
       ->orderBy('created_at', 'ASC')
       ->get();
 
-    $info = UserRegister::where('id', $id)->with('files')->first();
+    $info = Requesting::where('id', $id)->with('files')->first();
 
     return response()->json([
       ...$this->G_ReturnDefault(),

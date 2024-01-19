@@ -12,7 +12,7 @@ export type TGQuery = {
   end?: Date
 }
 
-export type TGUserRegister = {
+export type TGRequesting = {
   id: string
   picture: string
   thumbnail: string
@@ -43,14 +43,14 @@ export type TGClaimType = {
 
 export type TGStatus = {
   id: number,
-  user_register_id: number
-  user_register: TGUserRegister
+  requesting_id: string
+  requesting: TGRequesting
   user_id?: number
   user: {
     email: string
     avatar: string
   }
-  category: {
+  status_category: {
     name: string
   }
   content?: string
@@ -73,7 +73,7 @@ export type TGDevice = {
 
 export type TGFile = {
   id: string
-  user_register_id: number
+  requesting_id: string
   name: string
   url: string
   created_at: Date
