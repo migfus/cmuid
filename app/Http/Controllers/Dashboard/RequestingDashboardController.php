@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\UserRegister;
-use App\Models\Request;
+use App\Models\Requesting;
 use App\Models\TextMessage;
 use App\Models\ClaimType;
 use App\Models\StatusCategory;
@@ -29,7 +28,7 @@ class RequestingDashboardController extends Controller
       return $this->G_ValidatorFailResponse($val);
     }
 
-    $data = UserRegister::where(function ($q) use($req) {
+    $data = Requesting::where(function ($q) use($req) {
       $q->whereRaw("CONCAT(`last_name`, ', ', `first_name`) LIKE ?", ['%'.$req->search.'%'])
         ->orWhere('email', 'LIKE', '%'.$req->search.'%')
         ->orWhere('department', 'LIKE', '%'.$req->search.'%')
@@ -104,7 +103,7 @@ class RequestingDashboardController extends Controller
 
     private function SendSMS(Request $req, $id) {
       TextMessage::create([
-        'user_register_id' => $id,
+        'requesting_id' => $id,
         'content' => $req->sms,
       ]);
 
@@ -112,13 +111,13 @@ class RequestingDashboardController extends Controller
     }
 
     private function Complete(Request $req, string $id, string $user_id) : void {
-      UserRegister::where('id', $id)
+      Requesting::where('id', $id)
       ->update([
         'status_category_id' => 5 // NOTE Done
       ]);
 
-      RegisterStatus::create([
-        'user_register_id' => $id,
+      RequestStatus::create([
+        'requesting_id' => $id,
         'user_id' => $user_id,
         'category_id' => 5,
         'content' => $req->content,
@@ -126,12 +125,12 @@ class RequestingDashboardController extends Controller
     }
 
     private function Cancel(Request $req, string $id, string $user_id) : void {
-      UserRegister::where('id', $id)->update([
+      Requesting::where('id', $id)->update([
         'status_category_id' => 4 // NOTE Done
       ]);
 
-      RegisterStatus::create([
-        'user_register_id' => $id,
+      RequestStatus::create([
+        'requesting_id' => $id,
         'user_id' => $user_id,
         'category_id' => 4,
         'content' => $req->content,
@@ -139,8 +138,8 @@ class RequestingDashboardController extends Controller
     }
 
     private function Feedback(Request $req, string $id, string $user_id) : void {
-      RegisterStatus::create([
-        'user_register_id' => $id,
+      Requesting::create([
+        'requesting_id' => $id,
         'user_id' => $user_id,
         'category_id' => 3,
         'content' => $req->content,
@@ -148,12 +147,12 @@ class RequestingDashboardController extends Controller
     }
 
     private function Claim(Request $req, string $id, string $user_id) : void {
-      UserRegister::where('id', $id)->update([
+      Requesting::where('id', $id)->update([
         'status_category_id' => 6 // NOTE Claimed
       ]);
 
-      RegisterStatus::create([
-        'user_register_id' => $id,
+      RequestStatus::create([
+        'requesting_id' => $id,
         'user_id' => $user_id,
         'category_id' => 6,
         'content' => $req->content,

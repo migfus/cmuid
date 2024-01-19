@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('claim_types', function (Blueprint $table) {
           $table->uuid('id')->primary();
           $table->string('name');
+          $table->text('description');
+          $table->json('features');
+          $table->string('icon');
           $table->timestamps();
         });
     }

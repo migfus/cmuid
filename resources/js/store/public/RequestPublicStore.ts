@@ -17,7 +17,7 @@ export const useRequestPublicStore = defineStore(title, () => {
   })
 
   // SECTION API
-  async function RegisterAPI(claim_type_id: number) {
+  async function RegisterAPI(claim_type_id: string) {
     config.buttonLoading = true
     try{
       let { data: { data }} = await axios.post(

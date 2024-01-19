@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 
-use App\Models\UserRegister;
+use App\Models\Requesting;
 
 class StatisticDashboardController extends Controller
 {
@@ -14,11 +14,11 @@ class StatisticDashboardController extends Controller
     }
 
     $data = [
-      'requesting' => UserRegister::where('status_category_id', '<=', 3)->count(),
-      'completed' => UserRegister::where('status_category_id', 5)->count(),
-      'canceled' => UserRegister::where('status_category_id', 4)->count(),
-      'claimed' => UserRegister::where('status_category_id', 6)->count(),
-      'upload' => UserRegister::where('claim_type_id', 2)->doesntHave('files')->count()
+      'requesting' => Requesting::where('status_category_id', '<=', 3)->count(),
+      'completed' => Requesting::where('status_category_id', 5)->count(),
+      'canceled' => Requesting::where('status_category_id', 4)->count(),
+      'claimed' => Requesting::where('status_category_id', 6)->count(),
+      'upload' => Requesting::where('claim_type_id', 2)->doesntHave('files')->count()
     ];
 
     return response()->json([

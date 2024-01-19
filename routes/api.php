@@ -3,13 +3,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// SECTION PUBLIC
+// SECTION 🔘 PUBLIC
 Route::group(['prefix' => 'public', 'as' => 'public.'], function () {
   // NOTE AUTH [Login]
   Route::post('/login', [\App\Http\Controllers\Public\AuthPublicController::class, 'Login']);
 
   // NOTE REQUEST [request csc id]
   Route::post('/requesting', [\App\Http\Controllers\Public\RequestingPublicController::class, 'store']);
+  Route::apiResource('/claim-type', \App\Http\Controllers\Public\ClaimTypePublicController::class);
 
   // NOTE STATUS [list]
   Route::apiResource('/status',  \App\Http\Controllers\Public\RequestStatusPublicController::class)->only(['show']);
@@ -20,7 +21,7 @@ Route::group(['prefix' => 'public', 'as' => 'public.'], function () {
 });
 
 
-// SECTION DEVICE
+// SECTION 📱 DEVICE
 Route::group(['prefix' => 'device', 'as' => 'device.'], function () {
   // NOTE DEVICE [TOKEN]
   Route::apiResource('/device',  \App\Http\Controllers\DeviceDeviceController::class)
@@ -31,7 +32,7 @@ Route::group(['prefix' => 'device', 'as' => 'device.'], function () {
 });
 
 
-// SECTION AUTH PROTECTED
+// SECTION 🔒 AUTH PROTECTED
 Route::middleware('auth:sanctum')->group(function () {
   // NOTE AUTH
   Route::get('/logout', [\App\Http\Controllers\AuthPublicController::class, 'logout']);
@@ -39,7 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
   // SECTION DASHBOARD
   Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     // NOTE DASHBOARD [STATS, SUMMARY]
-    Route::get('/dashboard/request', [\App\Http\Controllers\DashboardPublicController::class, 'RequestNumber']);
+    Route::get('/requesting-statistics', [\App\Http\Controllers\Dashboard\StatisticDashboardController::class, 'RequestNumber']);
 
     // NOTE DEVICE [MANAGEMENT]
     Route::apiResource('/device', \App\Http\Controllers\DevicePublicController::class)
@@ -50,7 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
       ->only(['index', 'store', 'destroy']);
 
     // NOTE REQUEST [MANAGEMENT]
-    Route::apiResource('/requesting',  \App\Http\Controllers\RequestingPublicController::class)
+    Route::apiResource('/requesting',  \App\Http\Controllers\Dashboard\RequestingDashboardController::class)
       ->only(['index', 'update']);
   });
 });

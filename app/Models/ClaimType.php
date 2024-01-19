@@ -12,6 +12,9 @@ class ClaimType extends Model
 
   protected $fillable = [
     'id',
-    'name'
+    'name',
+    'description',
+    'features',
+    'icon'
   ];
 }

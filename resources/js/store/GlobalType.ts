@@ -38,7 +38,11 @@ export type TGStatusCategory = {
 }
 
 export type TGClaimType = {
+  id: string
   name: string
+  description: string
+  features: string
+  icon: string
 }
 
 export type TGStatus = {
