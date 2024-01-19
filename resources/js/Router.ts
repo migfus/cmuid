@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router"
 import { useAuthPublicStore } from "@/store/public/AuthPublicStore"
 import { usePreLoader } from "@/store/system/PreLoader"
 import ability from '@/Ability'
+import { useTitle } from '@vueuse/core'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -13,7 +14,8 @@ const router = createRouter({
         {
           path: '',
           name: 'request',
-          component: () => import('./views/request/index.vue'),
+          // @ts-ignore
+          component: () => import('@/views/request/index.vue'),
           meta: {
             title: 'Request for CSC-ID',
           }
@@ -21,6 +23,7 @@ const router = createRouter({
         {
           path: '/confirm',
           name: 'confirm-request',
+          // @ts-ignore
           component: () => import('@/views/request/confirm.vue'),
           meta: {
             title: 'Confirm Request',
@@ -29,6 +32,7 @@ const router = createRouter({
         {
           path: 'status',
           name: 'status',
+          // @ts-ignore
           component: () => import('@/views/status/index.vue'),
           meta: {
             title: 'CSC ID Status',
@@ -37,6 +41,7 @@ const router = createRouter({
         {
           path: 'status/:id',
           name: 'status-show',
+          // @ts-ignore
           component: () => import('@/views/status/[id].vue'),
           meta: {
             title: 'CSC ID Status',
@@ -45,6 +50,7 @@ const router = createRouter({
         {
           path: 'verify',
           name: 'verify',
+          // @ts-ignore
           component: () => import('@/views/verify/index.vue'),
           meta: {
             title: 'Verify ID',
@@ -53,6 +59,7 @@ const router = createRouter({
         {
           path: 'verify/:id',
           name: 'verify-show',
+          // @ts-ignore
           component: () => import('@/views/verify/[id].vue'),
           meta: {
             title: 'Verify CSC ID',
@@ -67,6 +74,7 @@ const router = createRouter({
         {
           path: '',
           name: 'dashboard',
+          // @ts-ignore
           component: () => import('@/views/dashboard/index.vue'),
           meta: {
             title: 'Dashboard',
@@ -79,6 +87,7 @@ const router = createRouter({
             {
               path: '',
               name: 'requesting',
+              // @ts-ignore
               component: () => import('@/views/dashboard/requesting/index.vue'),
               meta: {
                 title: 'Requesting',
@@ -88,6 +97,7 @@ const router = createRouter({
             {
               path: 'completed',
               name: 'completed',
+              // @ts-ignore
               component: () => import('@/views/dashboard/requesting/completed.vue'),
               meta: {
                 title: 'Completed',
@@ -97,6 +107,7 @@ const router = createRouter({
             {
               path: 'canceled',
               name: 'canceled',
+              // @ts-ignore
               component: () => import('@/views/dashboard/requesting/canceled.vue'),
               meta: {
                 title: 'Canceled',
@@ -106,6 +117,7 @@ const router = createRouter({
             {
               path: 'claimed',
               name: 'claimed',
+              // @ts-ignore
               component: () => import('@/views/dashboard/requesting/claimed.vue'),
               meta: {
                 title: 'Claimed',
@@ -122,6 +134,7 @@ const router = createRouter({
             {
               path: '',
               name: 'upload',
+              // @ts-ignore
               component: () => import('@/views/dashboard/upload/index.vue'),
               meta: {
                 title: 'Upload',
@@ -131,6 +144,7 @@ const router = createRouter({
             {
               path: 'uploaded',
               name: 'uploaded',
+              // @ts-ignore
               component: () => import('@/views/dashboard/upload/uploaded.vue'),
               meta: {
                 title: 'Uploaded',
@@ -143,6 +157,7 @@ const router = createRouter({
         {
           path: '/devices',
           name: 'devices',
+          // @ts-ignore
           component: () => import('@/views/dashboard/devices/index.vue'),
           meta: {
             title: 'Devices',
@@ -158,6 +173,7 @@ const router = createRouter({
         {
           name: 'login',
           path: '',
+          // @ts-ignore
           component: () => import('@/views/login/index.vue'),
           meta: {
             title: 'Login',
@@ -171,6 +187,7 @@ const router = createRouter({
     {
       path: "/:pathMatch(.*)*",
       name: 'error',
+      // @ts-ignore
       component: () => import("@/views/[error].vue"),
       meta: {
         title: "Page not Found!",
@@ -209,7 +226,9 @@ router.afterEach((to, from, failure) => {
   const $load = usePreLoader()
   $load.config.loading = false
 
-  document.title = to.meta.title ? `${to.meta.title} | ${TITLE}` : "";
+  const title = useTitle()
+
+  title.value = to.meta.title ? `${to.meta.title} | ${TITLE}` : "";
 })
 
 export default router;
