@@ -21,3 +21,9 @@ Available only for applicants on this current version.
 ## Development Progress
 
 [https://trello.com/b/j06zEFhY/csc-id](https://trello.com/b/j06zEFhY/csc-id) 
+
+## Technologies Used
+
+- Laravel - Backend
+- Vue 3 - Frontend
+- MySQL - Database
